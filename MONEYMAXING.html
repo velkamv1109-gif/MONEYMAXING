@@ -1,0 +1,3629 @@
+<!doctype html>
+<html lang="es" data-theme="obsidian" data-glass="crystal" data-pane-anim="smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060807">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>MONEYMAXING — Finanzas personales</title>
+<style>
+/* ========================================================
+   SISTEMA DE DISEÑO LIQUID CRYSTAL & PRISMATIC LUXURY
+   ======================================================== */
+:root {
+  --sans: "Aptos", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "Cascadia Code", "SF Mono", Consolas, monospace;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --accent-base: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.35);
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --pane-duration: 0.35s;
+}
+
+/* PALETAS DE COLOR DE LUJO */
+[data-theme="obsidian"] {
+  color-scheme: dark;
+  --bg-app: #050706;
+  --bg-surface: #0a0e0b;
+  --bg-glass: rgba(12, 17, 14, 0.62);
+  --bg-glass-card: rgba(18, 26, 21, 0.55);
+  --bg-card-hover: rgba(26, 38, 30, 0.75);
+  --ink: #f0fdf4;
+  --ink-secondary: #9cb1a2;
+  --muted: #5e7264;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-crystal: rgba(255, 255, 255, 0.18);
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 40%, rgba(16,185,129,0.15) 100%);
+  --shadow-lux: 0 24px 60px rgba(0, 0, 0, 0.75);
+  --mesh-1: rgba(16, 185, 129, 0.08);
+  --mesh-2: rgba(5, 150, 105, 0.06);
+}
+
+[data-theme="gold"] {
+  color-scheme: dark;
+  --bg-app: #070604;
+  --bg-surface: #100e0a;
+  --bg-glass: rgba(18, 15, 11, 0.65);
+  --bg-glass-card: rgba(26, 22, 16, 0.55);
+  --bg-card-hover: rgba(38, 32, 23, 0.75);
+  --ink: #fffbeb;
+  --ink-secondary: #b3a896;
+  --muted: #736754;
+  --line: rgba(212, 175, 55, 0.12);
+  --line-crystal: rgba(212, 175, 55, 0.28);
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.03) 40%, rgba(212,175,55,0.2) 100%);
+  --shadow-lux: 0 24px 60px rgba(0, 0, 0, 0.8);
+  --mesh-1: rgba(212, 175, 55, 0.09);
+  --mesh-2: rgba(180, 83, 9, 0.06);
+}
+
+[data-theme="sapphire"] {
+  color-scheme: dark;
+  --bg-app: #050a14;
+  --bg-surface: #0a1122;
+  --bg-glass: rgba(11, 18, 34, 0.65);
+  --bg-glass-card: rgba(16, 26, 50, 0.55);
+  --bg-card-hover: rgba(24, 38, 72, 0.75);
+  --ink: #f8fafc;
+  --ink-secondary: #99aabf;
+  --muted: #5c708c;
+  --line: rgba(56, 189, 248, 0.12);
+  --line-crystal: rgba(56, 189, 248, 0.28);
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.03) 40%, rgba(56,189,248,0.2) 100%);
+  --shadow-lux: 0 24px 60px rgba(0, 0, 0, 0.8);
+  --mesh-1: rgba(56, 189, 248, 0.09);
+  --mesh-2: rgba(2, 132, 199, 0.06);
+}
+
+[data-theme="titanium"] {
+  color-scheme: dark;
+  --bg-app: #0c0f14;
+  --bg-surface: #141820;
+  --bg-glass: rgba(20, 24, 32, 0.68);
+  --bg-glass-card: rgba(28, 33, 44, 0.55);
+  --bg-card-hover: rgba(38, 45, 60, 0.75);
+  --ink: #f0f6fc;
+  --ink-secondary: #9aa2ac;
+  --muted: #606873;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-crystal: rgba(255, 255, 255, 0.22);
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.03) 40%, rgba(203,213,225,0.18) 100%);
+  --shadow-lux: 0 24px 60px rgba(0, 0, 0, 0.75);
+  --mesh-1: rgba(148, 163, 184, 0.07);
+  --mesh-2: rgba(34, 211, 238, 0.04);
+}
+
+[data-theme="amethyst"] {
+  color-scheme: dark;
+  --bg-app: #080310;
+  --bg-surface: #110822;
+  --bg-glass: rgba(18, 9, 34, 0.65);
+  --bg-glass-card: rgba(26, 13, 50, 0.55);
+  --bg-card-hover: rgba(38, 19, 72, 0.75);
+  --ink: #faf5ff;
+  --ink-secondary: #afa0c2;
+  --muted: #735e8a;
+  --line: rgba(168, 85, 247, 0.15);
+  --line-crystal: rgba(168, 85, 247, 0.32);
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.03) 40%, rgba(168,85,247,0.2) 100%);
+  --shadow-lux: 0 24px 60px rgba(0, 0, 0, 0.85);
+  --mesh-1: rgba(168, 85, 247, 0.1);
+  --mesh-2: rgba(216, 180, 254, 0.05);
+}
+
+[data-theme="crimson"] {
+  color-scheme: dark;
+  --bg-app: #0b0406;
+  --bg-surface: #15080c;
+  --bg-glass: rgba(22, 9, 13, 0.65);
+  --bg-glass-card: rgba(32, 13, 19, 0.55);
+  --bg-card-hover: rgba(48, 20, 29, 0.75);
+  --ink: #fff1f2;
+  --ink-secondary: #b5989f;
+  --muted: #79575e;
+  --line: rgba(244, 63, 94, 0.15);
+  --line-crystal: rgba(244, 63, 94, 0.32);
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.03) 40%, rgba(244,63,94,0.2) 100%);
+  --shadow-lux: 0 24px 60px rgba(0, 0, 0, 0.85);
+  --mesh-1: rgba(244, 63, 94, 0.09);
+  --mesh-2: rgba(251, 113, 133, 0.05);
+}
+
+[data-theme="emerald-light"] {
+  color-scheme: light;
+  --bg-app: #f7f6f2;
+  --bg-surface: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.78);
+  --bg-glass-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: #f1f2eb;
+  --ink: #16241b;
+  --ink-secondary: #4a5c50;
+  --muted: #798b7f;
+  --line: #e0e3da;
+  --line-crystal: #c5cbc0;
+  --prism-glare: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 50%, rgba(30,90,60,0.1) 100%);
+  --shadow-lux: 0 16px 45px rgba(22, 36, 27, 0.08);
+  --mesh-1: rgba(30, 90, 60, 0.05);
+  --mesh-2: rgba(16, 185, 129, 0.04);
+}
+
+/* OVERRIDES DE ACENTO NEÓN */
+[data-accent="emerald"] { --accent-base: #10b981; --accent-glow: rgba(16, 185, 129, 0.4); --accent-soft: rgba(16, 185, 129, 0.14); }
+[data-accent="gold"] { --accent-base: #d4af37; --accent-glow: rgba(212, 175, 55, 0.45); --accent-soft: rgba(212, 175, 55, 0.14); }
+[data-accent="sapphire"] { --accent-base: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.45); --accent-soft: rgba(56, 189, 248, 0.14); }
+[data-accent="amethyst"] { --accent-base: #a855f7; --accent-glow: rgba(168, 85, 247, 0.45); --accent-soft: rgba(168, 85, 247, 0.14); }
+[data-accent="ruby"] { --accent-base: #f43f5e; --accent-glow: rgba(244, 63, 94, 0.45); --accent-soft: rgba(244, 63, 94, 0.14); }
+[data-accent="cyan"] { --accent-base: #06b6d4; --accent-glow: rgba(6, 182, 212, 0.45); --accent-soft: rgba(6, 182, 212, 0.14); }
+[data-accent="amber"] { --accent-base: #f59e0b; --accent-glow: rgba(245, 158, 11, 0.45); --accent-soft: rgba(245, 158, 11, 0.14); }
+
+/* VELOCIDADES DE PANEO */
+[data-pane-anim="smooth"] { --pane-duration: 0.38s; }
+[data-pane-anim="fast"] { --pane-duration: 0.18s; }
+[data-pane-anim="instant"] { --pane-duration: 0.001s; }
+
+/* RESET & BASE */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg-app);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* FONDO AMBIENTAL PRISMÁTICO */
+.prismatic-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 10% 20%, var(--mesh-1) 0%, transparent 45%),
+    radial-gradient(circle at 90% 75%, var(--mesh-2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.01) 0%, transparent 60%);
+  transition: all 0.5s ease;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: transparent; }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent-base);
+  outline-offset: 2px;
+}
+.hidden { display: none !important; }
+
+/* ========================================================
+   COMPONENTES LIQUID CRYSTAL (CRISTAL TRANSPARENTE & BRILLO)
+   ======================================================== */
+.crystal-panel {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lux), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: all 0.28s var(--ease-spring);
+}
+.crystal-panel:hover {
+  border-color: var(--line-crystal);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lux), inset 0 1px 2px rgba(255, 255, 255, 0.25), 0 12px 30px var(--accent-glow);
+}
+.crystal-panel.hero {
+  background: linear-gradient(145deg, var(--bg-glass-card) 0%, rgba(255,255,255,0.03) 100%);
+  border-color: var(--accent-glow);
+}
+.crystal-panel.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-base), transparent);
+}
+
+/* BOTONES CRISTALINOS ULTRA-TRANSPARENTES CON MICRO-FEEDBACK */
+.crystal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--line-crystal);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--ink);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: all 0.22s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+.crystal-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.crystal-btn:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.crystal-btn:hover::before { opacity: 1; }
+.crystal-btn:active {
+  transform: scale(0.96) translateY(1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* BOTÓN PRIMARIO DE DESTELLO LÍQUIDO */
+.crystal-btn-primary {
+  background: linear-gradient(135deg, var(--accent-base) 0%, rgba(255,255,255,0.2) 100%);
+  color: #060807;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 0 6px 24px var(--accent-glow);
+}
+.crystal-btn-primary:hover {
+  filter: brightness(1.12);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.8), 0 10px 32px var(--accent-glow);
+}
+
+.crystal-btn-danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.crystal-btn-danger:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* INSIGNIAS GEMAS DE CRISTAL (CRYSTAL GEM) */
+.crystal-gem {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--line-crystal);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.crystal-gem::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  pointer-events: none;
+}
+.crystal-gem.accent {
+  background: var(--accent-soft);
+  color: var(--accent-base);
+  border-color: var(--accent-glow);
+}
+
+/* ========================================================
+   ANIMACIÓN DE PANEO FLUIDO ENTRE MÓDULOS (CAMERA SLIDE)
+   ======================================================== */
+.page { display: none; }
+.page.active {
+  display: block;
+  animation: paneSlide var(--pane-duration) var(--ease-spring) forwards;
+}
+@keyframes paneSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(32px) scale(0.985);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* LAYOUT & SIDEBAR */
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  max-width: 1800px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+.sidebar {
+  padding: 24px 18px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--bg-glass);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+}
+.profile-pill-card {
+  background: var(--bg-glass-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-spring);
+  margin-bottom: 24px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.profile-pill-card:hover {
+  border-color: var(--accent-base);
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.nav-label {
+  font: 10px var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 10px;
+  margin: 14px 0 6px;
+}
+.nav-menu { display: grid; gap: 4px; }
+.nav-item {
+  text-align: left;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--ink-secondary);
+  font-weight: 650;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s var(--ease-spring);
+  position: relative;
+  user-select: none;
+}
+.nav-item:hover {
+  background: var(--bg-card-hover);
+  color: var(--ink);
+  transform: translateX(4px);
+}
+.nav-item[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--accent-base);
+  border: 1px solid var(--accent-glow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* TOPBAR */
+.main-viewport {
+  padding: 24px clamp(20px, 4vw, 54px) 56px;
+  min-width: 0;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 34px;
+}
+.search-crystal {
+  background: var(--bg-glass-card);
+  border: 1px solid var(--line-crystal);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.2s;
+}
+.search-crystal:hover {
+  border-color: var(--accent-base);
+  color: var(--ink);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* HEADERS */
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.eyebrow {
+  margin: 0 0 6px;
+  font: 10px var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-base);
+  font-weight: 750;
+}
+.page-head h1 {
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.04em;
+  margin: 0;
+  font-weight: 850;
+}
+.subhead { color: var(--ink-secondary); font-size: 13px; margin: 6px 0 0; }
+
+/* GRID CARDS */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.card-label {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--ink-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.card-value {
+  font-size: 32px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.card-sub { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+/* GRÁFICAS Y SCRUBBERS */
+.chart-container {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--line);
+  padding: 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-lux), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(10, 15, 12, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--accent-base);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 11px;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+.chart-tooltip.show { opacity: 1; }
+
+/* DONUT CHART */
+.donut-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+.donut-svg-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  margin: auto;
+}
+.donut-center-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+}
+
+/* LISTAS Y TABLAS */
+.tx-list { background: var(--bg-glass-card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.tx-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  transition: all 0.2s var(--ease-spring);
+}
+.tx-item:last-child { border-bottom: 0; }
+.tx-item:hover {
+  background: var(--bg-card-hover);
+  transform: translateX(4px);
+}
+
+/* COMMAND PALETTE SPOTLIGHT */
+.cmd-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: grid;
+  place-items: start center;
+  padding-top: 14vh;
+  z-index: 1000;
+}
+.cmd-palette-modal {
+  width: min(100%, 620px);
+  background: var(--bg-surface);
+  border: 1px solid var(--line-crystal);
+  border-radius: 16px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  animation: scaleIn 0.2s var(--ease-spring);
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.cmd-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.cmd-input-wrap input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+}
+.cmd-results { max-height: 400px; overflow-y: auto; padding: 10px; }
+.cmd-item {
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 650;
+  transition: all 0.15s;
+}
+.cmd-item:hover, .cmd-item.active {
+  background: var(--accent-soft);
+  color: var(--accent-base);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* SLIDERS */
+.slider-lux { margin: 18px 0; }
+.slider-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 650; margin-bottom: 8px; }
+.slider-meta span:last-child { font-family: var(--mono); color: var(--accent-base); font-size: 14px; font-weight: 750; }
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-base);
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line-crystal);
+  cursor: pointer;
+}
+
+/* MODALES */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 200;
+}
+.modal-content {
+  width: min(100%, 560px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--line-crystal);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: var(--shadow-lux), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--bg-app);
+  padding: 10px 22px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 750;
+  z-index: 9999;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+  transition: all 0.25s var(--ease-spring);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ESTILOS DE IMPRESIÓN */
+@media print {
+  body { background: #ffffff !important; color: #000000 !important; }
+  .sidebar, .topbar, .no-print, .modal-backdrop, .cmd-palette-backdrop, .prismatic-mesh { display: none !important; }
+  .main-viewport { padding: 0 !important; }
+  .proposal-sheet { display: block !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { height: auto; min-height: auto; position: relative; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-menu { display: flex; overflow-x: auto; padding-bottom: 6px; }
+  .nav-item { white-space: nowrap; }
+  .donut-layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="prismatic-mesh"></div>
+
+<!-- ==========================================
+     PANTALLA DE ACCESO (GATE ZERO-KNOWLEDGE)
+     ========================================== -->
+<section id="gate" class="gate" aria-label="Acceso seguro a MONEYMAXING" style="min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;z-index:1;">
+  <div class="crystal-panel" style="width:min(100%,480px);padding:clamp(32px,6vw,48px);">
+    <div style="display:flex;align-items:center;gap:12px;font-size:17px;font-weight:800;letter-spacing:-0.04em;">
+      <div class="crystal-gem accent" style="font-weight:900;">M</div>
+      <div>MONEYMAXING <span style="font-weight:450;color:var(--muted)">/ LIQUID CRYSTAL</span></div>
+    </div>
+    
+    <div style="margin-top:20px;">
+      <span class="crystal-btn" style="padding:4px 12px;font-size:11px;font-family:var(--mono);color:var(--accent-base);border-color:var(--accent-glow);">🛡️ BÓVEDA SUIZA ZERO-KNOWLEDGE · AES-256-GCM</span>
+    </div>
+
+    <h1 id="gate-title" style="font-size:clamp(30px,6vw,40px);line-height:1.05;letter-spacing:-0.05em;margin:28px 0 12px;">Finanzas con<br>precisión suiza.</h1>
+    <p id="gate-copy" style="color:var(--ink-secondary);line-height:1.6;font-size:13px;margin:0 0 24px;">Desbloquea tu bóveda personal, inmobiliaria y ejecutiva con cifrado militar.</p>
+    
+    <div id="gate-lockout" class="hidden" style="background:rgba(239,68,68,0.12);border:1px solid #ef4444;padding:12px;border-radius:10px;color:#ef4444;font-size:12px;margin-bottom:16px;">
+      <strong>⚠️ Escudo contra fuerza bruta activo.</strong>
+      <div style="margin-top:4px;">Reintentos congelados por seguridad. Espera <span id="lockout-seconds">10</span>s.</div>
+    </div>
+
+    <form id="gate-form">
+      <div style="display:grid;gap:6px;margin:14px 0;">
+        <label for="gate-password" id="password-label" style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Contraseña maestra</label>
+        <input id="gate-password" type="password" autocomplete="current-password" required minlength="10" placeholder="Escribe tu contraseña maestra" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+      </div>
+
+      <div id="confirm-field" style="display:grid;gap:6px;margin:14px 0;">
+        <label for="gate-confirm" style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Confirmar contraseña</label>
+        <input id="gate-confirm" type="password" autocomplete="new-password" minlength="10" placeholder="Confirma tu contraseña" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+      </div>
+
+      <p style="font-size:11px;color:var(--muted);line-height:1.5;margin:6px 0 20px;">Por seguridad zero-knowledge, no existe recuperación si se olvida.</p>
+      
+      <button class="crystal-btn crystal-btn-primary" type="submit" id="gate-submit" style="width:100%;">Desbloquear Bóveda</button>
+      <div id="gate-error" style="color:#ef4444;font-size:12px;font-weight:650;margin-top:12px;min-height:20px;"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ==========================================
+     APLICACIÓN PRINCIPAL
+     ========================================== -->
+<div id="app" class="layout hidden">
+  <aside class="sidebar">
+    <div style="display:flex;align-items:center;gap:12px;font-size:16px;font-weight:850;margin-bottom:24px;letter-spacing:-0.04em;">
+      <div class="crystal-gem accent">M</div>
+      <div>MONEYMAXING</div>
+    </div>
+
+    <!-- Selector de Perfil Rápido -->
+    <div class="profile-pill-card" id="profile-switcher-btn" title="Click para gestionar o cambiar perfil">
+      <div style="display:grid;text-align:left;">
+        <span style="font-size:9px;font-family:var(--mono);color:var(--accent-base);font-weight:800;letter-spacing:0.08em;text-transform:uppercase;" id="sidebar-role-badge">MASTER</span>
+        <span style="font-size:13px;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;" id="sidebar-profile-name">Principal</span>
+      </div>
+      <span style="font-size:11px;color:var(--muted)">▼</span>
+    </div>
+
+    <div class="nav-label">Módulos Ejecutivos</div>
+    <nav class="nav-menu" aria-label="Navegación principal">
+      <button type="button" class="nav-item" data-page="home" aria-current="page"><span class="crystal-gem accent" style="width:28px;height:28px;font-size:12px;">⌂</span>Resumen Snapshot</button>
+      <button type="button" class="nav-item" data-page="transactions"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">⇄</span>Movimientos & Filtros</button>
+      <button type="button" class="nav-item" data-page="realestate"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">🏢</span>Inmobiliario & Hipotecas</button>
+      <button type="button" class="nav-item" data-page="accounting"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">📊</span>Contabilidad & PyME</button>
+      <button type="button" class="nav-item" data-page="insurance"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">🛡️</span>Seguros & Retiro (PPR)</button>
+      <button type="button" class="nav-item" data-page="clients"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">👥</span>Cartera de Clientes</button>
+      <button type="button" class="nav-item" data-page="budgets"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">↗</span>Presupuestos & Metas</button>
+      <button type="button" class="nav-item" data-page="studio"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">✨</span>Liquid Crystal Studio</button>
+      <button type="button" class="nav-item" data-page="security"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">🔒</span>Seguridad & Bóveda</button>
+    </nav>
+
+    <div style="margin-top:auto;padding:16px 8px 0;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.5;">
+      <b style="color:var(--accent-base)">Bóveda Suiza Local.</b><br>
+      Bloqueo de pánico con <kbd style="background:var(--bg-glass-card);padding:2px 4px;border-radius:4px;border:1px solid var(--line);">Esc</kbd>
+    </div>
+  </aside>
+
+  <main class="main-viewport">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="search-crystal" id="open-cmd-palette-btn">
+          <span>🔍 Buscar o ejecutar…</span>
+          <kbd style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:10px;font-family:var(--mono);">Ctrl K</kbd>
+        </div>
+        <span style="font-size:12px;color:var(--muted);font-family:var(--mono);" id="header-today"></span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="crystal-btn crystal-btn-primary" id="quick-add-btn" type="button">+ Movimiento</button>
+        <button class="crystal-btn" id="lock-btn" type="button" title="Bloquear inmediatamente">🔒</button>
+      </div>
+    </header>
+
+    <!-- 1. RESUMEN SNAPSHOT -->
+    <section id="page-home" class="page active">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Panorama Financiero Integral</p>
+          <h1>Snapshot Ejecutivo</h1>
+          <p class="subhead">Métricas consolidadas de liquidez, patrimonio e indicadores en tiempo real.</p>
+        </div>
+        <div style="font-size:12px;color:var(--muted);font-family:var(--mono);" id="header-month"></div>
+      </div>
+
+      <div class="grid-cards">
+        <div class="crystal-panel hero">
+          <div class="card-label">
+            <span>Saldo Total Disponible</span>
+            <span style="color:var(--accent-base);font-size:11px;font-family:var(--mono);">● ACTIVO</span>
+          </div>
+          <div class="card-value" id="dash-balance" style="color:var(--accent-base)">$0.00</div>
+          <div class="card-sub" id="dash-balance-sub">Calculado en tiempo real con todas las entradas y salidas.</div>
+        </div>
+
+        <div class="crystal-panel">
+          <div class="card-label"><span>Ingresos del Mes</span><span>📈</span></div>
+          <div class="card-value" id="dash-income">$0.00</div>
+          <div class="card-sub">Entradas registradas en el período.</div>
+        </div>
+
+        <div class="crystal-panel">
+          <div class="card-label"><span>Gastos del Mes</span><span>📉</span></div>
+          <div class="card-value" id="dash-expense" style="color:#f97316;">$0.00</div>
+          <div class="card-sub">Salidas operativas y personales.</div>
+        </div>
+
+        <div class="crystal-panel">
+          <div class="card-label"><span>Soberanía Financiera</span><span>🛡️</span></div>
+          <div style="width:120px;height:120px;position:relative;margin:auto;">
+            <svg viewBox="0 0 100 100" style="width:100%;height:100%;transform:rotate(-90deg);">
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--line)" stroke-width="8"></circle>
+              <circle id="score-ring" cx="50" cy="50" r="40" fill="transparent" stroke="var(--accent-base)" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="100" stroke-linecap="round" style="transition:stroke-dashoffset 0.8s var(--ease-spring);"></circle>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <span style="font-size:28px;font-weight:850;font-family:var(--mono);" id="score-number">85</span>
+              <span style="font-size:9px;color:var(--accent-base);font-weight:800;letter-spacing:0.05em;" id="score-badge">ROBUSTO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfica de Área con Scrubber Magnético -->
+      <div class="chart-container">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div>
+            <h3 style="margin:0;font-size:15px;font-weight:750;">Trayectoria Patrimonial & Flujo Reciente</h3>
+            <span style="font-size:11px;color:var(--muted)">Desliza el cursor sobre la curva para inspeccionar fechas y saldos.</span>
+          </div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--accent-base);" id="chart-scrubber-readout">Interactivo</div>
+        </div>
+        <div style="position:relative;height:180px;" id="trend-chart-box">
+          <svg id="trend-svg" width="100%" height="100%" preserveAspectRatio="none" style="overflow:visible;"></svg>
+          <div class="chart-tooltip" id="trend-tooltip"></div>
+        </div>
+      </div>
+
+      <!-- Donut Chart & Movimientos -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="crystal-panel">
+          <h3 style="margin:0 0 16px;font-size:15px;">Distribución de Gastos (Anillo Interactivo)</h3>
+          <div class="donut-layout">
+            <div class="donut-svg-wrap">
+              <svg id="donut-svg" viewBox="0 0 120 120" style="width:100%;height:100%;"></svg>
+              <div class="donut-center-info">
+                <span style="font-size:24px;font-weight:850;" id="donut-center-pct">100%</span>
+                <span style="font-size:11px;color:var(--muted);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" id="donut-center-cat">Total Gastos</span>
+              </div>
+            </div>
+            <div id="donut-legend" style="display:grid;gap:8px;font-size:12px;"></div>
+          </div>
+        </div>
+
+        <div class="crystal-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="margin:0;font-size:15px;">Últimos Movimientos</h3>
+            <button class="crystal-btn" data-go-tx style="padding:4px 10px;font-size:11px;">Ver todos →</button>
+          </div>
+          <div class="tx-list" id="home-tx-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. MOVIMIENTOS -->
+    <section id="page-transactions" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Auditoría Financiera</p>
+          <h1>Movimientos</h1>
+          <p class="subhead">Historial completo con filtros dinámicos, etiquetas fiscales y exportación.</p>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="crystal-btn" id="export-csv-btn">📥 Exportar CSV</button>
+          <button class="crystal-btn crystal-btn-primary" id="add-tx-btn-page">+ Nuevo Movimiento</button>
+        </div>
+      </div>
+
+      <div class="crystal-panel" style="margin-bottom:20px;padding:16px;">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px;">
+          <input type="text" id="filter-search" placeholder="🔍 Buscar concepto o nota…" style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+          <select id="filter-kind" style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+            <option value="all">Todos los flujos</option>
+            <option value="income">Solo Ingresos (+)</option>
+            <option value="expense">Solo Gastos (−)</option>
+          </select>
+          <select id="filter-category" style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+            <option value="all">Todas las categorías</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tx-list" id="full-tx-list"></div>
+    </section>
+
+    <!-- 3. MÓDULO INMOBILIARIO & BIENES RAÍCES (NUEVO) -->
+    <section id="page-realestate" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Suite para Asesores Inmobiliarios & Inversionistas</p>
+          <h1>Bienes Raíces & Hipotecas</h1>
+          <p class="subhead">Simulador de crédito hipotecario, amortización con aportaciones a capital, Cap Rate de rentas y catálogo de propiedades.</p>
+        </div>
+        <button class="crystal-btn crystal-btn-primary" id="new-property-btn">+ Nueva Propiedad</button>
+      </div>
+
+      <!-- Simulador de Crédito Hipotecario & Aportaciones a Capital -->
+      <div class="crystal-panel hero" style="margin-bottom:24px;">
+        <h2 style="font-size:18px;margin:0 0 16px;">Simulador de Crédito Hipotecario (Tabla Francesa & Aportaciones a Capital)</h2>
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:28px;">
+          <div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Valor del Inmueble</span><span id="label-re-price">$3,500,000</span></div>
+              <input type="range" id="input-re-price" min="500000" max="25000000" step="50000" value="3500000">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Porcentaje de Enganche</span><span id="label-re-down">20% ($700,000)</span></div>
+              <input type="range" id="input-re-down" min="10" max="70" step="5" value="20">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Plazo del Crédito</span><span id="label-re-term">20 años (240 meses)</span></div>
+              <input type="range" id="input-re-term" min="5" max="30" step="5" value="20">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Tasa de Interés Anual Fija</span><span id="label-re-rate">10.25%</span></div>
+              <input type="range" id="input-re-rate" min="7" max="15" step="0.25" value="10.25">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Aportación Mensual Extraordinaria a Capital</span><span id="label-re-extra" style="color:var(--accent-base);">$2,000</span></div>
+              <input type="range" id="input-re-extra" min="0" max="30000" step="500" value="2000">
+            </div>
+          </div>
+
+          <!-- Resultados de Mensualidad & Ahorro -->
+          <div style="background:var(--bg-glass-card);border:1px solid var(--line-crystal);padding:22px;border-radius:14px;">
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">MENSUALIDAD BASE ESTIMADA</div>
+            <div class="card-value" id="re-monthly-payment" style="font-size:34px;color:var(--accent-base);margin:6px 0 16px;">$0.00</div>
+
+            <div style="display:grid;gap:10px;font-size:12px;border-top:1px solid var(--line);padding-top:14px;">
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Monto Financiado por Banco:</span>
+                <strong id="re-loan-amount">$0.00</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Intereses Totales sin Abonos:</span>
+                <strong style="color:#f97316;" id="re-total-interest">$0.00</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Ahorro en Intereses por Abonos:</span>
+                <strong style="color:var(--accent-base);" id="re-interest-saved">$0.00</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Reducción de Tiempo del Crédito:</span>
+                <strong style="color:#38bdf8;" id="re-time-reduced">0 años menos</strong>
+              </div>
+            </div>
+
+            <button class="crystal-btn crystal-btn-primary" id="print-mortgage-proposal" style="width:100%;margin-top:16px;">📄 Cotización Hipotecaria para Cliente</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculadora de Cap Rate & Rendimiento de Rentas -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+        <div class="crystal-panel">
+          <h3 style="margin:0 0 14px;font-size:16px;">Calculadora de Rentabilidad (Cap Rate & Yield)</h3>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Evalúa si un inmueble es una inversión rentable para compra y renta.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Precio de Compra</label>
+              <input type="number" id="roi-price" value="2500000" step="50000" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Renta Mensual Estimada</label>
+              <input type="number" id="roi-rent" value="16000" step="500" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Gastos Notariales (5-7%)</label>
+              <input type="number" id="roi-closing" value="125000" step="5000" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Gastos Mantenimiento / Predial Anual</label>
+              <input type="number" id="roi-expenses" value="22000" step="1000" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;background:var(--bg-glass-card);border:1px solid var(--line);padding:14px;border-radius:10px;">
+            <div>
+              <div style="font-size:11px;color:var(--muted);">CAP RATE (YIELD ANUAL NETO)</div>
+              <div style="font-size:24px;font-weight:850;color:var(--accent-base);" id="roi-caprate-res">6.8%</div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:var(--muted);">FLUJO DE EFECTIVO NETO / AÑO</div>
+              <div style="font-size:24px;font-weight:850;color:#eab308;" id="roi-net-cash">$170,000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portafolio de Inmuebles en Promoción -->
+        <div class="crystal-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <h3 style="margin:0;font-size:16px;">Portafolio Inmobiliario & Comisiones</h3>
+            <span style="font-size:11px;color:var(--muted);" id="re-properties-count">0 propiedades</span>
+          </div>
+          <div class="tx-list" id="re-properties-list" style="max-height:280px;overflow-y:auto;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CONTABILIDAD & PYME (CON CALCULADORA DE PUNTO DE EQUILIBRIO) -->
+    <section id="page-accounting" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Módulo Contable & Negocios</p>
+          <h1>Contabilidad & Punto de Equilibrio</h1>
+          <p class="subhead">P&L, cálculo automático de IVA/ISR y punto de equilibrio para comercios y servicios.</p>
+        </div>
+        <button class="crystal-btn" onclick="window.print()">🖨️ Imprimir Estado Financiero</button>
+      </div>
+
+      <div class="grid-cards">
+        <div class="crystal-panel">
+          <div class="card-label"><span>Ingresos Brutos</span><span>+</span></div>
+          <div class="card-value" id="pnl-gross-income" style="color:var(--accent-base);">$0.00</div>
+          <div class="card-sub">Total facturado o cobrado.</div>
+        </div>
+        <div class="crystal-panel">
+          <div class="card-label"><span>Gastos Deducibles / Operativos</span><span>−</span></div>
+          <div class="card-value" id="pnl-deductible-expenses" style="color:#f97316;">$0.00</div>
+          <div class="card-sub">Egresos operativos de negocio.</div>
+        </div>
+        <div class="crystal-panel">
+          <div class="card-label"><span>Impuestos Estimados (IVA/ISR)</span><span>🏛️</span></div>
+          <div class="card-value" id="pnl-tax-estimated" style="color:#eab308;">$0.00</div>
+          <div class="card-sub">Provisión fiscal automática.</div>
+        </div>
+        <div class="crystal-panel hero">
+          <div class="card-label"><span>Utilidad Neta Real</span><span>⭐</span></div>
+          <div class="card-value" id="pnl-net-profit" style="color:var(--accent-base);">$0.00</div>
+          <div class="card-sub">Beneficio libre de impuestos.</div>
+        </div>
+      </div>
+
+      <!-- Calculadora de Punto de Equilibrio (Break-Even) -->
+      <div class="crystal-panel" style="margin-bottom:24px;">
+        <h3 style="margin:0 0 12px;font-size:16px;">Calculadora de Punto de Equilibrio (Break-Even Point)</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Determina cuántas ventas o qué facturación mínima necesita tu negocio cada mes para no perder dinero.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+          <div>
+            <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Costos Fijos Mensuales (Renta, Nómina, Luz)</label>
+            <input type="number" id="be-fixed" value="45000" step="1000" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Precio Promedio de Venta por Unidad / Servicio</label>
+            <input type="number" id="be-price" value="1200" step="50" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:650;color:var(--ink-secondary);">Costo Variable por Unidad (Materia Prima/Insumos)</label>
+            <input type="number" id="be-cost" value="450" step="25" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;background:var(--bg-glass-card);border:1px solid var(--line);padding:14px;border-radius:10px;">
+          <div>
+            <div style="font-size:11px;color:var(--muted);">UNIDADES MÍNIMAS A VENDER AL MES</div>
+            <div style="font-size:26px;font-weight:850;color:var(--accent-base);" id="be-units-res">60 unidades</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);">FACTURACIÓN MÍNIMA REQUERIDA (EQUILIBRIO)</div>
+            <div style="font-size:26px;font-weight:850;color:#eab308;" id="be-revenue-res">$72,000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla P&L -->
+      <div class="crystal-panel">
+        <h3 style="margin:0 0 16px;font-size:15px;">Estado de Resultados Detallado</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--line);text-align:left;color:var(--muted);font-family:var(--mono);font-size:10px;text-transform:uppercase;">
+              <th style="padding:10px 12px;">Concepto</th>
+              <th style="padding:10px 12px;">Monto</th>
+              <th style="padding:10px 12px;">% s/ Ingresos</th>
+              <th style="padding:10px 12px;">Naturaleza</th>
+            </tr>
+          </thead>
+          <tbody id="pnl-table-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Cuentas por Cobrar y Pagar -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;">
+        <div class="crystal-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <h3 style="margin:0;font-size:14px;">Cuentas por Cobrar (Facturas a Clientes)</h3>
+            <button class="crystal-btn" id="add-receivable-btn" style="padding:4px 10px;font-size:11px;">+ Agregar</button>
+          </div>
+          <div id="receivables-list" class="tx-list"></div>
+        </div>
+
+        <div class="crystal-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <h3 style="margin:0;font-size:14px;">Cuentas por Pagar (Proveedores / Pasivos)</h3>
+            <button class="crystal-btn" id="add-payable-btn" style="padding:4px 10px;font-size:11px;">+ Agregar</button>
+          </div>
+          <div id="payables-list" class="tx-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SEGUROS & RETIRO -->
+    <section id="page-insurance" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Asesoría Patrimonial & Seguros</p>
+          <h1>Decision Center: Retiro & Pólizas</h1>
+          <p class="subhead">Simulador dinámico de interés compuesto, planes de retiro (PPR) y cotizador de pólizas para clientes.</p>
+        </div>
+        <button class="crystal-btn crystal-btn-primary" id="generate-proposal-btn">📄 Propuesta Ejecutiva</button>
+      </div>
+
+      <div class="crystal-panel hero" style="margin-bottom:24px;">
+        <h2 style="font-size:18px;margin:0 0 16px;">Simulador Actuarial de Retiro & Aportación Sistemática</h2>
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:28px;">
+          <div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Edad Actual</span><span id="label-age">30 años</span></div>
+              <input type="range" id="input-age" min="18" max="65" value="30">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Edad de Jubilación</span><span id="label-retire-age">65 años</span></div>
+              <input type="range" id="input-retire-age" min="40" max="75" value="65">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Aportación Mensual</span><span id="label-monthly-inv">$3,500</span></div>
+              <input type="range" id="input-monthly-inv" min="500" max="50000" step="500" value="3500">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Rendimiento Anual Estimado</span><span id="label-rate">9.5%</span></div>
+              <input type="range" id="input-rate" min="3" max="16" step="0.5" value="9.5">
+            </div>
+            <div class="slider-lux">
+              <div class="slider-meta"><span>Inflación Anual Estimada</span><span id="label-inflation">4.0%</span></div>
+              <input type="range" id="input-inflation" min="2" max="10" step="0.5" value="4">
+            </div>
+          </div>
+
+          <div style="background:var(--bg-glass-card);border:1px solid var(--line-crystal);padding:22px;border-radius:14px;">
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">FONDO PROYECTADO A LOS <span id="res-retire-age-text">65</span> AÑOS</div>
+            <div class="card-value" id="res-total-projected" style="font-size:34px;color:var(--accent-base);margin:6px 0 16px;">$0.00</div>
+            
+            <div style="height:90px;position:relative;margin-bottom:16px;">
+              <svg id="compound-svg" width="100%" height="100%" preserveAspectRatio="none"></svg>
+            </div>
+
+            <div style="display:grid;gap:10px;font-size:12px;border-top:1px solid var(--line);padding-top:14px;">
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Capital Total Aportado:</span>
+                <strong id="res-capital-invested">$0.00</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Ganancia por Interés Compuesto:</span>
+                <strong style="color:var(--accent-base);" id="res-interest-earned">$0.00</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Renta Mensual Estimada al Retiro:</span>
+                <strong style="color:#eab308;" id="res-monthly-pension">$0.00</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--ink-secondary)">Deducción Fiscal Anual (Art. 151):</span>
+                <strong style="color:#38bdf8;" id="res-tax-deduction">$0.00</strong>
+              </div>
+            </div>
+
+            <button class="crystal-btn crystal-btn-primary" id="save-retirement-quote-btn" style="width:100%;margin-top:16px;">💾 Guardar Proyección en Cartera</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cotizador Rápido de Pólizas -->
+      <div class="crystal-panel">
+        <h3 style="margin:0 0 16px;font-size:16px;">Cotizador Rápido de Pólizas</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:14px;">
+          <div>
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Tipo de Póliza</label>
+            <select id="quote-policy-type" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+              <option value="Vida Dotal / Ahorro">Vida Dotal / Ahorro</option>
+              <option value="Plan Personal de Retiro (PPR)">Plan Personal de Retiro (PPR)</option>
+              <option value="Gastos Médicos Mayores (GMM)">Gastos Médicos Mayores (GMM)</option>
+              <option value="Vida Puro / Temporal">Vida Puro / Temporal</option>
+              <option value="Educacional">Seguro Educativo</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Suma Asegurada</label>
+            <input type="number" id="quote-sum-insured" value="2500000" step="50000" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Prima Anual</label>
+            <input type="number" id="quote-premium-annual" value="36000" step="1000" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Nombre del Prospecto</label>
+            <input type="text" id="quote-client-name" placeholder="Ej. Roberto Garza" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+          </div>
+          <div style="display:flex;align-items:flex-end;">
+            <button class="crystal-btn crystal-btn-primary" id="create-quote-btn" style="width:100%;height:42px;">Registrar Cotización</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hoja de Propuesta Ejecutiva para Cliente (Imprimible) -->
+      <div class="crystal-panel hidden proposal-sheet" id="client-proposal-preview" style="margin-top:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--line);padding-bottom:20px;margin-bottom:20px;">
+          <div>
+            <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;" id="prop-advisor-brand">MONEYMAXING WEALTH ADVISORY</div>
+            <div style="font-size:12px;color:var(--ink-secondary);margin-top:4px;" id="prop-advisor-contact">Asesor Patrimonial Certificado</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="crystal-btn" style="font-size:10px;padding:4px 10px;color:var(--accent-base);">PROPUESTA DE ASESORÍA PATRIMONIAL</span>
+            <div style="font-size:11px;color:var(--muted);margin-top:6px;" id="prop-date"></div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-glass-card);border:1px solid var(--line);padding:16px;border-radius:10px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <div style="font-size:11px;color:var(--muted);">CLIENTE TITULAR</div>
+            <strong style="font-size:15px;" id="prop-client-name">Cliente</strong>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);">ESTRATEGIA PATRIMONIAL</div>
+            <strong style="font-size:15px;color:var(--accent-base);" id="prop-plan-name">PPR Élite</strong>
+          </div>
+        </div>
+
+        <div class="grid-cards" style="margin-bottom:20px;">
+          <div class="crystal-panel">
+            <div class="card-label">Suma Asegurada / Cobertura</div>
+            <div class="card-value" id="prop-insured-capital">$0.00</div>
+          </div>
+          <div class="crystal-panel">
+            <div class="card-label">Aportación / Prima Mensual</div>
+            <div class="card-value" id="prop-monthly-premium" style="color:var(--accent-base);">$0.00</div>
+          </div>
+          <div class="crystal-panel">
+            <div class="card-label">Fondo Proyectado al Retiro</div>
+            <div class="card-value" id="prop-projected-capital" style="color:#eab308;">$0.00</div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;" class="no-print">
+          <button class="crystal-btn" id="close-proposal-btn">Cerrar</button>
+          <button class="crystal-btn crystal-btn-primary" onclick="window.print()">🖨️ Imprimir / Guardar en PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CARTERA DE CLIENTES (CRM UNIVERSAL) -->
+    <section id="page-clients" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Gestión de Relaciones Comerciales</p>
+          <h1>Cartera de Clientes & CRM</h1>
+          <p class="subhead">Prospectos y clientes para Seguros, Bienes Raíces, Consultoría y Servicios.</p>
+        </div>
+        <button class="crystal-btn crystal-btn-primary" id="new-client-btn">+ Nuevo Cliente</button>
+      </div>
+
+      <div class="crystal-panel" style="margin-bottom:20px;padding:14px;">
+        <input type="text" id="client-search" placeholder="🔍 Buscar cliente por nombre, teléfono o plan…" style="width:100%;max-width:380px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+      </div>
+
+      <div class="tx-list">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--line);text-align:left;color:var(--muted);font-family:var(--mono);font-size:10px;text-transform:uppercase;">
+              <th style="padding:12px 14px;">Cliente</th>
+              <th style="padding:12px 14px;">Contacto</th>
+              <th style="padding:12px 14px;">Plan / Servicio</th>
+              <th style="padding:12px 14px;">Monto / Cobertura</th>
+              <th style="padding:12px 14px;">Valor / Prima</th>
+              <th style="padding:12px 14px;">Estado</th>
+              <th style="padding:12px 14px;">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="clients-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7. PRESUPUESTOS & METAS -->
+    <section id="page-budgets" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Disciplina Financiera</p>
+          <h1>Presupuestos & Metas</h1>
+          <p class="subhead">Topes de gasto mensual por categoría y tracking visual de metas de ahorro.</p>
+        </div>
+        <button class="crystal-btn crystal-btn-primary" id="new-goal-btn">+ Nueva Meta de Ahorro</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
+        <div class="crystal-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="margin:0;font-size:15px;">Límites de Gastos Mensuales</h3>
+            <button class="crystal-btn" id="save-budgets-btn" style="padding:4px 10px;font-size:11px;">Guardar Límites</button>
+          </div>
+          <div id="budgets-container" style="display:grid;gap:14px;"></div>
+        </div>
+
+        <div class="crystal-panel">
+          <h3 style="margin:0 0 16px;font-size:15px;">Metas de Ahorro & Crecimiento</h3>
+          <div id="savings-goals-container" style="display:grid;gap:14px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. LIQUID CRYSTAL STUDIO (PERSONALIZACIÓN TOTAL & PANEO) -->
+    <section id="page-studio" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Control Total de Apariencia & Dinámicas</p>
+          <h1>Liquid Crystal Studio</h1>
+          <p class="subhead">Personaliza paletas maestras, botones transparentes, velocidad de paneo y membrete.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
+        <!-- Selector de Estilos y Paneo -->
+        <div class="crystal-panel">
+          <h3 style="margin:0 0 14px;font-size:15px;">Paleta Maestra Liquid Crystal</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <button class="crystal-btn theme-picker-btn" data-theme-val="obsidian">🌌 Obsidian Stealth (Dark)</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="gold">👑 Royal Onyx & Gold</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="sapphire">💎 Wall Street Sapphire</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="titanium">🪐 Apple Pro Titanium</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="amethyst">🔮 Cyber Amethyst</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="crimson">🍷 Monaco Crimson</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="emerald-light">📜 Swiss Alpine Paper</button>
+          </div>
+
+          <h3 style="margin:24px 0 10px;font-size:15px;">Acento Neón / Prismatic Glow</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+            <button class="swatch-btn" data-accent-val="emerald" style="background:#10b981;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Esmeralda"></button>
+            <button class="swatch-btn" data-accent-val="gold" style="background:#d4af37;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Oro"></button>
+            <button class="swatch-btn" data-accent-val="sapphire" style="background:#38bdf8;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Zafiro"></button>
+            <button class="swatch-btn" data-accent-val="amethyst" style="background:#a855f7;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Amatista"></button>
+            <button class="swatch-btn" data-accent-val="ruby" style="background:#f43f5e;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Rubí"></button>
+            <button class="swatch-btn" data-accent-val="cyan" style="background:#06b6d4;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Cian"></button>
+            <button class="swatch-btn" data-accent-val="amber" style="background:#f59e0b;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Ámbar"></button>
+          </div>
+
+          <!-- Ajuste de Paneo de Páginas -->
+          <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:16px;">
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Animación de Paneo entre Módulos</label>
+            <select id="setting-pane-anim" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+              <option value="smooth">Cinemático Suave con Blur (0.38s)</option>
+              <option value="fast">Dinámico Rápido (0.18s)</option>
+              <option value="instant">Instantáneo (0s)</option>
+            </select>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
+            <div>
+              <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Moneda Principal</label>
+              <select id="setting-currency" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+                <option value="MXN">Peso Mexicano (MXN $)</option>
+                <option value="USD">Dólar Estadounidense (USD $)</option>
+                <option value="EUR">Euro (EUR €)</option>
+                <option value="COP">Peso Colombiano (COP $)</option>
+                <option value="CLP">Peso Chileno (CLP $)</option>
+                <option value="ARS">Peso Argentino (ARS $)</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Auto-Bloqueo</label>
+              <select id="setting-autolock" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+                <option value="2">2 minutos</option>
+                <option value="5" selected>5 minutos</option>
+                <option value="15">15 minutos</option>
+                <option value="30">30 minutos</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);">
+            <div>
+              <strong style="font-size:13px;">Efectos Sonoros Cristalinos</strong>
+              <div style="font-size:11px;color:var(--muted);">Micro-clics acústicos de sintetizador Web Audio.</div>
+            </div>
+            <input type="checkbox" id="setting-sound" checked style="width:18px;height:18px;accent-color:var(--accent-base);">
+          </div>
+        </div>
+
+        <!-- Membrete & Perfiles -->
+        <div>
+          <div class="crystal-panel">
+            <h3 style="margin:0 0 14px;font-size:15px;">Membrete de Despacho & Asesor</h3>
+            <div style="display:grid;gap:10px;">
+              <input type="text" id="setting-business-name" placeholder="Nombre del Despacho o Firma" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+              <input type="text" id="setting-advisor-name" placeholder="Nombre del Asesor Titular" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <input type="text" id="setting-advisor-phone" placeholder="Teléfono" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+                <input type="email" id="setting-advisor-email" placeholder="Correo" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+              </div>
+              <button class="crystal-btn crystal-btn-primary" id="save-studio-btn" style="margin-top:6px;">💾 Guardar Preferencias</button>
+            </div>
+          </div>
+
+          <div class="crystal-panel" style="margin-top:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+              <h3 style="margin:0;font-size:15px;">Perfiles de la Bóveda</h3>
+              <button class="crystal-btn" id="btn-add-profile-wizard" style="padding:4px 10px;font-size:11px;">+ Crear Perfil</button>
+            </div>
+            <div id="profiles-list-container" class="tx-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. SEGURIDAD & BÓVEDA -->
+    <section id="page-security" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Protocolos Criptográficos</p>
+          <h1>Bóveda Suiza & Respaldos</h1>
+          <p class="subhead">Arquitectura local zero-knowledge, SHA-256 integrity checks y copias portátiles.</p>
+        </div>
+      </div>
+
+      <div class="grid-cards">
+        <div class="crystal-panel">
+          <div class="card-label">Algoritmo Principal</div>
+          <div class="card-value" style="font-size:22px;color:var(--accent-base);">AES-256-GCM</div>
+          <div class="card-sub">Cifrado simétrico autenticado de bloques.</div>
+        </div>
+        <div class="crystal-panel">
+          <div class="card-label">Derivación de Clave</div>
+          <div class="card-value" style="font-size:22px;color:#38bdf8;">PBKDF2 310,000</div>
+          <div class="card-sub">Iteraciones SHA-256 según NIST.</div>
+        </div>
+        <div class="crystal-panel">
+          <div class="card-label">Escudo de Fuerza Bruta</div>
+          <div class="card-value" style="font-size:22px;color:#eab308;">ACTIVO</div>
+          <div class="card-sub">Congelamiento exponencial ante fallos.</div>
+        </div>
+      </div>
+
+      <div class="crystal-panel" style="margin-top:20px;">
+        <h3 style="margin:0 0 10px;font-size:16px;">Exportar Respaldo Cifrado (.mmxvault)</h3>
+        <p style="font-size:12px;color:var(--ink-secondary);line-height:1.6;margin-bottom:16px;">
+          Guarda un archivo 100% cifrado de toda tu información para archivarlo en una memoria USB o disco seguro. Nadie puede abrirlo sin la contraseña maestra.
+        </p>
+        <button class="crystal-btn crystal-btn-primary" id="download-backup-btn">📦 Descargar Respaldo Cifrado</button>
+
+        <div style="margin-top:24px;border-top:1px solid var(--line);padding-top:16px;">
+          <h4 style="margin:0 0 8px;font-size:14px;">Restaurar Respaldo</h4>
+          <input type="file" id="restore-file-input" accept=".mmxvault,.json" style="font-size:12px;">
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ==========================================
+     COMMAND PALETTE SPOTLIGHT
+     ========================================== -->
+<div id="cmd-palette" class="cmd-palette-backdrop hidden" role="dialog" aria-modal="true">
+  <div class="cmd-palette-modal">
+    <div class="cmd-input-wrap">
+      <span style="margin-right:12px;color:var(--muted);">🔍</span>
+      <input type="text" id="cmd-search-input" placeholder="Escribe para buscar comandos o navegar… (Esc para cerrar)">
+    </div>
+    <div class="cmd-results" id="cmd-results-list"></div>
+  </div>
+</div>
+
+<!-- ==========================================
+     MODAL: ANOTAR MOVIMIENTO
+     ========================================== -->
+<div id="tx-modal" class="modal-backdrop hidden" role="presentation">
+  <div class="modal-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <h2 style="margin:0;font-size:18px;">Anotar Movimiento</h2>
+      <button class="crystal-btn" id="close-tx-modal-btn" style="padding:4px 8px;">✕</button>
+    </div>
+    <form id="tx-form">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Tipo</label>
+          <select id="modal-tx-kind" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            <option value="expense">Gasto (−)</option>
+            <option value="income">Ingreso (+)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Monto</label>
+          <input type="number" id="modal-tx-amount" min="0.01" step="0.01" required placeholder="0.00" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+      </div>
+
+      <div style="margin:12px 0;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Categoría</label>
+        <select id="modal-tx-category" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;"></select>
+      </div>
+
+      <div style="margin:12px 0;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Concepto / Nota</label>
+        <input type="text" id="modal-tx-note" maxlength="80" placeholder="Ej. Factura consultoría, Honorarios, Comisión inmobiliaria…" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Fecha</label>
+          <input type="date" id="modal-tx-date" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Módulo Fiscal</label>
+          <select id="modal-tx-tax" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            <option value="none">Sin desglose fiscal</option>
+            <option value="vat16">IVA 16% Incluido</option>
+            <option value="vat8">IVA 8% (Frontera)</option>
+            <option value="retention">Honorarios (IVA + Retención)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="crystal-btn" type="button" id="cancel-tx-modal-btn">Cancelar</button>
+        <button class="crystal-btn crystal-btn-primary" type="submit">Guardar en Bóveda</button>
+      </div>
+      <div id="modal-tx-error" style="color:#ef4444;font-size:12px;margin-top:10px;"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ==========================================
+     MODAL: NUEVA PROPIEDAD INMOBILIARIA
+     ========================================== -->
+<div id="property-modal" class="modal-backdrop hidden" role="presentation">
+  <div class="modal-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2 style="margin:0;font-size:18px;">Registrar Propiedad</h2>
+      <button class="crystal-btn" id="close-property-modal-btn" style="padding:4px 8px;">✕</button>
+    </div>
+    <form id="property-form">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Título / Nombre del Inmueble</label>
+        <input type="text" id="prop-title" required placeholder="Ej. Depto Torre Platino #402, Casa San Jerónimo" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Tipo de Operación</label>
+          <select id="prop-op-type" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            <option value="Venta">Venta</option>
+            <option value="Renta">Renta</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Precio Solicitado</label>
+          <input type="number" id="prop-price" required placeholder="3500000" step="50000" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Comisión Acordada (%)</label>
+          <input type="number" id="prop-commission" value="5" step="0.5" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Estatus en Promoción</label>
+          <select id="prop-status" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            <option value="Disponible">Disponible / En Promoción</option>
+            <option value="Apartada">Apartada / Oferta en Firme</option>
+            <option value="En Notaría">En Notaría / Firma</option>
+            <option value="Cerrada">Cerrada / Comisión Cobrada</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Cliente Propietario / Comprador</label>
+        <input type="text" id="prop-client" placeholder="Nombre y contacto del cliente" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+      </div>
+      <div class="modal-actions">
+        <button class="crystal-btn" type="button" id="cancel-property-modal-btn">Cancelar</button>
+        <button class="crystal-btn crystal-btn-primary" type="submit">Guardar Inmueble</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==========================================
+     MODAL: WIZARD DE PERFIL
+     ========================================== -->
+<div id="onboarding-modal" class="modal-backdrop hidden" role="presentation">
+  <div class="modal-content" style="max-width:580px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2 id="wizard-title" style="margin:0;font-size:20px;">Configurar Perfil</h2>
+      <button class="crystal-btn" id="close-wizard-btn" style="padding:4px 8px;">✕</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;">
+      <div class="crystal-btn" id="wstep-1" style="font-size:11px;">1. Especialidad</div>
+      <div class="crystal-btn" id="wstep-2" style="font-size:11px;">2. Identidad</div>
+      <div class="crystal-btn" id="wstep-3" style="font-size:11px;">3. Calibración</div>
+    </div>
+
+    <div id="wizard-content-1">
+      <p style="font-size:13px;color:var(--ink-secondary);margin-bottom:14px;">Elige el modo de trabajo de este perfil:</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="crystal-panel role-card selected" data-role="master" style="cursor:pointer;padding:16px;">
+          <div style="font-size:24px;margin-bottom:6px;">⭐</div>
+          <strong style="font-size:13px;">Master Ejecutivo</strong>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Inmobiliario, seguros, contabilidad y finanzas personales.</div>
+        </div>
+        <div class="crystal-panel role-card" data-role="realestate" style="cursor:pointer;padding:16px;">
+          <div style="font-size:24px;margin-bottom:6px;">🏢</div>
+          <strong style="font-size:13px;">Asesor Inmobiliario</strong>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Hipotecas, amortizaciones, Cap Rate y comisiones.</div>
+        </div>
+        <div class="crystal-panel role-card" data-role="insurance" style="cursor:pointer;padding:16px;">
+          <div style="font-size:24px;margin-bottom:6px;">🛡️</div>
+          <strong style="font-size:13px;">Asesor de Seguros & PPR</strong>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Planes de retiro, pólizas y proyecciones actuariales.</div>
+        </div>
+        <div class="crystal-panel role-card" data-role="accounting" style="cursor:pointer;padding:16px;">
+          <div style="font-size:24px;margin-bottom:6px;">📊</div>
+          <strong style="font-size:13px;">Contable & PyME</strong>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">P&L, punto de equilibrio e impuestos.</div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="crystal-btn crystal-btn-primary" id="wizard-next-1">Continuar →</button>
+      </div>
+    </div>
+
+    <div id="wizard-content-2" class="hidden">
+      <div style="display:grid;gap:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Nombre del Perfil</label>
+          <input type="text" id="wiz-profile-name" placeholder="Ej. Inmobiliaria Garza, Finanzas Personales…" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Moneda Base</label>
+            <select id="wiz-currency" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+              <option value="MXN">Peso Mexicano (MXN $)</option>
+              <option value="USD">Dólar Estadounidense (USD $)</option>
+              <option value="EUR">Euro (EUR €)</option>
+              <option value="COP">Peso Colombiano (COP $)</option>
+              <option value="CLP">Peso Chileno (CLP $)</option>
+              <option value="ARS">Peso Argentino (ARS $)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Paleta Inicial</label>
+            <select id="wiz-theme" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+              <option value="obsidian">Obsidian Stealth</option>
+              <option value="gold">Royal Gold</option>
+              <option value="sapphire">Wall Street Sapphire</option>
+              <option value="titanium">Apple Pro Titanium</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="crystal-btn" id="wizard-prev-2">← Volver</button>
+        <button class="crystal-btn crystal-btn-primary" id="wizard-next-2">Continuar →</button>
+      </div>
+    </div>
+
+    <div id="wizard-content-3" class="hidden">
+      <div style="display:grid;gap:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Saldo Inicial en Cuenta / Bóveda</label>
+          <input type="number" id="wiz-initial-balance" value="0" step="100" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Nombre del Despacho o Titular</label>
+          <input type="text" id="wiz-business-name" placeholder="Ej. Garza & Asociados · Real Estate" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="crystal-btn" id="wizard-prev-3">← Volver</button>
+        <button class="crystal-btn crystal-btn-primary" id="wizard-finish">🚀 Activar Perfil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================
+     MODAL: CLIENTE (CRM)
+     ========================================== -->
+<div id="client-modal" class="modal-backdrop hidden" role="presentation">
+  <div class="modal-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2 style="margin:0;font-size:18px;">Ficha de Cliente / Prospecto</h2>
+      <button class="crystal-btn" id="close-client-modal-btn" style="padding:4px 8px;">✕</button>
+    </div>
+    <form id="client-form">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Nombre Completo</label>
+        <input type="text" id="client-name" required placeholder="Ej. Gabriel Morales" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Teléfono</label>
+          <input type="text" id="client-phone" placeholder="555-123-4567" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Correo</label>
+          <input type="email" id="client-email" placeholder="cliente@correo.com" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Plan / Servicio</label>
+          <input type="text" id="client-plan" required placeholder="Ej. PPR Retiro, Compra Inmueble, Asesoría" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Estado</label>
+          <select id="client-status" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+            <option value="Prospecto">Prospecto Inicial</option>
+            <option value="Propuesta Presentada">Propuesta Presentada</option>
+            <option value="Activo / Vigente">Activo / Vigente</option>
+            <option value="Cerrado">Cerrado / Cobrado</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Monto / Cobertura</label>
+          <input type="number" id="client-sum-insured" placeholder="2000000" step="50000" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Prima / Valor Estimado</label>
+          <input type="number" id="client-premium" placeholder="36000" step="1000" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="crystal-btn" type="button" id="cancel-client-modal-btn">Cancelar</button>
+        <button class="crystal-btn crystal-btn-primary" type="submit">Guardar Cliente</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==========================================
+     MODAL: CUENTAS POR COBRAR / PAGAR
+     ========================================== -->
+<div id="debt-modal" class="modal-backdrop hidden" role="presentation">
+  <div class="modal-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2 id="debt-modal-title" style="margin:0;font-size:18px;">Añadir Cuenta</h2>
+      <button class="crystal-btn" id="close-debt-modal-btn" style="padding:4px 8px;">✕</button>
+    </div>
+    <form id="debt-form">
+      <input type="hidden" id="debt-kind" value="receivable">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Persona o Empresa</label>
+        <input type="text" id="debt-entity" required placeholder="Nombre de cliente o proveedor" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Monto</label>
+          <input type="number" id="debt-amount" min="1" step="0.01" required placeholder="0.00" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Fecha de Vencimiento</label>
+          <input type="date" id="debt-due-date" required style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Concepto</label>
+        <input type="text" id="debt-concept" placeholder="Ej. Factura #402, Pago de consultoría…" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--ink);margin-top:4px;">
+      </div>
+      <div class="modal-actions">
+        <button class="crystal-btn" type="button" id="cancel-debt-modal-btn">Cancelar</button>
+        <button class="crystal-btn crystal-btn-primary" type="submit">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- ==========================================
+     MOTOR JAVASCRIPT ZERO-KNOWLEDGE & LIQUID
+     ========================================== -->
+<script>
+(()=>{
+'use strict';
+
+const ITERATIONS = 310000;
+const CATEGORIES = [
+  ['comida', 'Comida & Despensa'],
+  ['vivienda', 'Vivienda & Servicios'],
+  ['transporte', 'Transporte & Movilidad'],
+  ['salud', 'Salud & Gastos Médicos'],
+  ['ocio', 'Ocio & Calidad de Vida'],
+  ['negocio', 'Gastos Operativos / Negocio'],
+  ['inmobiliario', 'Bienes Raíces & Inversiones'],
+  ['impuestos', 'Impuestos & SAT'],
+  ['seguros', 'Seguros & Protección'],
+  ['ahorro', 'Inversión & Retiro'],
+  ['otros', 'Otros Flujos']
+];
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+let key = null;
+let data = null;
+let vaultSalt = null;
+let vaultRevision = 0;
+let lockTimer = null;
+let toastTimer = null;
+let failedAttempts = 0;
+let lockoutCountdown = null;
+let wizardSelectedRole = 'master';
+let audioCtx = null;
+
+// Sonido háptico
+function playHaptic(type = 'click') {
+  if (data?.globalSettings?.soundEnabled === false) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+
+    if (type === 'unlock') {
+      osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.18);
+      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.25);
+    } else if (type === 'save') {
+      osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+      osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.22);
+    } else {
+      osc.frequency.setValueAtTime(950, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.04);
+    }
+  } catch {}
+}
+
+function money(amount, currency = null) {
+  const cur = currency || (data?.globalSettings?.currency) || 'MXN';
+  return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: cur,
+    maximumFractionDigits: 2
+  }).format(Number(amount) || 0);
+}
+
+function localToday() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function monthId() {
+  return localToday().slice(0, 7);
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Bóveda por defecto
+function defaultVaultData() {
+  const initialId = 'prof_' + crypto.randomUUID().slice(0, 8);
+  return {
+    version: 2,
+    activeProfileId: initialId,
+    globalSettings: {
+      theme: 'obsidian',
+      accent: 'emerald',
+      paneAnim: 'smooth',
+      currency: 'MXN',
+      autoLockMinutes: 5,
+      soundEnabled: true,
+      businessName: 'MONEYMAXING Wealth Advisory',
+      advisorName: 'Asesor Patrimonial Certificado',
+      advisorPhone: '+52 55 0000 0000',
+      advisorEmail: 'contacto@moneymaxing.com'
+    },
+    profiles: [
+      {
+        id: initialId,
+        name: 'Principal Ejecutivo',
+        role: 'master',
+        currency: 'MXN',
+        initialBalance: 0,
+        transactions: [],
+        budgets: Object.fromEntries(CATEGORIES.map(([id]) => [id, 0])),
+        savingsGoals: [
+          { id: 'goal_1', name: 'Fondo de Emergencia (6 meses)', target: 75000, current: 25000, deadline: '2027-12-31' },
+          { id: 'goal_2', name: 'Enganche Inmueble Residencial', target: 500000, current: 120000, deadline: '2028-12-31' }
+        ],
+        realEstateProperties: [
+          {
+            id: 'prop_1',
+            title: 'Depto Torre Platino #402',
+            opType: 'Venta',
+            price: 3650000,
+            commissionPct: 5,
+            status: 'Disponible',
+            client: 'Ing. Carlos Mendoza (555-987-6543)'
+          }
+        ],
+        insuranceClients: [
+          {
+            id: 'cli_1',
+            name: 'Lic. Roberto Garza',
+            phone: '555-432-1098',
+            email: 'roberto.garza@empresa.com',
+            plan: 'PPR Retiro Dotal Art. 151',
+            status: 'Activo / Vigente',
+            sumInsured: 3000000,
+            premium: 48000
+          }
+        ],
+        receivables: [],
+        payables: []
+      }
+    ]
+  };
+}
+
+function migrateLegacyData(loaded) {
+  if (loaded.version >= 2 && Array.isArray(loaded.profiles)) {
+    loaded.globalSettings = loaded.globalSettings || {};
+    loaded.globalSettings.theme = loaded.globalSettings.theme || 'obsidian';
+    loaded.globalSettings.accent = loaded.globalSettings.accent || 'emerald';
+    loaded.globalSettings.paneAnim = loaded.globalSettings.paneAnim || 'smooth';
+    loaded.globalSettings.soundEnabled = loaded.globalSettings.soundEnabled !== false;
+    loaded.profiles.forEach(p => {
+      p.realEstateProperties = p.realEstateProperties || [];
+    });
+    return loaded;
+  }
+  const id = 'prof_legacy';
+  const legacyTransactions = (loaded.transactions || []).map(t => ({
+    ...t,
+    taxKind: 'none',
+    taxAmount: 0
+  }));
+  const legacyBudgets = loaded.budgets || Object.fromEntries(CATEGORIES.map(([c]) => [c, 0]));
+
+  return {
+    version: 2,
+    activeProfileId: id,
+    globalSettings: {
+      theme: 'obsidian',
+      accent: 'emerald',
+      paneAnim: 'smooth',
+      currency: 'MXN',
+      autoLockMinutes: 5,
+      soundEnabled: true,
+      businessName: 'MONEYMAXING Wealth Advisory',
+      advisorName: '',
+      advisorPhone: '',
+      advisorEmail: ''
+    },
+    profiles: [
+      {
+        id: id,
+        name: 'Principal',
+        role: 'master',
+        currency: 'MXN',
+        initialBalance: 0,
+        transactions: legacyTransactions,
+        budgets: legacyBudgets,
+        savingsGoals: [],
+        realEstateProperties: [],
+        insuranceClients: [],
+        receivables: [],
+        payables: []
+      }
+    ]
+  };
+}
+
+function getActiveProfile() {
+  if (!data || !data.profiles) return null;
+  let p = data.profiles.find(x => x.id === data.activeProfileId);
+  if (!p && data.profiles.length > 0) {
+    p = data.profiles[0];
+    data.activeProfileId = p.id;
+  }
+  return p;
+}
+
+// Criptografía
+function bytesToB64(bytes) { let s = ''; for (const b of bytes) s += String.fromCharCode(b); return btoa(s); }
+function b64ToBytes(s) { return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
+
+async function derive(password, salt) {
+  const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
+    material,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+}
+
+async function loadVault() {
+  const res = await fetch('/api/vault', { cache: 'no-store' });
+  if (!res.ok) throw new Error('No se pudo conectar a la bóveda.');
+  return res.json();
+}
+
+async function storeVault({ create = false } = {}) {
+  if (!key || !data || !vaultSalt) throw new Error('Bóveda bloqueada.');
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder().encode(JSON.stringify(data));
+  const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded);
+  const record = {
+    version: 1,
+    iterations: ITERATIONS,
+    salt: bytesToB64(vaultSalt),
+    iv: bytesToB64(iv),
+    ciphertext: bytesToB64(new Uint8Array(encrypted))
+  };
+  const headers = { 'Content-Type': 'application/json' };
+  if (!create) headers['If-Match'] = String(vaultRevision);
+  const res = await fetch('/api/vault', {
+    method: create ? 'POST' : 'PUT',
+    headers,
+    body: JSON.stringify(record),
+    cache: 'no-store'
+  });
+  const result = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    if (res.status === 409) throw new Error('Conflicto de sincronización. Bloquea y reabre la bóveda.');
+    throw new Error('Error al guardar la bóveda.');
+  }
+  vaultRevision = result.revision;
+}
+
+// Puerta de Acceso
+async function gateMode() {
+  try {
+    const stored = await loadVault();
+    vaultRevision = stored.revision;
+    const exists = Boolean(stored.vault);
+    $('#gate-title').innerHTML = exists ? 'Bienvenido<br>de vuelta.' : 'Finanzas con<br>precisión suiza.';
+    $('#gate-copy').textContent = exists
+      ? 'Desbloquea tu bóveda personal, inmobiliaria y patrimonial.'
+      : 'Crea tu bóveda con cifrado zero-knowledge.';
+    $('#password-label').textContent = exists ? 'Contraseña maestra' : 'Crea tu contraseña maestra';
+    $('#confirm-field').classList.toggle('hidden', exists);
+    $('#gate-confirm').required = !exists;
+    $('#gate-submit').textContent = exists ? 'Desbloquear Bóveda' : 'Crear Bóveda Cifrada';
+    $('#gate-submit').disabled = false;
+    $('#gate-error').textContent = '';
+  } catch {
+    $('#gate-title').innerHTML = 'Conecta tu<br>PC principal.';
+    $('#gate-copy').textContent = 'El servidor local de MONEYMAXING no responde.';
+    $('#confirm-field').classList.add('hidden');
+    $('#gate-submit').disabled = true;
+    $('#gate-error').textContent = 'Servicio no disponible.';
+  }
+}
+
+function handleBruteForceFailure() {
+  failedAttempts++;
+  if (failedAttempts >= 3) {
+    const delay = failedAttempts === 3 ? 5 : failedAttempts === 4 ? 12 : 30;
+    triggerLockout(delay);
+  }
+}
+
+function triggerLockout(seconds) {
+  let remaining = seconds;
+  $('#gate-lockout').classList.remove('hidden');
+  $('#gate-submit').disabled = true;
+  $('#gate-password').disabled = true;
+  $('#lockout-seconds').textContent = remaining;
+
+  clearInterval(lockoutCountdown);
+  lockoutCountdown = setInterval(() => {
+    remaining--;
+    $('#lockout-seconds').textContent = remaining;
+    if (remaining <= 0) {
+      clearInterval(lockoutCountdown);
+      $('#gate-lockout').classList.add('hidden');
+      $('#gate-submit').disabled = false;
+      $('#gate-password').disabled = false;
+      $('#gate-password').focus();
+    }
+  }, 1000);
+}
+
+function lock() {
+  clearTimeout(lockTimer);
+  key = null;
+  data = null;
+  vaultSalt = null;
+  vaultRevision = 0;
+  $('#app').classList.add('hidden');
+  $('#gate').classList.remove('hidden');
+  $('#gate-form').reset();
+  $('#gate-error').textContent = '';
+  gateMode();
+  $('#gate-password').focus();
+}
+
+function resetLockTimer() {
+  clearTimeout(lockTimer);
+  const minutes = Number(data?.globalSettings?.autoLockMinutes) || 5;
+  if (key) lockTimer = setTimeout(lock, minutes * 60 * 1000);
+}
+
+function toast(message) {
+  const el = $('#toast');
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+function applyAppearance() {
+  const theme = data?.globalSettings?.theme || 'obsidian';
+  const accent = data?.globalSettings?.accent || 'emerald';
+  const paneAnim = data?.globalSettings?.paneAnim || 'smooth';
+
+  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.setAttribute('data-accent', accent);
+  document.documentElement.setAttribute('data-pane-anim', paneAnim);
+
+  $$('.theme-picker-btn').forEach(b => b.classList.toggle('crystal-btn-primary', b.dataset.themeVal === theme));
+  $$('.swatch-btn').forEach(b => b.style.outline = b.dataset.accentVal === accent ? '3px solid #ffffff' : 'none');
+}
+
+// ==========================================
+// RENDERIZADO GENERAL & LIQUID EXPERIENCE
+// ==========================================
+function render() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  applyAppearance();
+
+  $('#sidebar-profile-name').textContent = profile.name;
+  $('#sidebar-role-badge').textContent = profile.role.toUpperCase();
+  $('#header-today').textContent = new Intl.DateTimeFormat('es-MX', { weekday: 'short', day: 'numeric', month: 'short' }).format(new Date()).toUpperCase();
+  $('#header-month').textContent = new Intl.DateTimeFormat('es-MX', { month: 'long', year: 'numeric' }).format(new Date()).toUpperCase();
+
+  const txs = [...profile.transactions].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
+  const currentMonth = monthId();
+  const monthlyTxs = txs.filter(t => t.date.slice(0, 7) === currentMonth);
+
+  const totalIncomes = txs.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0);
+  const totalExpenses = txs.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0);
+  const balance = (profile.initialBalance || 0) + totalIncomes - totalExpenses;
+
+  const monthIncomes = monthlyTxs.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0);
+  const monthExpenses = monthlyTxs.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0);
+
+  $('#dash-balance').textContent = money(balance, profile.currency);
+  $('#dash-income').textContent = money(monthIncomes, profile.currency);
+  $('#dash-expense').textContent = money(monthExpenses, profile.currency);
+
+  calculateHealthScore(balance, monthIncomes, monthExpenses, profile);
+  renderTrendAreaChart(txs, balance, profile.currency);
+  renderDonutChart(monthlyTxs, profile.currency);
+  renderTxList($('#home-tx-list'), txs.slice(0, 5), profile.currency);
+  renderFullTransactions();
+  renderRealEstateModule();
+  renderAccounting();
+  renderBreakEvenCalculator();
+  renderBudgetsAndGoals();
+  renderClients();
+  renderRetirementSimulation();
+  renderProfilesList();
+}
+
+function calculateHealthScore(balance, monthIncomes, monthExpenses, profile) {
+  let score = 55;
+  const burn = monthExpenses || 1;
+  const runway = balance / burn;
+  if (runway >= 6) score += 20;
+  else if (runway >= 3) score += 10;
+  else if (runway < 1) score -= 15;
+
+  if (monthIncomes > 0) {
+    const rate = (monthIncomes - monthExpenses) / monthIncomes;
+    if (rate >= 0.25) score += 15;
+    else if (rate >= 0.10) score += 8;
+  }
+
+  score = Math.max(10, Math.min(100, Math.round(score)));
+  $('#score-number').textContent = score;
+  const ring = $('#score-ring');
+  const offset = 251.2 - (251.2 * score) / 100;
+  ring.style.strokeDashoffset = offset;
+
+  const badge = $('#score-badge');
+  if (score >= 85) { badge.textContent = 'SOBERANO'; badge.style.color = 'var(--accent-base)'; ring.style.stroke = 'var(--accent-base)'; }
+  else if (score >= 65) { badge.textContent = 'ROBUSTO'; badge.style.color = '#38bdf8'; ring.style.stroke = '#38bdf8'; }
+  else if (score >= 45) { badge.textContent = 'ESTABLE'; badge.style.color = '#eab308'; ring.style.stroke = '#eab308'; }
+  else { badge.textContent = 'VULNERABLE'; badge.style.color = '#ef4444'; ring.style.stroke = '#ef4444'; }
+}
+
+function renderTrendAreaChart(txs, currentBalance, currency) {
+  const svg = $('#trend-svg');
+  const tooltip = $('#trend-tooltip');
+  if (!svg) return;
+
+  const width = 800, height = 180;
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+  if (txs.length < 2) {
+    svg.innerHTML = `<text x="${width/2}" y="${height/2}" fill="var(--muted)" font-size="12" text-anchor="middle">Registra al menos 2 movimientos para ver la curva patrimonial.</text>`;
+    return;
+  }
+
+  const sorted = [...txs].sort((a, b) => a.date.localeCompare(b.date));
+  let running = 0;
+  const dataPoints = sorted.slice(-15).map(t => {
+    running += (t.kind === 'income' ? t.amount : -t.amount);
+    return { date: t.date, val: running, note: t.note };
+  });
+
+  const minVal = Math.min(...dataPoints.map(p => p.val));
+  const maxVal = Math.max(...dataPoints.map(p => p.val));
+  const range = (maxVal - minVal) || 1;
+
+  const paddingX = 40, paddingY = 25;
+  const chartW = width - paddingX * 2, chartH = height - paddingY * 2;
+
+  const coords = dataPoints.map((p, idx) => {
+    const x = paddingX + (idx / (dataPoints.length - 1)) * chartW;
+    const y = height - paddingY - ((p.val - minVal) / range) * chartH;
+    return { x, y, data: p };
+  });
+
+  let pathD = `M ${coords[0].x} ${coords[0].y}`;
+  for (let i = 0; i < coords.length - 1; i++) {
+    const cpX = (coords[i].x + coords[i + 1].x) / 2;
+    pathD += ` C ${cpX} ${coords[i].y}, ${cpX} ${coords[i + 1].y}, ${coords[i + 1].x} ${coords[i + 1].y}`;
+  }
+
+  const areaD = `${pathD} L ${coords[coords.length - 1].x} ${height} L ${coords[0].x} ${height} Z`;
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--accent-base)" stop-opacity="0.35" />
+        <stop offset="100%" stop-color="var(--accent-base)" stop-opacity="0.0" />
+      </linearGradient>
+    </defs>
+    <path d="${areaD}" fill="url(#areaGrad)" />
+    <path d="${pathD}" fill="none" stroke="var(--accent-base)" stroke-width="3" stroke-linecap="round" />
+    <line id="scrub-line" x1="0" y1="0" x2="0" y2="${height}" stroke="var(--line-crystal)" stroke-width="1" stroke-dasharray="3,3" opacity="0" />
+    <circle id="scrub-dot" cx="0" cy="0" r="5" fill="var(--accent-base)" stroke="#ffffff" stroke-width="2" opacity="0" />
+  `;
+
+  const scrubLine = svg.querySelector('#scrub-line');
+  const scrubDot = svg.querySelector('#scrub-dot');
+  const box = $('#trend-chart-box');
+
+  box.onmousemove = e => {
+    const rect = box.getBoundingClientRect();
+    const mouseX = (e.clientX - rect.left) * (width / rect.width);
+
+    let closest = coords[0];
+    let minDist = Infinity;
+    coords.forEach(pt => {
+      const dist = Math.abs(pt.x - mouseX);
+      if (dist < minDist) { minDist = dist; closest = pt; }
+    });
+
+    scrubLine.setAttribute('x1', closest.x);
+    scrubLine.setAttribute('x2', closest.x);
+    scrubLine.setAttribute('opacity', '1');
+    scrubDot.setAttribute('cx', closest.x);
+    scrubDot.setAttribute('cy', closest.y);
+    scrubDot.setAttribute('opacity', '1');
+
+    tooltip.innerHTML = `<strong>${money(closest.data.val, currency)}</strong><br><span style="color:var(--muted);">${closest.data.date} · ${escapeHtml(closest.data.note)}</span>`;
+    tooltip.classList.add('show');
+    tooltip.style.left = `${(closest.x / width) * 100}%`;
+    tooltip.style.top = `${closest.y - 45}px`;
+    tooltip.style.transform = 'translate(-50%, 0)';
+
+    $('#chart-scrubber-readout').textContent = `${closest.data.date}: ${money(closest.data.val, currency)}`;
+  };
+
+  box.onmouseleave = () => {
+    scrubLine.setAttribute('opacity', '0');
+    scrubDot.setAttribute('opacity', '0');
+    tooltip.classList.remove('show');
+    $('#chart-scrubber-readout').textContent = 'Interactivo';
+  };
+}
+
+function renderDonutChart(monthlyTxs, currency) {
+  const svg = $('#donut-svg');
+  const legend = $('#donut-legend');
+  if (!svg || !legend) return;
+
+  const expenses = monthlyTxs.filter(t => t.kind === 'expense');
+  const total = expenses.reduce((s, t) => s + t.amount, 0);
+
+  if (total === 0) {
+    svg.innerHTML = '<circle cx="60" cy="60" r="45" fill="transparent" stroke="var(--line)" stroke-width="16"></circle>';
+    $('#donut-center-pct').textContent = '0%';
+    $('#donut-center-cat').textContent = 'Sin gastos';
+    legend.innerHTML = '<div style="color:var(--muted);">Sin gastos registrados en el mes actual.</div>';
+    return;
+  }
+
+  const catSums = {};
+  expenses.forEach(t => catSums[t.category] = (catSums[t.category] || 0) + t.amount);
+
+  const colors = ['#10b981', '#38bdf8', '#f59e0b', '#a855f7', '#f43f5e', '#06b6d4', '#84cc16', '#fb923c', '#94a3b8'];
+  const circumference = 2 * Math.PI * 45;
+
+  let accumulatedAngle = 0;
+  let paths = '';
+  let legendHtml = '';
+  let colorIdx = 0;
+
+  for (const [catId, name] of CATEGORIES) {
+    const val = catSums[catId] || 0;
+    if (val > 0) {
+      const pct = val / total;
+      const strokeLen = pct * circumference;
+      const rot = (accumulatedAngle / circumference) * 360 - 90;
+      const col = colors[colorIdx % colors.length];
+
+      paths += `
+        <circle cx="60" cy="60" r="45" fill="transparent"
+          stroke="${col}" stroke-width="16"
+          stroke-dasharray="${strokeLen} ${circumference - strokeLen}"
+          transform="rotate(${rot} 60 60)"
+          data-cat="${name}" data-pct="${Math.round(pct * 100)}%"
+          style="cursor:pointer;transition:all 0.25s var(--ease-spring);transform-origin:60px 60px;"
+          class="donut-segment"
+        ></circle>
+      `;
+
+      legendHtml += `
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="display:flex;align-items:center;gap:6px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:${col};"></span>
+            ${escapeHtml(name)}
+          </span>
+          <strong>${money(val, currency)} (${Math.round(pct * 100)}%)</strong>
+        </div>
+      `;
+
+      accumulatedAngle += strokeLen;
+      colorIdx++;
+    }
+  }
+
+  svg.innerHTML = paths;
+  legend.innerHTML = legendHtml;
+
+  svg.querySelectorAll('.donut-segment').forEach(seg => {
+    seg.onmouseenter = () => {
+      seg.setAttribute('stroke-width', '22');
+      playHaptic('click');
+      $('#donut-center-pct').textContent = seg.dataset.pct;
+      $('#donut-center-cat').textContent = seg.dataset.cat;
+    };
+    seg.onmouseleave = () => {
+      seg.setAttribute('stroke-width', '16');
+      $('#donut-center-pct').textContent = '100%';
+      $('#donut-center-cat').textContent = 'Total Gastos';
+    };
+  });
+}
+
+function renderTxList(container, list, currency) {
+  if (!list.length) {
+    container.innerHTML = '<div style="padding:22px;text-align:center;color:var(--muted);font-size:12px;">Sin movimientos registrados.</div>';
+    return;
+  }
+  container.innerHTML = list.map(t => {
+    const isInc = t.kind === 'income';
+    const catName = CATEGORIES.find(([id]) => id === t.category)?.[1] || (isInc ? 'Ingreso' : 'Gasto');
+    const dStr = new Intl.DateTimeFormat('es-MX', { day: 'numeric', month: 'short' }).format(new Date(`${t.date}T12:00:00`));
+    return `
+      <div class="tx-item">
+        <div class="crystal-gem ${isInc ? 'accent' : ''}">${isInc ? '↑' : '↓'}</div>
+        <div style="min-width:0;">
+          <div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(t.note)}</div>
+          <div style="font-size:11px;color:var(--muted);">${escapeHtml(catName)} · ${dStr} ${t.taxKind && t.taxKind !== 'none' ? '· 🏛️ Fiscal' : ''}</div>
+        </div>
+        <div style="font-weight:800;font-size:14px;white-space:nowrap;color:${isInc ? 'var(--accent-base)' : '#f97316'};">${isInc ? '+' : '−'}${money(t.amount, currency)}</div>
+        <button class="crystal-btn delete-tx-btn" data-id="${t.id}" style="padding:4px 8px;font-size:11px;color:var(--muted);" title="Eliminar">✕</button>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.delete-tx-btn').forEach(btn => {
+    btn.onclick = async () => {
+      const p = getActiveProfile();
+      p.transactions = p.transactions.filter(t => t.id !== btn.dataset.id);
+      await storeVault();
+      render();
+      playHaptic('click');
+      toast('Movimiento eliminado.');
+    };
+  });
+}
+
+function renderFullTransactions() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+  const search = $('#filter-search').value.toLowerCase().trim();
+  const kind = $('#filter-kind').value;
+  const cat = $('#filter-category').value;
+
+  let filtered = [...profile.transactions].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
+  if (kind !== 'all') filtered = filtered.filter(t => t.kind === kind);
+  if (cat !== 'all') filtered = filtered.filter(t => t.category === cat);
+  if (search) filtered = filtered.filter(t => t.note.toLowerCase().includes(search));
+
+  renderTxList($('#full-tx-list'), filtered, profile.currency);
+}
+
+// ==========================================
+// MÓDULO INMOBILIARIO & BIENES RAÍCES (NUEVO)
+// ==========================================
+function renderRealEstateModule() {
+  const price = Number($('#input-re-price').value);
+  const downPct = Number($('#input-re-down').value);
+  const termYears = Number($('#input-re-term').value);
+  const annualRate = Number($('#input-re-rate').value) / 100;
+  const extraPmt = Number($('#input-re-extra').value);
+
+  const downAmount = price * (downPct / 100);
+  const loanAmount = Math.max(0, price - downAmount);
+  const months = termYears * 12;
+  const monthlyRate = annualRate / 12;
+
+  $('#label-re-price').textContent = money(price);
+  $('#label-re-down').textContent = `${downPct}% (${money(downAmount)})`;
+  $('#label-re-term').textContent = `${termYears} años (${months} meses)`;
+  $('#label-re-rate').textContent = `${(annualRate * 100).toFixed(2)}%`;
+  $('#label-re-extra').textContent = money(extraPmt);
+
+  // Fórmula de Mensualidad Hipotecaria Francesa
+  let basePmt = 0;
+  if (monthlyRate > 0) {
+    basePmt = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+  } else {
+    basePmt = loanAmount / months;
+  }
+
+  // Simulación de amortización con y sin aportaciones a capital
+  let balanceNormal = loanAmount;
+  let totalInterestNormal = 0;
+  for (let m = 0; m < months; m++) {
+    const intPmt = balanceNormal * monthlyRate;
+    const princPmt = basePmt - intPmt;
+    totalInterestNormal += intPmt;
+    balanceNormal -= princPmt;
+    if (balanceNormal <= 0) break;
+  }
+
+  let balanceWithExtra = loanAmount;
+  let totalInterestExtra = 0;
+  let monthsWithExtra = 0;
+  while (balanceWithExtra > 0 && monthsWithExtra < months) {
+    monthsWithExtra++;
+    const intPmt = balanceWithExtra * monthlyRate;
+    const princPmt = (basePmt - intPmt) + extraPmt;
+    totalInterestExtra += intPmt;
+    balanceWithExtra -= princPmt;
+  }
+
+  const interestSaved = Math.max(0, totalInterestNormal - totalInterestExtra);
+  const yearsReduced = ((months - monthsWithExtra) / 12).toFixed(1);
+
+  $('#re-monthly-payment').textContent = money(basePmt);
+  $('#re-loan-amount').textContent = money(loanAmount);
+  $('#re-total-interest').textContent = money(totalInterestNormal);
+  $('#re-interest-saved').textContent = money(interestSaved);
+  $('#re-time-reduced').textContent = `${yearsReduced} años menos (${months - monthsWithExtra} meses)`;
+
+  // Calculadora de Rentabilidad (Cap Rate & Yield)
+  renderCapRateCalculation();
+  renderPropertiesList();
+}
+
+function renderCapRateCalculation() {
+  const buyPrice = Number($('#roi-price').value) || 1;
+  const rent = Number($('#roi-rent').value) || 0;
+  const closing = Number($('#roi-closing').value) || 0;
+  const expenses = Number($('#roi-expenses').value) || 0;
+
+  const totalInvested = buyPrice + closing;
+  const grossAnnualRent = rent * 12;
+  const netOperatingIncome = Math.max(0, grossAnnualRent - expenses);
+
+  const capRate = ((netOperatingIncome / totalInvested) * 100).toFixed(2);
+  $('#roi-caprate-res').textContent = `${capRate}%`;
+  $('#roi-net-cash').textContent = money(netOperatingIncome);
+}
+
+function renderPropertiesList() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+  profile.realEstateProperties = profile.realEstateProperties || [];
+
+  const list = $('#re-properties-list');
+  $('#re-properties-count').textContent = `${profile.realEstateProperties.length} propiedades`;
+
+  if (!profile.realEstateProperties.length) {
+    list.innerHTML = '<div style="padding:18px;color:var(--muted);font-size:12px;text-align:center;">Sin inmuebles en cartera. Usa “+ Nueva Propiedad”.</div>';
+    return;
+  }
+
+  list.innerHTML = profile.realEstateProperties.map((p, i) => {
+    const commAmount = (p.price * (p.commissionPct || 5)) / 100;
+    return `
+      <div class="tx-item">
+        <div class="crystal-gem accent">🏠</div>
+        <div style="min-width:0;">
+          <div style="font-weight:750;font-size:13px;">${escapeHtml(p.title)}</div>
+          <div style="font-size:11px;color:var(--muted);">${p.opType} · ${escapeHtml(p.client || 'Cliente')}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-weight:800;color:var(--ink);">${money(p.price, profile.currency)}</div>
+          <div style="font-size:10px;color:var(--accent-base);">Comisión: ${money(commAmount, profile.currency)} (${p.commissionPct}%)</div>
+        </div>
+        <button class="crystal-btn delete-prop-btn" data-index="${i}" style="padding:4px 8px;font-size:11px;color:#ef4444;">✕</button>
+      </div>
+    `;
+  }).join('');
+
+  list.querySelectorAll('.delete-prop-btn').forEach(btn => {
+    btn.onclick = async () => {
+      profile.realEstateProperties.splice(Number(btn.dataset.index), 1);
+      await storeVault();
+      render();
+      playHaptic('click');
+      toast('Propiedad eliminada.');
+    };
+  });
+}
+
+// Calculadora de Punto de Equilibrio (Break-Even)
+function renderBreakEvenCalculator() {
+  const fixed = Number($('#be-fixed').value) || 0;
+  const price = Number($('#be-price').value) || 1;
+  const cost = Number($('#be-cost').value) || 0;
+
+  const marginPerUnit = Math.max(1, price - cost);
+  const unitsNeeded = Math.ceil(fixed / marginPerUnit);
+  const revenueNeeded = unitsNeeded * price;
+
+  $('#be-units-res').textContent = `${unitsNeeded} unidades / ventas`;
+  $('#be-revenue-res').textContent = money(revenueNeeded);
+}
+
+// Contabilidad & P&L
+function renderAccounting() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  const currentMonth = monthId();
+  const monthlyTxs = profile.transactions.filter(t => t.date.slice(0, 7) === currentMonth);
+
+  const grossIncomes = monthlyTxs.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0);
+  const deductibleExpenses = monthlyTxs.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0);
+
+  let taxEstimated = 0;
+  monthlyTxs.forEach(t => {
+    if (t.taxKind === 'vat16') taxEstimated += (t.amount * 0.16) / 1.16;
+    if (t.taxKind === 'retention') taxEstimated += t.amount * 0.10;
+  });
+
+  const netProfit = grossIncomes - deductibleExpenses;
+
+  $('#pnl-gross-income').textContent = money(grossIncomes, profile.currency);
+  $('#pnl-deductible-expenses').textContent = money(deductibleExpenses, profile.currency);
+  $('#pnl-tax-estimated').textContent = money(taxEstimated, profile.currency);
+  $('#pnl-net-profit').textContent = money(netProfit, profile.currency);
+
+  const tbody = $('#pnl-table-body');
+  const catSpend = {};
+  monthlyTxs.filter(t => t.kind === 'expense').forEach(t => catSpend[t.category] = (catSpend[t.category] || 0) + t.amount);
+
+  let rowsHtml = `
+    <tr style="border-bottom:1px solid var(--line);">
+      <td style="padding:10px 12px;"><strong>(+) Ingresos Brutos Totales</strong></td>
+      <td style="padding:10px 12px;"><strong>${money(grossIncomes, profile.currency)}</strong></td>
+      <td style="padding:10px 12px;">100.0%</td>
+      <td style="padding:10px 12px;color:var(--accent-base);">Base Gravable</td>
+    </tr>
+  `;
+
+  for (const [id, name] of CATEGORIES) {
+    const val = catSpend[id] || 0;
+    if (val > 0) {
+      const pct = grossIncomes > 0 ? ((val / grossIncomes) * 100).toFixed(1) : '0.0';
+      rowsHtml += `
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:10px 12px;">(-) ${escapeHtml(name)}</td>
+          <td style="padding:10px 12px;">${money(val, profile.currency)}</td>
+          <td style="padding:10px 12px;">${pct}%</td>
+          <td style="padding:10px 12px;color:var(--muted);">Deducible</td>
+        </tr>
+      `;
+    }
+  }
+
+  rowsHtml += `
+    <tr style="font-weight:800;background:var(--bg-card-hover);">
+      <td style="padding:12px;">(=) UTILIDAD OPERATIVA (EBITDA)</td>
+      <td style="padding:12px;color:${netProfit >= 0 ? 'var(--accent-base)' : '#f97316'};">${money(netProfit, profile.currency)}</td>
+      <td style="padding:12px;">${grossIncomes > 0 ? ((netProfit / grossIncomes) * 100).toFixed(1) : '0.0'}%</td>
+      <td style="padding:12px;color:var(--accent-base);">Resultado Neto</td>
+    </tr>
+  `;
+  tbody.innerHTML = rowsHtml;
+
+  renderDebtsLists();
+}
+
+function renderDebtsLists() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  const recList = $('#receivables-list');
+  const recs = profile.receivables || [];
+  recList.innerHTML = recs.length ? recs.map((r, i) => `
+    <div class="tx-item">
+      <div class="crystal-gem accent">📥</div>
+      <div style="min-width:0;">
+        <div style="font-weight:700;font-size:13px;">${escapeHtml(r.entity)}</div>
+        <div style="font-size:11px;color:var(--muted);">${escapeHtml(r.concept || 'Factura')} · Vence: ${r.dueDate}</div>
+      </div>
+      <div style="font-weight:800;color:var(--accent-base);">${money(r.amount, profile.currency)}</div>
+      <button class="crystal-btn delete-rec-btn" data-index="${i}" style="padding:4px 8px;font-size:11px;">✕</button>
+    </div>
+  `).join('') : '<div style="padding:16px;color:var(--muted);font-size:12px;">Sin cuentas por cobrar.</div>';
+
+  recList.querySelectorAll('.delete-rec-btn').forEach(btn => {
+    btn.onclick = async () => {
+      profile.receivables.splice(Number(btn.dataset.index), 1);
+      await storeVault();
+      render();
+      toast('Cuenta archivada.');
+    };
+  });
+
+  const payList = $('#payables-list');
+  const pays = profile.payables || [];
+  payList.innerHTML = pays.length ? pays.map((p, i) => `
+    <div class="tx-item">
+      <div class="crystal-gem">📤</div>
+      <div style="min-width:0;">
+        <div style="font-weight:700;font-size:13px;">${escapeHtml(p.entity)}</div>
+        <div style="font-size:11px;color:var(--muted);">${escapeHtml(p.concept || 'Pasivo')} · Vence: ${p.dueDate}</div>
+      </div>
+      <div style="font-weight:800;color:#f97316;">${money(p.amount, profile.currency)}</div>
+      <button class="crystal-btn delete-pay-btn" data-index="${i}" style="padding:4px 8px;font-size:11px;">✕</button>
+    </div>
+  `).join('') : '<div style="padding:16px;color:var(--muted);font-size:12px;">Sin cuentas por pagar.</div>';
+
+  payList.querySelectorAll('.delete-pay-btn').forEach(btn => {
+    btn.onclick = async () => {
+      profile.payables.splice(Number(btn.dataset.index), 1);
+      await storeVault();
+      render();
+      toast('Cuenta por pagar saldada.');
+    };
+  });
+}
+
+// Retiro Actuarial
+function renderRetirementSimulation() {
+  const currentAge = Number($('#input-age').value);
+  const retireAge = Number($('#input-retire-age').value);
+  const monthlyInv = Number($('#input-monthly-inv').value);
+  const annualRate = Number($('#input-rate').value) / 100;
+  const inflation = Number($('#input-inflation').value) / 100;
+
+  $('#label-age').textContent = `${currentAge} años`;
+  $('#label-retire-age').textContent = `${retireAge} años`;
+  $('#label-monthly-inv').textContent = money(monthlyInv);
+  $('#label-rate').textContent = `${(annualRate * 100).toFixed(1)}%`;
+  $('#label-inflation').textContent = `${(inflation * 100).toFixed(1)}%`;
+  $('#res-retire-age-text').textContent = retireAge;
+
+  const years = Math.max(1, retireAge - currentAge);
+  const totalMonths = years * 12;
+  const monthlyRate = annualRate / 12;
+
+  let totalProjected = 0;
+  if (monthlyRate > 0) {
+    totalProjected = monthlyInv * ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
+  } else {
+    totalProjected = monthlyInv * totalMonths;
+  }
+
+  const totalCapitalInvested = monthlyInv * totalMonths;
+  const interestEarned = Math.max(0, totalProjected - totalCapitalInvested);
+  const estimatedMonthlyPension = totalProjected * 0.005;
+  const taxDeductionAnnual = Math.min(monthlyInv * 12 * 0.30, 189000);
+
+  $('#res-total-projected').textContent = money(totalProjected);
+  $('#res-capital-invested').textContent = money(totalCapitalInvested);
+  $('#res-interest-earned').textContent = money(interestEarned);
+  $('#res-monthly-pension').textContent = money(estimatedMonthlyPension);
+  $('#res-tax-deduction').textContent = money(taxDeductionAnnual);
+
+  const svg = $('#compound-svg');
+  if (svg) {
+    const w = 300, h = 90;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    let investedPts = '', compoundPts = '';
+    for (let y = 0; y <= years; y++) {
+      const x = (y / years) * w;
+      const m = y * 12;
+      const inv = monthlyInv * m;
+      const comp = monthlyRate > 0 ? (monthlyInv * ((Math.pow(1 + monthlyRate, m) - 1) / monthlyRate)) : inv;
+      const yInv = h - (inv / (totalProjected || 1)) * (h - 10);
+      const yComp = h - (comp / (totalProjected || 1)) * (h - 10);
+      investedPts += `${y === 0 ? 'M' : 'L'} ${x} ${yInv} `;
+      compoundPts += `${y === 0 ? 'M' : 'L'} ${x} ${yComp} `;
+    }
+    svg.innerHTML = `
+      <path d="${investedPts}" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3,3" />
+      <path d="${compoundPts}" fill="none" stroke="var(--accent-base)" stroke-width="3" stroke-linecap="round" />
+    `;
+  }
+}
+
+// Clientes CRM
+function renderClients() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+  const query = $('#client-search').value.toLowerCase().trim();
+  const clients = profile.insuranceClients || [];
+
+  const filtered = query ? clients.filter(c =>
+    c.name.toLowerCase().includes(query) ||
+    c.plan.toLowerCase().includes(query) ||
+    (c.phone && c.phone.includes(query))
+  ) : clients;
+
+  const tbody = $('#clients-table-body');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--muted);">Sin clientes registrados en este perfil. Usa “+ Nuevo Cliente”.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map((c, i) => `
+    <tr style="border-bottom:1px solid var(--line);">
+      <td style="padding:12px 14px;"><strong>${escapeHtml(c.name)}</strong></td>
+      <td style="padding:12px 14px;">${escapeHtml(c.phone || c.email || '—')}</td>
+      <td style="padding:12px 14px;color:#38bdf8;">${escapeHtml(c.plan)}</td>
+      <td style="padding:12px 14px;">${c.sumInsured ? money(c.sumInsured, profile.currency) : '—'}</td>
+      <td style="padding:12px 14px;font-weight:800;color:var(--accent-base);">${c.premium ? money(c.premium, profile.currency) : '—'}</td>
+      <td style="padding:12px 14px;"><span class="crystal-btn" style="font-size:10px;padding:2px 8px;">${escapeHtml(c.status || 'Prospecto')}</span></td>
+      <td style="padding:12px 14px;">
+        <button class="crystal-btn print-client-prop-btn" data-index="${i}" title="Generar propuesta formal" style="padding:4px 8px;font-size:11px;">📄</button>
+        <button class="crystal-btn delete-client-btn" data-index="${i}" title="Eliminar" style="padding:4px 8px;font-size:11px;color:#ef4444;">✕</button>
+      </td>
+    </tr>
+  `).join('');
+
+  tbody.querySelectorAll('.delete-client-btn').forEach(btn => {
+    btn.onclick = async () => {
+      profile.insuranceClients.splice(Number(btn.dataset.index), 1);
+      await storeVault();
+      render();
+      toast('Cliente eliminado.');
+    };
+  });
+
+  tbody.querySelectorAll('.print-client-prop-btn').forEach(btn => {
+    btn.onclick = () => {
+      const c = profile.insuranceClients[Number(btn.dataset.index)];
+      if (c) showClientProposal(c);
+    };
+  });
+}
+
+function showClientProposal(c) {
+  const profile = getActiveProfile();
+  const brand = data.globalSettings.businessName || 'MONEYMAXING WEALTH ADVISORY';
+  const adv = data.globalSettings.advisorName || 'Asesor Patrimonial Certificado';
+
+  $('#prop-advisor-brand').textContent = brand.toUpperCase();
+  $('#prop-advisor-contact').textContent = `${adv} · ${data.globalSettings.advisorPhone || ''} ${data.globalSettings.advisorEmail ? '· ' + data.globalSettings.advisorEmail : ''}`;
+  $('#prop-date').textContent = new Intl.DateTimeFormat('es-MX', { dateStyle: 'full' }).format(new Date());
+
+  $('#prop-client-name').textContent = c.name;
+  $('#prop-plan-name').textContent = c.plan;
+  $('#prop-insured-capital').textContent = c.sumInsured ? money(c.sumInsured, profile.currency) : 'Según Cobertura';
+  $('#prop-monthly-premium').textContent = c.premium ? money(c.premium / 12, profile.currency) : '$0.00';
+  $('#prop-projected-capital').textContent = c.sumInsured ? money(c.sumInsured * 1.5, profile.currency) : 'Proyección a Medida';
+
+  $('#client-proposal-preview').classList.remove('hidden');
+  $('#client-proposal-preview').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Presupuestos & Metas
+function renderBudgetsAndGoals() {
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  const currentMonth = monthId();
+  const monthlyTxs = profile.transactions.filter(t => t.date.slice(0, 7) === currentMonth && t.kind === 'expense');
+  const spentByCat = {};
+  monthlyTxs.forEach(t => spentByCat[t.category] = (spentByCat[t.category] || 0) + t.amount);
+
+  const bContainer = $('#budgets-container');
+  bContainer.innerHTML = CATEGORIES.map(([id, name]) => {
+    const limit = Number(profile.budgets?.[id]) || 0;
+    const spent = spentByCat[id] || 0;
+    const pct = limit > 0 ? Math.min(100, Math.round((spent / limit) * 100)) : 0;
+    const col = pct > 90 ? '#ef4444' : pct > 75 ? '#f97316' : 'var(--accent-base)';
+
+    return `
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:4px;">
+          <span><strong>${name}</strong> (Gastado: ${money(spent, profile.currency)})</span>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span>Límite: $</span>
+            <input type="number" data-cat-budget="${id}" value="${limit}" style="width:100px;padding:4px 6px;text-align:right;border-radius:6px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+          </div>
+        </div>
+        <div style="height:6px;background:var(--line);border-radius:3px;overflow:hidden;">
+          <div style="height:100%;width:${pct}%;background:${col};transition:width 0.4s var(--ease-spring);"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const gContainer = $('#savings-goals-container');
+  const goals = profile.savingsGoals || [];
+  gContainer.innerHTML = goals.length ? goals.map((g, i) => {
+    const pct = g.target > 0 ? Math.min(100, Math.round((g.current / g.target) * 100)) : 0;
+    return `
+      <div style="background:var(--bg-glass-card);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <strong style="font-size:13px;">${escapeHtml(g.name)}</strong>
+          <span style="font-weight:800;color:var(--accent-base);font-size:12px;">${pct}%</span>
+        </div>
+        <div style="height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:8px;">
+          <div style="height:100%;width:${pct}%;background:var(--accent-base);transition:width 0.4s var(--ease-spring);"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-secondary);">
+          <span>${money(g.current, profile.currency)} de ${money(g.target, profile.currency)}</span>
+          <button class="crystal-btn delete-goal-btn" data-index="${i}" style="padding:2px 6px;font-size:10px;">✕</button>
+        </div>
+      </div>
+    `;
+  }).join('') : '<div style="padding:16px;color:var(--muted);font-size:12px;">Sin metas de ahorro registradas.</div>';
+
+  gContainer.querySelectorAll('.delete-goal-btn').forEach(btn => {
+    btn.onclick = async () => {
+      profile.savingsGoals.splice(Number(btn.dataset.index), 1);
+      await storeVault();
+      render();
+      toast('Meta eliminada.');
+    };
+  });
+}
+
+function renderProfilesList() {
+  const container = $('#profiles-list-container');
+  if (!data?.profiles || !container) return;
+
+  container.innerHTML = data.profiles.map(p => {
+    const isCurrent = p.id === data.activeProfileId;
+    return `
+      <div class="tx-item" style="${isCurrent ? 'border-left:3px solid var(--accent-base);' : ''}">
+        <div class="crystal-gem accent">${p.role === 'realestate' ? '🏢' : p.role === 'insurance' ? '🛡️' : p.role === 'accounting' ? '📊' : p.role === 'personal' ? '👤' : '⭐'}</div>
+        <div style="min-width:0;">
+          <div style="font-weight:700;font-size:13px;">${escapeHtml(p.name)} ${isCurrent ? '<span style="color:var(--accent-base);font-size:10px;">(ACTIVO)</span>' : ''}</div>
+          <div style="font-size:11px;color:var(--muted);">Rol: ${p.role.toUpperCase()} · ${p.currency} · ${p.transactions.length} movimientos</div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          ${!isCurrent ? `<button class="crystal-btn switch-profile-btn" data-id="${p.id}" style="padding:4px 10px;font-size:11px;">Activar</button>` : ''}
+          ${data.profiles.length > 1 ? `<button class="crystal-btn crystal-btn-danger delete-profile-btn" data-id="${p.id}" style="padding:4px 8px;font-size:11px;">✕</button>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.switch-profile-btn').forEach(btn => {
+    btn.onclick = async () => {
+      data.activeProfileId = btn.dataset.id;
+      await storeVault();
+      render();
+      playHaptic('unlock');
+      toast('Perfil activado.');
+    };
+  });
+
+  container.querySelectorAll('.delete-profile-btn').forEach(btn => {
+    btn.onclick = async () => {
+      if (!confirm('¿Deseas eliminar este perfil y todos sus datos?')) return;
+      data.profiles = data.profiles.filter(p => p.id !== btn.dataset.id);
+      data.activeProfileId = data.profiles[0].id;
+      await storeVault();
+      render();
+      toast('Perfil eliminado.');
+    };
+  });
+
+  $('#setting-currency').value = data.globalSettings.currency || 'MXN';
+  $('#setting-autolock').value = String(data.globalSettings.autoLockMinutes || 5);
+  $('#setting-pane-anim').value = data.globalSettings.paneAnim || 'smooth';
+  $('#setting-sound').checked = data.globalSettings.soundEnabled !== false;
+  $('#setting-business-name').value = data.globalSettings.businessName || '';
+  $('#setting-advisor-name').value = data.globalSettings.advisorName || '';
+  $('#setting-advisor-phone').value = data.globalSettings.advisorPhone || '';
+  $('#setting-advisor-email').value = data.globalSettings.advisorEmail || '';
+}
+
+function showPage(pageId) {
+  $$('.page').forEach(p => p.classList.toggle('active', p.id === `page-${pageId}`));
+  $$('.nav-menu button').forEach(b => b.setAttribute('aria-current', b.dataset.page === pageId ? 'page' : 'false'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function populateCategorySelects() {
+  const options = CATEGORIES.map(([id, name]) => `<option value="${id}">${name}</option>`).join('');
+  $('#modal-tx-category').innerHTML = options;
+  $('#filter-category').innerHTML = '<option value="all">Todas las categorías</option>' + options;
+}
+
+// ==========================================
+// COMMAND PALETTE
+// ==========================================
+const COMMANDS = [
+  { title: '+ Nuevo Movimiento', icon: '📝', action: () => $('#quick-add-btn').click() },
+  { title: 'Ir a Resumen Snapshot', icon: '⌂', action: () => showPage('home') },
+  { title: 'Ir a Bienes Raíces & Hipotecas', icon: '🏢', action: () => showPage('realestate') },
+  { title: 'Ir a Contabilidad & PyME', icon: '📊', action: () => showPage('accounting') },
+  { title: 'Ir a Seguros & Retiro (PPR)', icon: '🛡️', action: () => showPage('insurance') },
+  { title: 'Ir a Cartera de Clientes (CRM)', icon: '👥', action: () => showPage('clients') },
+  { title: 'Ir a Presupuestos & Metas', icon: '↗', action: () => showPage('budgets') },
+  { title: 'Liquid Crystal Studio & Temas', icon: '✨', action: () => showPage('studio') },
+  { title: 'Exportar Movimientos a CSV', icon: '📥', action: () => $('#export-csv-btn').click() },
+  { title: 'Descargar Respaldo Cifrado (.mmxvault)', icon: '📦', action: () => $('#download-backup-btn').click() },
+  { title: 'Crear Nuevo Perfil', icon: '👤', action: () => openWizard() },
+  { title: '🔒 Bloquear Bóveda Inmediatamente', icon: '🔒', action: () => lock() }
+];
+
+function openCommandPalette() {
+  $('#cmd-palette').classList.remove('hidden');
+  $('#cmd-search-input').value = '';
+  renderCommandResults('');
+  $('#cmd-search-input').focus();
+  playHaptic('click');
+}
+
+function closeCommandPalette() {
+  $('#cmd-palette').classList.add('hidden');
+}
+
+function renderCommandResults(query) {
+  const list = $('#cmd-results-list');
+  const q = query.toLowerCase().trim();
+  const filtered = q ? COMMANDS.filter(c => c.title.toLowerCase().includes(q)) : COMMANDS;
+
+  list.innerHTML = filtered.map((c, i) => `
+    <div class="cmd-item ${i === 0 ? 'active' : ''}" data-cmd-idx="${i}">
+      <span style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:16px;">${c.icon}</span>
+        ${escapeHtml(c.title)}
+      </span>
+      <span style="font-size:11px;color:var(--muted);font-family:var(--mono);">↵ Ejecutar</span>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.cmd-item').forEach((item, idx) => {
+    item.onclick = () => {
+      closeCommandPalette();
+      filtered[idx].action();
+    };
+  });
+}
+
+// ==========================================
+// EVENT LISTENERS & INICIALIZACIÓN
+// ==========================================
+$('#gate-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const password = $('#gate-password').value;
+  $('#gate-error').textContent = '';
+
+  try {
+    if (!crypto?.subtle) throw new Error('Criptografía no soportada.');
+    const stored = await loadVault();
+    vaultRevision = stored.revision;
+
+    if (stored.vault) {
+      const record = stored.vault;
+      vaultSalt = b64ToBytes(record.salt);
+      const derived = await derive(password, vaultSalt);
+      const plain = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: b64ToBytes(record.iv) },
+        derived,
+        b64ToBytes(record.ciphertext)
+      );
+      key = derived;
+      failedAttempts = 0;
+      data = migrateLegacyData(JSON.parse(new TextDecoder().decode(plain)));
+      $('#gate').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      populateCategorySelects();
+      render();
+      resetLockTimer();
+      playHaptic('unlock');
+      toast('Bóveda Suiza descifrada.');
+    } else {
+      if (password.length < 10) throw new Error('La contraseña debe tener mínimo 10 caracteres.');
+      if (password !== $('#gate-confirm').value) throw new Error('Las contraseñas no coinciden.');
+      vaultSalt = crypto.getRandomValues(new Uint8Array(16));
+      key = await derive(password, vaultSalt);
+      data = defaultVaultData();
+      await storeVault({ create: true });
+      $('#gate').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      populateCategorySelects();
+      render();
+      resetLockTimer();
+      openWizard();
+    }
+  } catch (err) {
+    key = null;
+    data = null;
+    handleBruteForceFailure();
+    $('#gate-error').textContent = err.name === 'OperationError' ? 'Contraseña incorrecta.' : (err.message || 'Error al abrir.');
+  }
+});
+
+// Guardar Transacción
+$('#tx-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  const amount = Number($('#modal-tx-amount').value);
+  const kind = $('#modal-tx-kind').value;
+  const note = $('#modal-tx-note').value.trim();
+  const date = $('#modal-tx-date').value;
+  const taxKind = $('#modal-tx-tax').value;
+  const category = kind === 'expense' ? $('#modal-tx-category').value : 'ingreso';
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    $('#modal-tx-error').textContent = 'El monto debe ser mayor que 0.';
+    return;
+  }
+  if (!date) {
+    $('#modal-tx-error').textContent = 'Selecciona una fecha válida.';
+    return;
+  }
+
+  profile.transactions.push({
+    id: crypto.randomUUID(),
+    kind,
+    amount: Math.round(amount * 100) / 100,
+    note,
+    date,
+    category,
+    taxKind,
+    createdAt: Date.now()
+  });
+
+  try {
+    await storeVault();
+    render();
+    $('#tx-modal').classList.add('hidden');
+    playHaptic('save');
+    toast('Movimiento registrado en bóveda.');
+  } catch (err) {
+    $('#modal-tx-error').textContent = err.message || 'Error al guardar.';
+  }
+});
+
+// Registrar Propiedad Inmobiliaria
+$('#property-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  profile.realEstateProperties = profile.realEstateProperties || [];
+  profile.realEstateProperties.push({
+    id: crypto.randomUUID(),
+    title: $('#prop-title').value.trim(),
+    opType: $('#prop-op-type').value,
+    price: Number($('#prop-price').value) || 0,
+    commissionPct: Number($('#prop-commission').value) || 5,
+    status: $('#prop-status').value,
+    client: $('#prop-client').value.trim(),
+    createdAt: Date.now()
+  });
+
+  await storeVault();
+  render();
+  $('#property-modal').classList.add('hidden');
+  playHaptic('save');
+  toast('Propiedad guardada en cartera.');
+});
+
+// Sliders Inmobiliarios
+['input-re-price', 'input-re-down', 'input-re-term', 'input-re-rate', 'input-re-extra'].forEach(id => {
+  $(`#${id}`)?.addEventListener('input', renderRealEstateModule);
+});
+
+// Inputs de Cap Rate
+['roi-price', 'roi-rent', 'roi-closing', 'roi-expenses'].forEach(id => {
+  $(`#${id}`)?.addEventListener('input', renderCapRateCalculation);
+});
+
+// Inputs de Punto de Equilibrio
+['be-fixed', 'be-price', 'be-cost'].forEach(id => {
+  $(`#${id}`)?.addEventListener('input', renderBreakEvenCalculator);
+});
+
+$('#print-mortgage-proposal').onclick = () => window.print();
+
+// Guardar Límites
+$('#save-budgets-btn').addEventListener('click', async () => {
+  const profile = getActiveProfile();
+  if (!profile) return;
+  profile.budgets = profile.budgets || {};
+  for (const [id] of CATEGORIES) {
+    const input = $(`[data-cat-budget="${id}"]`);
+    profile.budgets[id] = Math.max(0, Number(input?.value) || 0);
+  }
+  await storeVault();
+  renderBudgetsAndGoals();
+  playHaptic('save');
+  toast('Límites actualizados.');
+});
+
+// Guardar Proyección en Cartera
+$('#save-retirement-quote-btn').addEventListener('click', async () => {
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  const currentAge = $('#input-age').value;
+  const retireAge = $('#input-retire-age').value;
+  const monthly = $('#input-monthly-inv').value;
+  const clientName = $('#quote-client-name').value.trim() || `Prospecto Retiro (${currentAge} a ${retireAge} años)`;
+
+  profile.insuranceClients = profile.insuranceClients || [];
+  profile.insuranceClients.push({
+    id: crypto.randomUUID(),
+    name: clientName,
+    phone: '',
+    email: '',
+    plan: `PPR Retiro (${currentAge} a ${retireAge} años)`,
+    status: 'Propuesta Presentada',
+    sumInsured: Number($('#res-total-projected').textContent.replace(/[^0-9.-]+/g, '')) || 0,
+    premium: Number(monthly) * 12
+  });
+
+  await storeVault();
+  render();
+  playHaptic('save');
+  toast('Proyección guardada en CRM.');
+  showPage('clients');
+});
+
+// Cotización Rápida
+$('#create-quote-btn').addEventListener('click', async () => {
+  const profile = getActiveProfile();
+  if (!profile) return;
+  const name = $('#quote-client-name').value.trim();
+  if (!name) { toast('Escribe el nombre del cliente.'); return; }
+
+  const type = $('#quote-policy-type').value;
+  const sum = Number($('#quote-sum-insured').value) || 0;
+  const premium = Number($('#quote-premium-annual').value) || 0;
+
+  profile.insuranceClients = profile.insuranceClients || [];
+  profile.insuranceClients.push({
+    id: crypto.randomUUID(),
+    name,
+    phone: '',
+    email: '',
+    plan: type,
+    status: 'Propuesta Presentada',
+    sumInsured: sum,
+    premium
+  });
+
+  await storeVault();
+  render();
+  playHaptic('save');
+  toast('Cotización registrada en Cartera.');
+  showPage('clients');
+});
+
+// Registrar Cliente en CRM
+$('#client-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  profile.insuranceClients = profile.insuranceClients || [];
+  profile.insuranceClients.push({
+    id: crypto.randomUUID(),
+    name: $('#client-name').value.trim(),
+    phone: $('#client-phone').value.trim(),
+    email: $('#client-email').value.trim(),
+    plan: $('#client-plan').value.trim(),
+    status: $('#client-status').value,
+    sumInsured: Number($('#client-sum-insured').value) || 0,
+    premium: Number($('#client-premium').value) || 0
+  });
+
+  await storeVault();
+  render();
+  $('#client-modal').classList.add('hidden');
+  playHaptic('save');
+  toast('Cliente guardado en cartera.');
+});
+
+// Cuentas por Cobrar / Pagar
+$('#debt-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const profile = getActiveProfile();
+  if (!profile) return;
+
+  const kind = $('#debt-kind').value;
+  const record = {
+    id: crypto.randomUUID(),
+    entity: $('#debt-entity').value.trim(),
+    amount: Number($('#debt-amount').value),
+    dueDate: $('#debt-due-date').value,
+    concept: $('#debt-concept').value.trim(),
+    createdAt: Date.now()
+  };
+
+  if (kind === 'receivable') {
+    profile.receivables = profile.receivables || [];
+    profile.receivables.push(record);
+  } else {
+    profile.payables = profile.payables || [];
+    profile.payables.push(record);
+  }
+
+  await storeVault();
+  render();
+  $('#debt-modal').classList.add('hidden');
+  playHaptic('save');
+  toast('Cuenta registrada.');
+});
+
+// CSV Export
+$('#export-csv-btn').addEventListener('click', () => {
+  const profile = getActiveProfile();
+  if (!profile || !profile.transactions.length) { toast('Sin movimientos.'); return; }
+  const headers = ['Fecha', 'Tipo', 'Monto', 'Categoría', 'Descripción', 'Impuestos'];
+  const rows = profile.transactions.map(t => [t.date, t.kind, t.amount, t.category, `"${(t.note || '').replace(/"/g, '""')}"`, t.taxKind || 'none']);
+  const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', `MONEYMAXING_${profile.name}_${localToday()}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  toast('Archivo CSV generado.');
+});
+
+// Respaldo
+$('#download-backup-btn').addEventListener('click', async () => {
+  try {
+    const stored = await loadVault();
+    if (!stored?.vault) throw new Error('Bóveda no encontrada.');
+    const blob = new Blob([JSON.stringify(stored, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Boveda_MONEYMAXING_${localToday()}.mmxvault`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast('Respaldo cifrado descargado.');
+  } catch (err) {
+    toast('Error: ' + err.message);
+  }
+});
+
+// Restaurar Respaldo
+$('#restore-file-input').addEventListener('change', async e => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    if (!parsed.vault || !parsed.vault.ciphertext || !parsed.vault.salt) throw new Error('Formato inválido.');
+    const res = await fetch('/api/vault', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'If-Match': String(vaultRevision) },
+      body: JSON.stringify(parsed.vault)
+    });
+    if (!res.ok) throw new Error('Servidor rechazó restauración.');
+    toast('Respaldo restaurado.');
+    lock();
+  } catch (err) {
+    alert('Error al restaurar: ' + err.message);
+  }
+});
+
+// Temas y Acentos Studio
+$$('.theme-picker-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    data.globalSettings.theme = btn.dataset.themeVal;
+    applyAppearance();
+    playHaptic('click');
+    await storeVault();
+  });
+});
+
+$$('.swatch-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    data.globalSettings.accent = btn.dataset.accentVal;
+    applyAppearance();
+    playHaptic('click');
+    await storeVault();
+  });
+});
+
+$('#setting-pane-anim').addEventListener('change', async e => {
+  data.globalSettings.paneAnim = e.target.value;
+  applyAppearance();
+  playHaptic('click');
+  await storeVault();
+  toast('Velocidad de paneo actualizada.');
+});
+
+$('#save-studio-btn').addEventListener('click', async () => {
+  data.globalSettings.currency = $('#setting-currency').value;
+  data.globalSettings.autoLockMinutes = Number($('#setting-autolock').value) || 5;
+  data.globalSettings.soundEnabled = $('#setting-sound').checked;
+  data.globalSettings.businessName = $('#setting-business-name').value.trim();
+  data.globalSettings.advisorName = $('#setting-advisor-name').value.trim();
+  data.globalSettings.advisorPhone = $('#setting-advisor-phone').value.trim();
+  data.globalSettings.advisorEmail = $('#setting-advisor-email').value.trim();
+
+  const profile = getActiveProfile();
+  if (profile) profile.currency = data.globalSettings.currency;
+
+  await storeVault();
+  render();
+  playHaptic('save');
+  toast('Preferencias del Studio guardadas.');
+});
+
+// WIZARD ONBOARDING
+function openWizard() {
+  $('#onboarding-modal').classList.remove('hidden');
+  $('#wizard-content-1').classList.remove('hidden');
+  $('#wizard-content-2').classList.add('hidden');
+  $('#wizard-content-3').classList.add('hidden');
+  $('#wstep-1').classList.add('crystal-btn-primary');
+  $('#wstep-2').classList.remove('crystal-btn-primary');
+  $('#wstep-3').classList.remove('crystal-btn-primary');
+}
+
+$$('.role-card').forEach(card => {
+  card.addEventListener('click', () => {
+    $$('.role-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    wizardSelectedRole = card.dataset.role;
+    playHaptic('click');
+  });
+});
+
+$('#wizard-next-1').addEventListener('click', () => {
+  $('#wizard-content-1').classList.add('hidden');
+  $('#wizard-content-2').classList.remove('hidden');
+  $('#wstep-1').classList.remove('crystal-btn-primary');
+  $('#wstep-2').classList.add('crystal-btn-primary');
+  $('#wiz-profile-name').focus();
+});
+
+$('#wizard-prev-2').addEventListener('click', () => {
+  $('#wizard-content-2').classList.add('hidden');
+  $('#wizard-content-1').classList.remove('hidden');
+  $('#wstep-2').classList.remove('crystal-btn-primary');
+  $('#wstep-1').classList.add('crystal-btn-primary');
+});
+
+$('#wizard-next-2').addEventListener('click', () => {
+  const name = $('#wiz-profile-name').value.trim();
+  if (!name) { toast('Escribe un nombre para este perfil.'); return; }
+  $('#wizard-content-2').classList.add('hidden');
+  $('#wizard-content-3').classList.remove('hidden');
+  $('#wstep-2').classList.remove('crystal-btn-primary');
+  $('#wstep-3').classList.add('crystal-btn-primary');
+});
+
+$('#wizard-prev-3').addEventListener('click', () => {
+  $('#wizard-content-3').classList.add('hidden');
+  $('#wizard-content-2').classList.remove('hidden');
+  $('#wstep-3').classList.remove('crystal-btn-primary');
+  $('#wstep-2').classList.add('crystal-btn-primary');
+});
+
+$('#wizard-finish').addEventListener('click', async () => {
+  const name = $('#wiz-profile-name').value.trim() || 'Nuevo Perfil';
+  const currency = $('#wiz-currency').value;
+  const theme = $('#wiz-theme').value;
+  const initBal = Number($('#wiz-initial-balance').value) || 0;
+  const bName = $('#wiz-business-name').value.trim();
+
+  const newProfile = {
+    id: 'prof_' + crypto.randomUUID().slice(0, 8),
+    name,
+    role: wizardSelectedRole,
+    currency,
+    initialBalance: initBal,
+    transactions: [],
+    budgets: Object.fromEntries(CATEGORIES.map(([id]) => [id, 0])),
+    savingsGoals: [],
+    realEstateProperties: [],
+    insuranceClients: [],
+    receivables: [],
+    payables: []
+  };
+
+  data.profiles = data.profiles || [];
+  data.profiles.push(newProfile);
+  data.activeProfileId = newProfile.id;
+  data.globalSettings.theme = theme;
+  data.globalSettings.currency = currency;
+  if (bName) data.globalSettings.businessName = bName;
+
+  await storeVault();
+  render();
+  $('#onboarding-modal').classList.add('hidden');
+  playHaptic('unlock');
+  toast('¡Perfil configurado con éxito!');
+});
+
+// Modales rápidos
+$('#quick-add-btn').onclick = () => {
+  $('#tx-form').reset();
+  $('#modal-tx-date').value = localToday();
+  $('#modal-tx-error').textContent = '';
+  $('#tx-modal').classList.remove('hidden');
+  $('#modal-tx-amount').focus();
+  playHaptic('click');
+};
+$('#add-tx-btn-page').onclick = () => $('#quick-add-btn').click();
+$('#close-tx-modal-btn').onclick = () => $('#tx-modal').classList.add('hidden');
+$('#cancel-tx-modal-btn').onclick = () => $('#tx-modal').classList.add('hidden');
+
+$('#new-property-btn').onclick = () => {
+  $('#property-form').reset();
+  $('#property-modal').classList.remove('hidden');
+  $('#prop-title').focus();
+  playHaptic('click');
+};
+$('#close-property-modal-btn').onclick = () => $('#property-modal').classList.add('hidden');
+$('#cancel-property-modal-btn').onclick = () => $('#property-modal').classList.add('hidden');
+
+$('#profile-switcher-btn').onclick = () => showPage('studio');
+$('#btn-add-profile-wizard').onclick = openWizard;
+$('#close-wizard-btn').onclick = () => $('#onboarding-modal').classList.add('hidden');
+
+$('#new-client-btn').onclick = () => {
+  $('#client-form').reset();
+  $('#client-modal').classList.remove('hidden');
+  $('#client-name').focus();
+  playHaptic('click');
+};
+$('#close-client-modal-btn').onclick = () => $('#client-modal').classList.add('hidden');
+$('#cancel-client-modal-btn').onclick = () => $('#client-modal').classList.add('hidden');
+
+$('#add-receivable-btn').onclick = () => {
+  $('#debt-form').reset();
+  $('#debt-kind').value = 'receivable';
+  $('#debt-modal-title').textContent = 'Añadir Cuenta por Cobrar';
+  $('#debt-due-date').value = localToday();
+  $('#debt-modal').classList.remove('hidden');
+};
+$('#add-payable-btn').onclick = () => {
+  $('#debt-form').reset();
+  $('#debt-kind').value = 'payable';
+  $('#debt-modal-title').textContent = 'Añadir Cuenta por Pagar';
+  $('#debt-due-date').value = localToday();
+  $('#debt-modal').classList.remove('hidden');
+};
+$('#close-debt-modal-btn').onclick = () => $('#debt-modal').classList.add('hidden');
+$('#cancel-debt-modal-btn').onclick = () => $('#debt-modal').classList.add('hidden');
+
+$('#new-goal-btn').onclick = async () => {
+  const profile = getActiveProfile();
+  if (!profile) return;
+  const name = prompt('Nombre de la meta de ahorro (ej. Enganche Inmueble, Fondo Emergencia):');
+  if (!name) return;
+  const target = Number(prompt('Monto objetivo en ' + profile.currency + ':')) || 0;
+  if (target <= 0) return;
+  profile.savingsGoals = profile.savingsGoals || [];
+  profile.savingsGoals.push({
+    id: crypto.randomUUID(),
+    name,
+    target,
+    current: 0,
+    deadline: localToday()
+  });
+  await storeVault();
+  render();
+  playHaptic('save');
+  toast('Meta creada.');
+};
+
+$('#generate-proposal-btn').onclick = () => {
+  const cName = $('#quote-client-name').value.trim() || 'Cliente Prospecto';
+  const pType = $('#quote-policy-type').value;
+  const sum = Number($('#quote-sum-insured').value) || 0;
+  const prem = Number($('#quote-premium-annual').value) || 0;
+  showClientProposal({ name: cName, plan: pType, sumInsured: sum, premium: prem });
+  playHaptic('click');
+};
+$('#close-proposal-btn').onclick = () => $('#client-proposal-preview').classList.add('hidden');
+
+$('#lock-btn').onclick = lock;
+
+['input-age', 'input-retire-age', 'input-monthly-inv', 'input-rate', 'input-inflation'].forEach(id => {
+  $(`#${id}`)?.addEventListener('input', renderRetirementSimulation);
+});
+
+$('#filter-search').addEventListener('input', renderFullTransactions);
+$('#filter-kind').addEventListener('change', renderFullTransactions);
+$('#filter-category').addEventListener('change', renderFullTransactions);
+$('#client-search').addEventListener('input', renderClients);
+
+$$('[data-go-tx]').forEach(b => b.onclick = () => showPage('transactions'));
+$$('.nav-menu button').forEach(b => b.addEventListener('click', () => {
+  playHaptic('click');
+  showPage(b.dataset.page);
+}));
+
+$('#open-cmd-palette-btn').onclick = openCommandPalette;
+$('#cmd-search-input').addEventListener('input', e => renderCommandResults(e.target.value));
+
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    if ($('#cmd-palette').classList.contains('hidden')) openCommandPalette();
+    else closeCommandPalette();
+  }
+  if (e.key === 'Escape') {
+    if (!$('#cmd-palette').classList.contains('hidden')) { closeCommandPalette(); return; }
+    if (!$('#tx-modal').classList.contains('hidden')) { $('#tx-modal').classList.add('hidden'); return; }
+    if (!$('#property-modal').classList.contains('hidden')) { $('#property-modal').classList.add('hidden'); return; }
+    if (!$('#onboarding-modal').classList.contains('hidden')) { $('#onboarding-modal').classList.add('hidden'); return; }
+    if (!$('#client-modal').classList.contains('hidden')) { $('#client-modal').classList.add('hidden'); return; }
+    if (!$('#debt-modal').classList.contains('hidden')) { $('#debt-modal').classList.add('hidden'); return; }
+    if (key) lock();
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
+    e.preventDefault();
+    if (key) lock();
+  }
+});
+
+$('#cmd-palette').addEventListener('click', e => {
+  if (e.target === $('#cmd-palette')) closeCommandPalette();
+});
+
+['click', 'keydown', 'mousemove', 'touchstart'].forEach(evt => {
+  document.addEventListener(evt, () => { if (key) resetLockTimer(); }, { passive: true });
+});
+
+gateMode();
+
+})();
+</script>
+</body>
+</html>

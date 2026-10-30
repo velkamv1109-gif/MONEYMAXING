@@ -1,0 +1,27 @@
+{
+  "name": "MONEYMAXING",
+  "short_name": "MONEYMAXING",
+  "description": "Aplicación de finanzas personales para Windows y macOS",
+  "start_url": "/MONEYMAXING-PWA.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f3ed",
+  "theme_color": "#f5f3ed",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/GoogleChrome/lighthouse-assets/master/icons/lighthouse/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/GoogleChrome/lighthouse-assets/master/icons/lighthouse/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["finance", "productivity", "money"],
+  "lang": "es",
+  "dir": "ltr",
+  "prefer_related_applications": false
+}

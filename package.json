@@ -1,0 +1,54 @@
+{
+  "name": "moneymaxing-desktop",
+  "productName": "MONEYMAXING",
+  "version": "1.0.0",
+  "description": "Aplicación de finanzas personales para Windows y macOS",
+  "main": "main.cjs",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "dist:win": "electron-builder --win nsis",
+    "dist:mac": "electron-builder --mac dmg --x64 --arm64"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "com.moneymaxing.desktop",
+    "productName": "MONEYMAXING",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.cjs",
+      "server.cjs",
+      "MONEYMAXING.html"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "MONEYMAXING-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "category": "public.app-category.finance",
+      "artifactName": "MONEYMAXING-${version}-${arch}.${ext}"
+    }
+  }
+}

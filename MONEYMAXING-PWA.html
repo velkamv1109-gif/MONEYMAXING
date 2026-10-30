@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f3ed">
+<meta name="description" content="MONEYMAXING — Finanzas personales">
+<meta name="mobile-app-name" content="MONEYMAXING">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MONEYMAXING">
+<meta name="theme-color" content="#f5f3ed">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ws://*.localhost; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>MONEYMAXING — Finanzas personales</title>
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<!-- Gate de acceso -->
+<section id="gate" class="gate" aria-label="Acceso a MONEYMAXING">
+  <div class="gate-card">
+    <div class="wordmark"><span class="mark">M</span> MONEYMAXING <span style="font-weight:450;color:var(--muted)">/ finanzas</span></div>
+    <h1 id="gate-title">Tu dinero,<br>con claridad.</h1>
+    <p id="gate-copy">Crea una bóveda privada. Tus movimientos se cifran en la PC principal.</p>
+    <form id="gate-form">
+      <div class="field"><label for="gate-password" id="password-label">Contraseña</label><input id="gate-password" type="password" autocomplete="new-password" required minlength="10"></div>
+      <div class="field" id="confirm-field"><label for="gate-confirm">Confirma la contraseña</label><input id="gate-confirm" type="password" autocomplete="new-password" minlength="10"></div>
+      <p class="help" id="gate-help">Usa una contraseña única. No se puede recuperar.</p>
+      <button class="primary wide" type="submit" id="gate-submit">Crear bóveda</button>
+      <div class="gate-error" id="gate-error" role="alert"></div>
+    </form>
+    <div class="lock-note">Tus datos están cifrados localmente. El celular accede desde la PC principal.</div>
+  </div>
+</section>
+
+<!-- App principal -->
+<div id="app" class="layout hidden">
+  <aside class="sidebar">
+    <div class="wordmark"><span class="mark">M</span> MONEYMAXING</div>
+    <div class="nav-label">Perfil</div>
+    <nav class="nav" aria-label="Selección de perfil">
+      <button type="button" data-profile="user1" aria-current="page" id="profile-user1"><span class="nav-symbol">👤</span>Usuario Principal</button>
+      <button type="button" data-profile="user2" id="profile-user2"><span class="nav-symbol">👤</span>Usuario Hermana</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <b>Bóveda cifrada.</b><br>
+      <small>Tailscale o localhost</small>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="profile-selector">
+        <span id="current-profile" class="pill">Usuario Principal</span>
+        <button class="icon-button" id="toggle-profile" aria-label="Cambiar perfil">▼</button>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" id="quick-add" type="button">+ Movimiento</button>
+        <button class="icon-button" id="lock-now" type="button" aria-label="Bloquear bóveda">Bloquear</button>
+      </div>
+    </header>
+    
+    <!-- Home page -->
+    <section id="page-home" class="page active">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Resumen</p>
+          <h1 id="home-title">Tu panorama</h1>
+          <p class="subhead">Vista simple de ingresos y gastos.</p>
+        </div>
+        <div class="month" id="month-label"></div>
+      </div>
+      <div class="overview">
+        <div class="balance-panel">
+          <div class="balance-label">Saldo disponible</div>
+          <div class="balance-value" id="balance-value">$0</div>
+          <div class="balance-foot" id="balance-foot">Registra un ingreso para comenzar.</div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="metric-label">Ingresos del mes</div><div class="metric-value" id="income-month">$0</div></div>
+          <div class="metric"><div class="metric-label">Gastos del mes</div><div class="metric-value out" id="expense-month">$0</div></div>
+        </div>
+      </div>
+      <div class="dash-grid">
+        <section>
+          <div class="section-title"><h2>Movimientos recientes</h2><button class="text-button" id="add-from-list" type="button">+ Registrar</button></div>
+          <div class="transaction-list" id="recent-list"></div>
+        </section>
+        <section>
+          <div class="section-title"><h2>Gastos por categoría</h2><button class="text-button" data-open-sim type="button">Planear →</button></div>
+          <div id="category-list" class="category-list"></div>
+        </section>
+      </div>
+      <div class="quick-box"><strong>¿Prueba otro plan?</strong><p>Reparte tu saldo en categorías.</p><button class="primary" type="button" data-open-sim>Simular presupuesto</button></div>
+    </section>
+    
+    <!-- Simulate page -->
+    <section id="page-simulate" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Mapa de dinero</p>
+          <h1 id="simulate-title">Presupuesto</h1>
+          <p class="subhead">Asigna límites a cada categoría.</p>
+        </div>
+      </div>
+      <div class="sim-layout">
+        <div>
+          <div class="section-title"><h2>¿Cómo repartirías tu saldo?</h2><button class="text-button" id="reset-plan" type="button">Borrar plan</button></div>
+          <div class="sim-list" id="sim-list"></div>
+          <p class="sim-help">El simulador compara tu saldo con los límites; no mueve dinero.</p>
+          <button class="primary" id="save-plan" type="button">Guardar este mapa</button>
+        </div>
+        <aside class="sim-side">
+          <div class="balance-label">Saldo disponible</div>
+          <div id="sim-balance" class="sim-total">$0</div>
+          <div id="sim-breakdown"></div>
+          <div class="sim-line sim-remainder"><span>Sin asignar</span><strong id="sim-left">$0</strong></div>
+          <p id="sim-warning" class="sim-warning hidden"></p>
+        </aside>
+      </div>
+    </section>
+    
+    <!-- Security page -->
+    <section id="page-security" class="page">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Seguridad</p>
+          <h1 id="security-title">Privacidad</h1>
+          <p class="subhead">Controles de acceso y límites.</p>
+        </div>
+      </div>
+      <div class="security-wrap">
+        <div class="security-block"><div><h2>Bóveda cifrada</h2><p>Los datos se cifran con AES-GCM. La contraseña no se guarda.</p></div><span class="status-pill">CIFRADA</span></div>
+        <div class="security-block"><div><h2>Bloqueo automático</h2><p>La bóveda se bloquea después de 5 minutos sin actividad.</p></div><button class="secondary" id="security-lock" type="button">Bloquear ahora</button></div>
+        <div class="security-block"><div><h2>Acceso remoto</h2><p>Tailscale: instala en PC y celular, usa la misma credencial, abre https://tu-ip:PORT en el celular.</p></div><span class="status-pill">HTTPS PRIVADO</span></div>
+        <div class="security-warning"><strong>Importante:</strong> Usa una contraseña fuerte. Protege tu cuenta de Tailscale.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Modal -->
+<div id="modal-backdrop" class="modal-backdrop hidden">
+  <section class="modal">
+    <div class="modal-head"><div><h2 id="modal-title">Anotar movimiento</h2><p class="modal-sub">Guarda un gasto o ingreso.</p></div><button class="close-button" id="close-modal">×</button></div>
+    <form id="tx-form">
+      <div class="form-row">
+        <div class="field"><label for="tx-kind">Tipo</label><select id="tx-kind"><option value="expense">Gasto</option><option value="income">Ingreso</option></select></div>
+        <div class="field"><label for="tx-amount">Cantidad (MXN)</label><input id="tx-amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required></div>
+      </div>
+      <div class="field" id="category-field"><label for="tx-category">Categoría</label><select id="tx-category"></select></div>
+      <div class="field"><label for="tx-note">Descripción</label><input id="tx-note" maxlength="60" placeholder="Ej. Despensa, transporte…" required></div>
+      <div class="field"><label for="tx-date">Fecha</label><input id="tx-date" type="date" required></div>
+      <div class="form-actions"><button class="quiet" id="cancel-modal" type="button">Cancelar</button><button class="primary" type="submit">Guardar</button></div>
+      <div class="gate-error" id="tx-error" role="alert"></div>
+    </form>
+  </section>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+const ITERATIONS=310000;
+const CATEGORIES=[['comida','Comida'],['vivienda','Vivienda'],['transporte','Transporte'],['salud','Salud'],['ocio','Ocio'],['otros','Otros']];
+const INCOME_TYPES=[['sueldo','Sueldo mes'],['bono','Bono'],['intereses','Intereses'],['otro','Otro ingreso']];
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+let key=null, data=null, vaultSalt=null, vaultRevision=0, lockTimer=null, currentProfile='user1', profilesDB=null, txsDB=null;
+const money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2}).format(Number(n)||0);
+const localToday=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const monthId=()=>localToday().slice(0,7);
+
+// Inicializar bases de datos SQLite
+function initDB(dbPath){
+  const db=new IDBDatabase(dbPath,{readable:true,writable:true});
+  db.onupgradeneeded=e=>{
+    const d=e.newTransaction();
+    d.objectStore('profiles').ifNotExist(()=>[{id:1,name:'Usuario Principal',color:'#007AFF',createdAt:new Date()}]);
+    d.objectStore('transactions').ifNotExist(()=>[{id:1,kind:'income',amount:0,description:'Ingreso inicial',category:'sueldo',type:'sueldo',date:localToday(),profileId:1,createdAt:new Date()}]);
+    db.transaction(d).complete();
+  };
+  return db;
+}
+
+// Cifrado vault
+function derive(password,salt){const material=crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:ITERATIONS,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+function bytesToB64(bytes){let s='';for(const b of bytes)s+=String.fromCharCode(b);return btoa(s)}
+function b64ToBytes(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
+async function loadVault(){const res=await fetch('/api/vault',{cache:'no-store'});if(!res.ok)throw new Error('No se pudo consultar la bóveda.');return res.json()}
+async function storeVault({create=false}={}){if(!key||!data||!vaultSalt)throw new Error('Bóveda bloqueada.');const iv=crypto.getRandomValues(new Uint8Array(12));const encoded=new TextEncoder().encode(JSON.stringify(data));const encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,encoded);const record={version:1,iterations:ITERATIONS,salt:bytesToB64(vaultSalt),iv:bytesToB64(iv),ciphertext:bytesToB64(new Uint8Array(encrypted))};const headers={'Content-Type':'application/json'};if(!create)headers['If-Match']=String(vaultRevision);const res=await fetch('/api/vault',{method:create?'POST':'PUT',headers,body:JSON.stringify(record),cache:'no-store'});const result=await res.json().catch(()=>({}));if(!res.ok){if(res.status===409)throw new Error('La bóveda cambió. Bloquéala y vuelve a abrirla.');throw new Error('No se pudo guardar.')}};vaultRevision=result.revision}
+
+// Gate mode
+async function gateMode(){try{const stored=await loadVault();vaultRevision=stored.revision;const exists=Boolean(stored.vault);$('#gate-title').innerHTML=exists?'Bienvenido<br>de vuelta.':'Tu dinero,<br>con claridad.';$('#gate-copy').textContent=exists?'Desbloquea la bóveda compartida':'Crea una bóveda privada.';$('#password-label').textContent=exists?'Contraseña':'Crea contraseña';$('#gate-password').autocomplete=exists?'current-password':'new-password';$('#gate-password').placeholder=exists?'Tu contraseña':'Mínimo 10 caracteres';$('#confirm-field').classList.toggle('hidden',exists);$('#gate-confirm').required=!exists;$('#gate-help').textContent=exists?'Usa la contraseña de la bóveda':'Usa una contraseña única. No se puede recuperar.';$('#gate-submit').textContent=exists?'Desbloquear':'Crear bóveda';$('#gate-submit').disabled=false;showGateError('')}catch{$('#gate-title').innerHTML='Conecta tu<br>PC principal.';$('#gate-copy').textContent='La bóveda no responde. En el celular, verifica Tailscale.';$('#confirm-field').classList.add('hidden');$('#gate-confirm').required=false;$('#gate-submit').disabled=true;showGateError('No se pudo conectar.')}}
+
+function showGateError(msg){$('#gate-error').textContent=msg||''}
+function showApp(){const profile=$('[data-profile="'+currentProfile+'"]');currentProfile=profile.dataset.profile;profilesDB=db.objectStore('profiles').get(currentProfile);txsDB=db.objectStore('transactions');const txs=await txsDB.getAll().catch(()=>[]);data={profiles:[await profilesDB.get(currentProfile)||{id:1,name:'Usuario Principal',color:'#007AFF',createdAt:new Date()}],transactions:txs};$('#gate').classList.add('hidden');$('#app').classList.remove('hidden');$('#current-profile').textContent=currentProfile==='user1'?'Usuario Principal':'Usuario Hermana';render();resetLockTimer()}
+
+async function lock(){if(!key)return;clearTimeout(lockTimer);key=null;data=null;vaultSalt=null;vaultRevision=0;$('#app').classList.add('hidden');$('#gate').classList.remove('hidden');$('#gate-form').reset();showGateError('');gateMode();$('#gate-password').focus()}
+function resetLockTimer(){clearTimeout(lockTimer);if(key)lockTimer=setTimeout(lock,5*60*1000)}
+function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400)}
+async function persistDB(){const txs=await txsDB.getAll();const profiles=await db.transaction('readwrite').objectStore('profiles').get(currentProfile);data={profiles:[profiles],transactions:txs};await storeVault();await db.transaction('readwrite').objectStore('transactions').clear().put(...txs).complete()}
+function balance(){return data.transactions.reduce((sum,t)=>sum+(t.kind==='income'?t.amount:-t.amount),0)}
+function fillCategories(){const sel=$('#tx-category');sel.innerHTML=CATEGORIES.map(([id,n])=>`<option value="${id}">${n}</option>`).join('')}
+function render(){if(!data)return;const txs=Array.from(data.transactions).sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt);const now=monthId();const monthly=txs.filter(t=>t.date.slice(0,7)===now);const incomes=monthly.filter(t=>t.kind==='income').reduce((s,t)=>s+t.amount,0);const expenses=monthly.filter(t=>t.kind==='expense').reduce((s,t)=>s+t.amount,0);const current=balance();$('#balance-value').textContent=money(current);$('#balance-foot').textContent=current<0?'Tus gastos superan ingresos.':current===0?'Registra ingreso':'Saldo calculado';$('#income-month').textContent=money(incomes);$('#expense-month').textContent=money(expenses);
+const recent=txs.slice(0,6);$('#recent-list').innerHTML=recent.length?recent.map(t=>{const cat=CATEGORIES.find(([id])=>id===t.category)?.[1]||'Ingreso';return `<div class="tx"><div class="tx-main"><span class="tx-dot ${t.kind==='income'?'income':''}"></span><div style="min-width:0"><div>${escapeHtml(t.description||t.note)}</div><div class="tx-meta">${escapeHtml(cat)} · ${new Intl.DateTimeFormat('es-MX',{day:'numeric',month:'short',year:'numeric'}).format(new Date(`${t.date}T12:00:00`))}</div></div></div><div class="tx-amount ${t.kind==='expense'?'expense':''}">${t.kind==='income'?'+':'−'}${money(t.amount)}</div></div>`}).join(''):'<div class="empty">No hay movimientos.<br>Usa \"+ Movimiento\".</div>';
+const spent=Object.fromEntries(CATEGORIES.map(([id])=>[id,monthly.filter(t=>t.kind==='expense'&&t.category===id).reduce((s,t)=>s+t.amount,0)]));const max=Math.max(1,...Object.values(spent));$('#category-list').innerHTML=CATEGORIES.map(([id,n])=>`<div class="cat-row"><span>${n}</span><span>${money(spent[id])}</span><div class="bar"><span style="width:${Math.min(100,spent[id]/max*100)}%"></span></div></div>`).join('')}
+function renderSim(){if(!data)return;const bal=balance();$('#sim-balance').textContent=money(bal);$('#sim-list').innerHTML=CATEGORIES.map(([id,n])=>`<div class="sim-row"><div><label for="budget-${id}">${n}</label><small>Propuesta</small></div><div class="money-input"><span>$</span><input id="budget-${id}" data-budget="${id}" type="number" min="0" step="50" inputmode="decimal" value="${Number(data.budgets[id])||0}" aria-label="Presupuesto ${n}"></div></div>`).join('');updateSim()}
+function updateSim(){if(!data)return;let total=0,html='';for(const [id,n] of CATEGORIES){const inp=$(`[data-budget="${id}"]`);const val=Math.max(0,Number(inp?.value??data.budgets[id])||0);total+=val;if(n>0)html+=`<div class="sim-l"><span>${n}</span><strong>${money(val)}</strong></div>`}$('#sim-breakdown').innerHTML=html||'<div class="sim-l"><span>Agrega límites</span><strong>—</strong></div>';const left=balance()-total;$('#sim-left').textContent=money(left);$('#sim-left').style.color=left<0?'#ffd0bc':'white';$('#sim-warning').textContent=left<0?'Supera saldo: '+money(Math.abs(left)):'';$('#sim-warning').classList.toggle('hidden',left>=0)}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function openModal(){if(!key)return;$('#tx-form').reset();$('#tx-date').value=localToday();$('#tx-kind').value='expense';$('#category-field').classList.remove('hidden');$('#tx-error').textContent='';$('#modal-backdrop').classList.remove('hidden');$('#tx-amount').focus()}
+function closeModal(){$('#modal-backdrop').classList.add('hidden')}
+function showPage(n){$$('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${n}`));$$('.nav [data-page]').forEach(b=>b.setAttribute('aria-current',b.dataset.page===n?'page':'false'));window.scrollTo({top:0,behavior:'smooth'})}
+$('#gate-form').addEventListener('submit',async e=>{e.preventDefault();showGateError('');const pass=$('#gate-password').value;try{if(!crypto.subtle)throw new Error('Necesitas Tailscale');const stored=await loadVault();vaultRevision=stored.revision;if(stored.vault){const rec=stored.vault;vaultSalt=b64ToBytes(rec.salt);const deriv=await derive(password,vaultSalt);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64ToBytes(rec.iv)},deriv,b64ToBytes(rec.ciphertext));key=deriv;data=JSON.parse(new TextDecoder().decode(plain));showApp()}else{if(pass.length<10)throw new Error('Mínimo 10 caracteres');if(pass!==$('#gate-confirm').value)throw new Error('No coinciden');vaultSalt=crypto.getRandomValues(new Uint8Array(16));key=await derive(pass,vaultSalt);data={profiles:[{id:1,name:'Usuario Principal',color:'#007AFF',createdAt:new Date()}],transactions:[],budgets:Object.fromEntries(CATEGORIES.map(([id])=>[id,0]))};await storeVault({create:true});showApp()}}catch(err){key=null;data=null;vaultSalt=null;showGateError(err.message||'Error al abrir bóveda.')}});
+$('#tx-kind').addEventListener('change',()=>$('#category-field').classList.toggle('hidden',$('#tx-kind').value==='income'));
+$('#tx-form').addEventListener('submit',async e=>{e.preventDefault();if(!key)return;const amt=Number($('#tx-amount').value),kind=$('#tx-kind').value,note=$('#tx-note').value.trim(),date=$('#tx-date').value;if(!Number.isFinite(amt)||amt<=0){$('#tx-error').textContent='Cantidad válida requerida';return}if(!date||date>localToday()){$('#tx-error').textContent='Fecha no posterior a hoy';return}const tx={id:crypto.randomUUID(),kind,amount:Math.round(amt*100)/100,description:note||'Movimiento',category:kind==='expense'?$('#tx-category').value:'sueldo',type:kind==='income'?'sueldo':'gasto',date,date:date,profileId:currentProfile,createdAt:Date.now()};await txsDB.add(tx);await persistDB();render();closeModal();showPage('home');toast('Movimiento guardado.')}catch(err){$('#tx-error').textContent=err.message||'Error al guardar.')});
+$('#sim-list').addEventListener('input',updateSim);
+$('#save-plan').addEventListener('click',async()=>{for(const [id] of CATEGORIES)data.budgets[id]=Math.max(0,Math.round((Number($(`[data-budget="${id}"]`).value)||0)*100)/100);await storeVault();renderSim();toast('Plan guardado.')});
+$('#reset-plan').addEventListener('click',()=>{for(const [id] of CATEGORIES)data.budgets[id]=0;renderSim();toast('Plan borrado.')});
+$$('.nav [data-page], .nav [data-profile]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.profile){const p=$(`[data-profile="${b.dataset.profile}"]`);currentProfile=b.dataset.profile;profilesDB=db.objectStore('profiles').get(currentProfile);txsDB=db.objectStore('transactions');const txs=await txsDB.getAll().catch(()=>[]);const profile=await profilesDB.get(currentProfile)||{id:1,name:b.textContent.split(' ')[1]||'Usuario',color:'#007AFF',createdAt:new Date()};data={profiles:[profile],transactions:txs};$('#current-profile').textContent=b.textContent.replace(/^\s*[0-9]+\s*([A-Z][a-zA-Z]+\s*)/g,'$1');render();showPage('home')}else showPage(b.dataset.page)}));
+$$('[data-open-sim]').forEach(b=>b.addEventListener('click',()=>showPage('simulate')));
+$('#quick-add').addEventListener('click',openModal);$('#add-from-list').addEventListener('click',openModal);$('#close-modal').addEventListener('click',closeModal);$('#cancel-modal').addEventListener('click',closeModal);$('#modal-backdrop').addEventListener('click',e=>{if(e.target===$('#modal-backdrop'))closeModal()});
+$('#lock-now').addEventListener('click',lock);$('#security-lock').addEventListener('click',lock);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+['click','keydown','mousemove','touchstart'].forEach(evt=>document.addEventListener(evt,()=>{if(key)resetLockTimer()},{passive:true}));
+gateMode();
+})();
+</script>
+</body>
+</html>
