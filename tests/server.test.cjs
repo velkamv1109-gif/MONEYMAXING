@@ -10,7 +10,7 @@ async function testServer(t) {
   const instance = await startServer({ appDir: path.join(__dirname, '..'), dataDir, host: '127.0.0.1', port: 0 });
   t.after(async () => {
     await instance.close();
-    await fs.rm(dataDir, { recursive: true, force: true });
+    await fs.rm(dataDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   });
   return instance.origin;
 }
@@ -104,4 +104,36 @@ test('rejects invalid encrypted vault records', async t => {
   });
   assert.equal(response.status, 400);
   assert.equal((await response.json()).error, 'invalid_vault');
+});
+
+test('rejects hostile origins, DNS rebinding hosts and cross-site writes', async t => {
+  const origin = await testServer(t);
+  for (const headers of [{host:'attacker.invalid'},{origin:'https://attacker.invalid'},{'sec-fetch-site':'cross-site'}]) {
+    const status = await new Promise((resolve,reject)=>require('node:http').get(origin+'/api/vault',{headers},response=>{response.resume();resolve(response.statusCode);}).on('error',reject));
+    assert.equal(status,403,JSON.stringify(headers));
+  }
+  const res=await fetch(origin);
+  assert.match(res.headers.get('content-security-policy'), /script-src 'self';/);
+  assert.equal(res.headers.get('x-frame-options'),'DENY');
+});
+
+test('keeps encrypted previous revision and persists across server restart', async t => {
+  const dataDir=await fs.mkdtemp(path.join(os.tmpdir(),'moneymaxing-restart-'));
+  let instance=await startServer({dataDir,port:0});
+  t.after(async()=>{await instance.close();await fs.rm(dataDir,{recursive:true,force:true,maxRetries:5,retryDelay:100});});
+  await fetch(instance.origin+'/api/vault',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(encryptedVault('old'))});
+  const response=await fetch(instance.origin+'/api/vault',{method:'PUT',headers:{'content-type':'application/json','if-match':'1'},body:JSON.stringify(encryptedVault('new'))});
+  assert.equal(response.status,200);
+  assert.deepEqual(JSON.parse(await fs.readFile(path.join(dataDir,'vault.enc.json.previous'),'utf8')).vault,encryptedVault('old'));
+  await instance.close();instance=await startServer({dataDir,port:0});
+  assert.deepEqual((await fetch(instance.origin+'/api/vault').then(r=>r.json())).vault,encryptedVault('new'));
+});
+
+test('corrupt existing vault fails closed without being overwritten', async t => {
+  const dataDir=await fs.mkdtemp(path.join(os.tmpdir(),'moneymaxing-corrupt-'));
+  const file=path.join(dataDir,'vault.enc.json');await fs.writeFile(file,'damaged');
+  const instance=await startServer({dataDir,port:0});
+  t.after(async()=>{await instance.close();await fs.rm(dataDir,{recursive:true,force:true,maxRetries:5,retryDelay:100});});
+  const res=await fetch(instance.origin+'/api/vault',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(encryptedVault())});
+  assert.equal(res.status,500);assert.equal(await fs.readFile(file,'utf8'),'damaged');
 });

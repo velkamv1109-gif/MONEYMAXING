@@ -1,0 +1,33 @@
+const {chromium}=require('playwright');
+const fs=require('node:fs/promises');const path=require('node:path');const assert=require('node:assert/strict');
+const pass=s=>console.log('PASS '+s);const password='Prueba-local-2026!';
+(async()=>{
+ const browser=await chromium.connectOverCDP('http://127.0.0.1:9226');const context=browser.contexts()[0];const p=context.pages()[0];p.setDefaultTimeout(10000);
+ const click=s=>p.locator(s).click();const saved=()=>p.waitForFunction(()=>document.querySelector('#save-status').textContent==='Guardado');
+ const nav=async name=>{await click('[data-page='+name+']');};
+ await nav('clients');await click('.edit-client-btn');await p.locator('#client-phone').fill('5550000000');await click('#client-form button[type=submit]');await saved();
+ assert.match(await p.locator('#clients-table-body').innerText(),/5550000000/);pass('editar cliente');
+ await nav('realestate');await click('#new-property-btn');await p.locator('#prop-title').fill('Inmueble de prueba');await p.locator('#prop-price').fill('1000000');await p.locator('#prop-commission').fill('0');await click('#property-form button[type=submit]');await saved();pass('registrar inmueble con comisión cero');
+ await nav('accounting');await click('#add-receivable-btn');await p.locator('#debt-entity').fill('Cuenta de prueba');await p.locator('#debt-amount').fill('123.45');await click('#debt-form button[type=submit]');await saved();
+ assert.match(await p.locator('#receivables-list').innerText(),/123\.45/);pass('cuenta por cobrar');
+ await nav('budgets');await p.locator('[data-cat-budget=comida]').fill('500');await click('#save-budgets-btn');await saved();pass('presupuesto');
+ await nav('transactions');const before=await p.locator('#full-tx-list .tx-item').count();
+ await click('#quick-add-btn');await p.locator('#modal-tx-amount').fill('1');await p.locator('#modal-tx-note').fill('Doble clic');
+ await p.locator('#tx-form button[type=submit]').evaluate(b=>{b.click();b.click();});await p.locator('#tx-modal').waitFor({state:'hidden'});
+ assert.equal(await p.locator('#full-tx-list .tx-item').count(),before+1);pass('doble clic no duplica');
+ const backup=await p.evaluate(()=>fetch('/api/vault').then(r=>r.json()));
+ const artifacts=path.resolve(__dirname,'../.test-data/exports');await fs.mkdir(artifacts,{recursive:true});
+ const backupPath=path.join(artifacts,'backup.mmxvault');await fs.writeFile(backupPath,JSON.stringify(backup));
+ // Download actual UI exports into isolated test artifacts.
+ const cdp=await browser.newBrowserCDPSession();await cdp.send('Browser.setDownloadBehavior',{behavior:'allow',downloadPath:artifacts,eventsEnabled:true});
+ await click('#export-csv-btn');
+ await nav('security');await click('#download-backup-btn');
+ await new Promise(resolve=>setTimeout(resolve,1000));
+ const files=await fs.readdir(artifacts);assert(files.some(f=>f.endsWith('.csv')));assert(files.some(f=>f.startsWith('Boveda_')));pass('exportar CSV y respaldo desde botones');
+ const beforeRestore=(await p.evaluate(()=>fetch('/api/vault').then(r=>r.json()))).revision;
+ await p.locator('#restore-file-input').setInputFiles(backupPath);await p.locator('#edit-password').fill('clave-incorrecta');await click('#editor-form button[type=submit]');
+ await p.locator('#toast').filter({hasText:/incorrecta/}).waitFor();assert.equal((await p.evaluate(()=>fetch('/api/vault').then(r=>r.json()))).revision,beforeRestore);pass('restauración rechaza contraseña incorrecta sin sobrescribir');
+ p.once('dialog',d=>d.accept());await p.locator('#restore-file-input').setInputFiles(backupPath);await p.locator('#edit-password').fill(password);await click('#editor-form button[type=submit]');await p.locator('#gate').waitFor({state:'visible'});
+ await p.locator('#gate-password').fill(password);await click('#gate-submit');await p.locator('#app').waitFor({state:'visible'});await nav('transactions');assert.equal(await p.locator('#full-tx-list .tx-item').count(),before+1);pass('restauración válida y reapertura');
+ await nav('home');console.log('UI_REGRESSION_OK');process.exit(0);
+})().catch(e=>{console.error(e);process.exit(1)});

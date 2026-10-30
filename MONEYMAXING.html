@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#060807">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <title>MONEYMAXING — Finanzas personales</title>
 <style>
 /* ========================================================
@@ -699,8 +699,10 @@ input[type="range"] {
   .donut-layout { grid-template-columns: 1fr; }
 }
 </style>
+<link rel="stylesheet" href="/polish.css">
 </head>
 <body>
+<div id="save-status" role="status" aria-live="polite"></div>
 
 <div class="prismatic-mesh"></div>
 
@@ -711,18 +713,18 @@ input[type="range"] {
   <div class="crystal-panel" style="width:min(100%,480px);padding:clamp(32px,6vw,48px);">
     <div style="display:flex;align-items:center;gap:12px;font-size:17px;font-weight:800;letter-spacing:-0.04em;">
       <div class="crystal-gem accent" style="font-weight:900;">M</div>
-      <div>MONEYMAXING <span style="font-weight:450;color:var(--muted)">/ LIQUID CRYSTAL</span></div>
+      <div>MONEYMAXING <span style="font-weight:450;color:var(--muted)">/ FINANZAS LOCALES</span></div>
     </div>
     
     <div style="margin-top:20px;">
-      <span class="crystal-btn" style="padding:4px 12px;font-size:11px;font-family:var(--mono);color:var(--accent-base);border-color:var(--accent-glow);">🛡️ BÓVEDA SUIZA ZERO-KNOWLEDGE · AES-256-GCM</span>
+      <span class="crystal-btn" style="padding:4px 12px;font-size:11px;font-family:var(--mono);color:var(--accent-base);border-color:var(--accent-glow);"> BÓVEDA CIFRADA LOCAL · AES-256-GCM</span>
     </div>
 
-    <h1 id="gate-title" style="font-size:clamp(30px,6vw,40px);line-height:1.05;letter-spacing:-0.05em;margin:28px 0 12px;">Finanzas con<br>precisión suiza.</h1>
-    <p id="gate-copy" style="color:var(--ink-secondary);line-height:1.6;font-size:13px;margin:0 0 24px;">Desbloquea tu bóveda personal, inmobiliaria y ejecutiva con cifrado militar.</p>
+    <h1 id="gate-title" style="font-size:clamp(30px,6vw,40px);line-height:1.05;letter-spacing:-0.05em;margin:28px 0 12px;">Tus finanzas,<br>en orden.</h1>
+    <p id="gate-copy" style="color:var(--ink-secondary);line-height:1.6;font-size:13px;margin:0 0 24px;">Desbloquea tu bóveda personal, inmobiliaria y ejecutiva con cifrado AES-GCM.</p>
     
     <div id="gate-lockout" class="hidden" style="background:rgba(239,68,68,0.12);border:1px solid #ef4444;padding:12px;border-radius:10px;color:#ef4444;font-size:12px;margin-bottom:16px;">
-      <strong>⚠️ Escudo contra fuerza bruta activo.</strong>
+      <strong> Escudo contra fuerza bruta activo.</strong>
       <div style="margin-top:4px;">Reintentos congelados por seguridad. Espera <span id="lockout-seconds">10</span>s.</div>
     </div>
 
@@ -737,10 +739,10 @@ input[type="range"] {
         <input id="gate-confirm" type="password" autocomplete="new-password" minlength="10" placeholder="Confirma tu contraseña" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
       </div>
 
-      <p style="font-size:11px;color:var(--muted);line-height:1.5;margin:6px 0 20px;">Por seguridad zero-knowledge, no existe recuperación si se olvida.</p>
+      <p style="font-size:11px;color:var(--muted);line-height:1.5;margin:6px 0 20px;">Por seguridad local, no existe recuperación si se olvida.</p>
       
       <button class="crystal-btn crystal-btn-primary" type="submit" id="gate-submit" style="width:100%;">Desbloquear Bóveda</button>
-      <div id="gate-error" style="color:#ef4444;font-size:12px;font-weight:650;margin-top:12px;min-height:20px;"></div>
+      <div id="gate-error" role="alert" style="color:#ef4444;font-size:12px;font-weight:650;margin-top:12px;min-height:20px;"></div>
     </form>
   </div>
 </section>
@@ -764,21 +766,21 @@ input[type="range"] {
       <span style="font-size:11px;color:var(--muted)">▼</span>
     </div>
 
-    <div class="nav-label">Módulos Ejecutivos</div>
+    <div class="nav-label">Espacio de trabajo</div>
     <nav class="nav-menu" aria-label="Navegación principal">
-      <button type="button" class="nav-item" data-page="home" aria-current="page"><span class="crystal-gem accent" style="width:28px;height:28px;font-size:12px;">⌂</span>Resumen Snapshot</button>
-      <button type="button" class="nav-item" data-page="transactions"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">⇄</span>Movimientos & Filtros</button>
-      <button type="button" class="nav-item" data-page="realestate"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">🏢</span>Inmobiliario & Hipotecas</button>
-      <button type="button" class="nav-item" data-page="accounting"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">📊</span>Contabilidad & PyME</button>
-      <button type="button" class="nav-item" data-page="insurance"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">🛡️</span>Seguros & Retiro (PPR)</button>
-      <button type="button" class="nav-item" data-page="clients"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">👥</span>Cartera de Clientes</button>
-      <button type="button" class="nav-item" data-page="budgets"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">↗</span>Presupuestos & Metas</button>
-      <button type="button" class="nav-item" data-page="studio"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">✨</span>Liquid Crystal Studio</button>
-      <button type="button" class="nav-item" data-page="security"><span class="crystal-gem" style="width:28px;height:28px;font-size:12px;">🔒</span>Seguridad & Bóveda</button>
+      <button type="button" class="nav-item" data-page="home" aria-current="page"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10 10 4l7 6v7H3z M8 17v-5h4v5"/></svg>Resumen</button>
+      <button type="button" class="nav-item" data-page="transactions"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7h14m-3-3 3 3-3 3M17 14H3m3-3-3 3 3 3"/></svg>Movimientos</button>
+      <button type="button" class="nav-item" data-page="realestate"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 18V4h9v14M12 9h5v9M6 7h3M6 10h3M6 13h3M2 18h16"/></svg>Inmuebles e hipotecas</button>
+      <button type="button" class="nav-item" data-page="accounting"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 18V11h3v7M9 18V7h3v11M15 18V3h3v15"/></svg>Contabilidad</button>
+      <button type="button" class="nav-item" data-page="insurance"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 7 3v5c0 4-7 8-7 8s-7-4-7-8V5zM7 10l2 2 4-4"/></svg>Seguros y retiro</button>
+      <button type="button" class="nav-item" data-page="clients"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M3 18v-2a6 6 0 0 1 12 0v2M15 4a3 3 0 0 1 2 5M17 12c2 1 2 3 2 6"/></svg>Clientes</button>
+      <button type="button" class="nav-item" data-page="budgets"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 16 8 11l4 2 5-9M12 4h5v5"/></svg>Presupuestos y metas</button>
+      <button type="button" class="nav-item" data-page="studio"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 14h14M7 3v6M13 11v6"/></svg>Preferencias</button>
+      <button type="button" class="nav-item" data-page="security"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 9V6a5 5 0 0 1 10 0v3M3 9h14v9H3zM10 12v3"/></svg>Seguridad y respaldos</button>
     </nav>
 
     <div style="margin-top:auto;padding:16px 8px 0;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.5;">
-      <b style="color:var(--accent-base)">Bóveda Suiza Local.</b><br>
+      <b style="color:var(--accent-base)">Bóveda personal Local.</b><br>
       Bloqueo de pánico con <kbd style="background:var(--bg-glass-card);padding:2px 4px;border-radius:4px;border:1px solid var(--line);">Esc</kbd>
     </div>
   </aside>
@@ -787,7 +789,7 @@ input[type="range"] {
     <header class="topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <div class="search-crystal" id="open-cmd-palette-btn">
-          <span>🔍 Buscar o ejecutar…</span>
+          <span> Buscar o ejecutar…</span>
           <kbd style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:10px;font-family:var(--mono);">Ctrl K</kbd>
         </div>
         <span style="font-size:12px;color:var(--muted);font-family:var(--mono);" id="header-today"></span>
@@ -795,7 +797,7 @@ input[type="range"] {
 
       <div style="display:flex;align-items:center;gap:10px;">
         <button class="crystal-btn crystal-btn-primary" id="quick-add-btn" type="button">+ Movimiento</button>
-        <button class="crystal-btn" id="lock-btn" type="button" title="Bloquear inmediatamente">🔒</button>
+        <button class="crystal-btn" aria-label="Bloquear bóveda" id="lock-btn" type="button" title="Bloquear inmediatamente">Bloquear</button>
       </div>
     </header>
 
@@ -803,9 +805,9 @@ input[type="range"] {
     <section id="page-home" class="page active">
       <div class="page-head">
         <div>
-          <p class="eyebrow">Panorama Financiero Integral</p>
-          <h1>Snapshot Ejecutivo</h1>
-          <p class="subhead">Métricas consolidadas de liquidez, patrimonio e indicadores en tiempo real.</p>
+          <p class="eyebrow">Tu actividad</p>
+          <h1>Resumen financiero</h1>
+          <p class="subhead">Tus saldos y movimientos, en un solo lugar.</p>
         </div>
         <div style="font-size:12px;color:var(--muted);font-family:var(--mono);" id="header-month"></div>
       </div>
@@ -821,19 +823,19 @@ input[type="range"] {
         </div>
 
         <div class="crystal-panel">
-          <div class="card-label"><span>Ingresos del Mes</span><span>📈</span></div>
+          <div class="card-label"><span>Ingresos del Mes</span><span></span></div>
           <div class="card-value" id="dash-income">$0.00</div>
           <div class="card-sub">Entradas registradas en el período.</div>
         </div>
 
         <div class="crystal-panel">
-          <div class="card-label"><span>Gastos del Mes</span><span>📉</span></div>
+          <div class="card-label"><span>Gastos del Mes</span><span></span></div>
           <div class="card-value" id="dash-expense" style="color:#f97316;">$0.00</div>
           <div class="card-sub">Salidas operativas y personales.</div>
         </div>
 
         <div class="crystal-panel">
-          <div class="card-label"><span>Soberanía Financiera</span><span>🛡️</span></div>
+          <div class="card-label"><span>Indicador orientativo</span><span></span></div>
           <div style="width:120px;height:120px;position:relative;margin:auto;">
             <svg viewBox="0 0 100 100" style="width:100%;height:100%;transform:rotate(-90deg);">
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--line)" stroke-width="8"></circle>
@@ -841,7 +843,7 @@ input[type="range"] {
             </svg>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <span style="font-size:28px;font-weight:850;font-family:var(--mono);" id="score-number">85</span>
-              <span style="font-size:9px;color:var(--accent-base);font-weight:800;letter-spacing:0.05em;" id="score-badge">ROBUSTO</span>
+              <span style="font-size:9px;color:var(--accent-base);font-weight:800;letter-spacing:0.05em;" id="score-badge">ESTABLE</span>
             </div>
           </div>
         </div>
@@ -851,7 +853,7 @@ input[type="range"] {
       <div class="chart-container">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
           <div>
-            <h3 style="margin:0;font-size:15px;font-weight:750;">Trayectoria Patrimonial & Flujo Reciente</h3>
+            <h3 style="margin:0;font-size:15px;font-weight:750;">Historial del saldo</h3>
             <span style="font-size:11px;color:var(--muted)">Desliza el cursor sobre la curva para inspeccionar fechas y saldos.</span>
           </div>
           <div style="font-size:11px;font-family:var(--mono);color:var(--accent-base);" id="chart-scrubber-readout">Interactivo</div>
@@ -865,7 +867,7 @@ input[type="range"] {
       <!-- Donut Chart & Movimientos -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
         <div class="crystal-panel">
-          <h3 style="margin:0 0 16px;font-size:15px;">Distribución de Gastos (Anillo Interactivo)</h3>
+          <h3 style="margin:0 0 16px;font-size:15px;">Gastos por categoría</h3>
           <div class="donut-layout">
             <div class="donut-svg-wrap">
               <svg id="donut-svg" viewBox="0 0 120 120" style="width:100%;height:100%;"></svg>
@@ -897,14 +899,14 @@ input[type="range"] {
           <p class="subhead">Historial completo con filtros dinámicos, etiquetas fiscales y exportación.</p>
         </div>
         <div style="display:flex;gap:10px;">
-          <button class="crystal-btn" id="export-csv-btn">📥 Exportar CSV</button>
+          <button class="crystal-btn" id="export-csv-btn"> Exportar CSV</button>
           <button class="crystal-btn crystal-btn-primary" id="add-tx-btn-page">+ Nuevo Movimiento</button>
         </div>
       </div>
 
       <div class="crystal-panel" style="margin-bottom:20px;padding:16px;">
         <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px;">
-          <input type="text" id="filter-search" placeholder="🔍 Buscar concepto o nota…" style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+          <input type="text" id="filter-search" placeholder=" Buscar concepto o nota…" style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
           <select id="filter-kind" style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
             <option value="all">Todos los flujos</option>
             <option value="income">Solo Ingresos (+)</option>
@@ -981,7 +983,7 @@ input[type="range"] {
               </div>
             </div>
 
-            <button class="crystal-btn crystal-btn-primary" id="print-mortgage-proposal" style="width:100%;margin-top:16px;">📄 Cotización Hipotecaria para Cliente</button>
+            <button class="crystal-btn crystal-btn-primary" id="print-mortgage-proposal" style="width:100%;margin-top:16px;"> Cotización Hipotecaria para Cliente</button>
           </div>
         </div>
       </div>
@@ -1041,29 +1043,29 @@ input[type="range"] {
           <h1>Contabilidad & Punto de Equilibrio</h1>
           <p class="subhead">P&L, cálculo automático de IVA/ISR y punto de equilibrio para comercios y servicios.</p>
         </div>
-        <button class="crystal-btn" onclick="window.print()">🖨️ Imprimir Estado Financiero</button>
+        <button class="crystal-btn" data-print> Imprimir Estado Financiero</button>
       </div>
 
       <div class="grid-cards">
         <div class="crystal-panel">
           <div class="card-label"><span>Ingresos Brutos</span><span>+</span></div>
           <div class="card-value" id="pnl-gross-income" style="color:var(--accent-base);">$0.00</div>
-          <div class="card-sub">Total facturado o cobrado.</div>
+          <div class="card-sub">Ingresos registrados en este mes.</div>
         </div>
         <div class="crystal-panel">
-          <div class="card-label"><span>Gastos Deducibles / Operativos</span><span>−</span></div>
+          <div class="card-label"><span>Gastos registrados / Operativos</span><span>−</span></div>
           <div class="card-value" id="pnl-deductible-expenses" style="color:#f97316;">$0.00</div>
           <div class="card-sub">Egresos operativos de negocio.</div>
         </div>
         <div class="crystal-panel">
-          <div class="card-label"><span>Impuestos Estimados (IVA/ISR)</span><span>🏛️</span></div>
+          <div class="card-label"><span>Etiquetas fiscales</span><span></span></div>
           <div class="card-value" id="pnl-tax-estimated" style="color:#eab308;">$0.00</div>
-          <div class="card-sub">Provisión fiscal automática.</div>
+          <div class="card-sub">Referencia de etiquetas; no calcula obligaciones fiscales.</div>
         </div>
         <div class="crystal-panel hero">
-          <div class="card-label"><span>Utilidad Neta Real</span><span>⭐</span></div>
+          <div class="card-label"><span>Balance del mes</span><span></span></div>
           <div class="card-value" id="pnl-net-profit" style="color:var(--accent-base);">$0.00</div>
-          <div class="card-sub">Beneficio libre de impuestos.</div>
+          <div class="card-sub">Ingresos menos gastos registrados.</div>
         </div>
       </div>
 
@@ -1142,7 +1144,7 @@ input[type="range"] {
           <h1>Decision Center: Retiro & Pólizas</h1>
           <p class="subhead">Simulador dinámico de interés compuesto, planes de retiro (PPR) y cotizador de pólizas para clientes.</p>
         </div>
-        <button class="crystal-btn crystal-btn-primary" id="generate-proposal-btn">📄 Propuesta Ejecutiva</button>
+        <button class="crystal-btn crystal-btn-primary" id="generate-proposal-btn"> Propuesta Ejecutiva</button>
       </div>
 
       <div class="crystal-panel hero" style="margin-bottom:24px;">
@@ -1189,16 +1191,16 @@ input[type="range"] {
                 <strong style="color:var(--accent-base);" id="res-interest-earned">$0.00</strong>
               </div>
               <div style="display:flex;justify-content:space-between;">
-                <span style="color:var(--ink-secondary)">Renta Mensual Estimada al Retiro:</span>
+                <span style="color:var(--ink-secondary)">Retiro mensual supuesto (0.5% del fondo):</span>
                 <strong style="color:#eab308;" id="res-monthly-pension">$0.00</strong>
               </div>
               <div style="display:flex;justify-content:space-between;">
-                <span style="color:var(--ink-secondary)">Deducción Fiscal Anual (Art. 151):</span>
+                <span style="color:var(--ink-secondary)">Fondo en poder adquisitivo actual:</span>
                 <strong style="color:#38bdf8;" id="res-tax-deduction">$0.00</strong>
               </div>
             </div>
 
-            <button class="crystal-btn crystal-btn-primary" id="save-retirement-quote-btn" style="width:100%;margin-top:16px;">💾 Guardar Proyección en Cartera</button>
+            <button class="crystal-btn crystal-btn-primary" id="save-retirement-quote-btn" style="width:100%;margin-top:16px;"> Guardar Proyección en Cartera</button>
           </div>
         </div>
       </div>
@@ -1239,8 +1241,8 @@ input[type="range"] {
       <div class="crystal-panel hidden proposal-sheet" id="client-proposal-preview" style="margin-top:24px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--line);padding-bottom:20px;margin-bottom:20px;">
           <div>
-            <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;" id="prop-advisor-brand">MONEYMAXING WEALTH ADVISORY</div>
-            <div style="font-size:12px;color:var(--ink-secondary);margin-top:4px;" id="prop-advisor-contact">Asesor Patrimonial Certificado</div>
+            <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;" id="prop-advisor-brand">MONEYMAXING</div>
+            <div style="font-size:12px;color:var(--ink-secondary);margin-top:4px;" id="prop-advisor-contact">Titular por configurar</div>
           </div>
           <div style="text-align:right;">
             <span class="crystal-btn" style="font-size:10px;padding:4px 10px;color:var(--accent-base);">PROPUESTA DE ASESORÍA PATRIMONIAL</span>
@@ -1276,7 +1278,7 @@ input[type="range"] {
 
         <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;" class="no-print">
           <button class="crystal-btn" id="close-proposal-btn">Cerrar</button>
-          <button class="crystal-btn crystal-btn-primary" onclick="window.print()">🖨️ Imprimir / Guardar en PDF</button>
+          <button class="crystal-btn crystal-btn-primary" data-print> Imprimir / Guardar en PDF</button>
         </div>
       </div>
     </section>
@@ -1286,14 +1288,14 @@ input[type="range"] {
       <div class="page-head">
         <div>
           <p class="eyebrow">Gestión de Relaciones Comerciales</p>
-          <h1>Cartera de Clientes & CRM</h1>
+          <h1>Clientes</h1>
           <p class="subhead">Prospectos y clientes para Seguros, Bienes Raíces, Consultoría y Servicios.</p>
         </div>
         <button class="crystal-btn crystal-btn-primary" id="new-client-btn">+ Nuevo Cliente</button>
       </div>
 
       <div class="crystal-panel" style="margin-bottom:20px;padding:14px;">
-        <input type="text" id="client-search" placeholder="🔍 Buscar cliente por nombre, teléfono o plan…" style="width:100%;max-width:380px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
+        <input type="text" id="client-search" placeholder=" Buscar cliente por nombre, teléfono o plan…" style="width:100%;max-width:380px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
       </div>
 
       <div class="tx-list">
@@ -1319,7 +1321,7 @@ input[type="range"] {
       <div class="page-head">
         <div>
           <p class="eyebrow">Disciplina Financiera</p>
-          <h1>Presupuestos & Metas</h1>
+          <h1>Presupuestos y metas</h1>
           <p class="subhead">Topes de gasto mensual por categoría y tracking visual de metas de ahorro.</p>
         </div>
         <button class="crystal-btn crystal-btn-primary" id="new-goal-btn">+ Nueva Meta de Ahorro</button>
@@ -1346,7 +1348,7 @@ input[type="range"] {
       <div class="page-head">
         <div>
           <p class="eyebrow">Control Total de Apariencia & Dinámicas</p>
-          <h1>Liquid Crystal Studio</h1>
+          <h1>Preferencias</h1>
           <p class="subhead">Personaliza paletas maestras, botones transparentes, velocidad de paneo y membrete.</p>
         </div>
       </div>
@@ -1354,15 +1356,15 @@ input[type="range"] {
       <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
         <!-- Selector de Estilos y Paneo -->
         <div class="crystal-panel">
-          <h3 style="margin:0 0 14px;font-size:15px;">Paleta Maestra Liquid Crystal</h3>
+          <h3 style="margin:0 0 14px;font-size:15px;">Paleta Maestra Minimal</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <button class="crystal-btn theme-picker-btn" data-theme-val="obsidian">🌌 Obsidian Stealth (Dark)</button>
-            <button class="crystal-btn theme-picker-btn" data-theme-val="gold">👑 Royal Onyx & Gold</button>
-            <button class="crystal-btn theme-picker-btn" data-theme-val="sapphire">💎 Wall Street Sapphire</button>
-            <button class="crystal-btn theme-picker-btn" data-theme-val="titanium">🪐 Apple Pro Titanium</button>
-            <button class="crystal-btn theme-picker-btn" data-theme-val="amethyst">🔮 Cyber Amethyst</button>
-            <button class="crystal-btn theme-picker-btn" data-theme-val="crimson">🍷 Monaco Crimson</button>
-            <button class="crystal-btn theme-picker-btn" data-theme-val="emerald-light">📜 Swiss Alpine Paper</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="obsidian"> Obsidian Stealth (Dark)</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="gold"> Royal Onyx & Gold</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="sapphire"> Wall Street Sapphire</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="titanium"> Apple Pro Titanium</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="amethyst"> Cyber Amethyst</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="crimson"> Monaco Crimson</button>
+            <button class="crystal-btn theme-picker-btn" data-theme-val="emerald-light"> Swiss Alpine Paper</button>
           </div>
 
           <h3 style="margin:24px 0 10px;font-size:15px;">Acento Neón / Prismatic Glow</h3>
@@ -1429,7 +1431,7 @@ input[type="range"] {
                 <input type="text" id="setting-advisor-phone" placeholder="Teléfono" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
                 <input type="email" id="setting-advisor-email" placeholder="Correo" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
               </div>
-              <button class="crystal-btn crystal-btn-primary" id="save-studio-btn" style="margin-top:6px;">💾 Guardar Preferencias</button>
+              <button class="crystal-btn crystal-btn-primary" id="save-studio-btn" style="margin-top:6px;"> Guardar Preferencias</button>
             </div>
           </div>
 
@@ -1449,8 +1451,8 @@ input[type="range"] {
       <div class="page-head">
         <div>
           <p class="eyebrow">Protocolos Criptográficos</p>
-          <h1>Bóveda Suiza & Respaldos</h1>
-          <p class="subhead">Arquitectura local zero-knowledge, SHA-256 integrity checks y copias portátiles.</p>
+          <h1>Bóveda personal & Respaldos</h1>
+          <p class="subhead">Cifrado autenticado local y respaldos recuperables con tu contraseña.</p>
         </div>
       </div>
 
@@ -1463,21 +1465,21 @@ input[type="range"] {
         <div class="crystal-panel">
           <div class="card-label">Derivación de Clave</div>
           <div class="card-value" style="font-size:22px;color:#38bdf8;">PBKDF2 310,000</div>
-          <div class="card-sub">Iteraciones SHA-256 según NIST.</div>
+          <div class="card-sub">PBKDF2 con SHA-256 para bóvedas nuevas.</div>
         </div>
         <div class="crystal-panel">
-          <div class="card-label">Escudo de Fuerza Bruta</div>
+          <div class="card-label">Pausa entre intentos</div>
           <div class="card-value" style="font-size:22px;color:#eab308;">ACTIVO</div>
-          <div class="card-sub">Congelamiento exponencial ante fallos.</div>
+          <div class="card-sub">Pausa local de 5, 12 o 30 segundos. Usa una contraseña larga.</div>
         </div>
       </div>
 
       <div class="crystal-panel" style="margin-top:20px;">
         <h3 style="margin:0 0 10px;font-size:16px;">Exportar Respaldo Cifrado (.mmxvault)</h3>
         <p style="font-size:12px;color:var(--ink-secondary);line-height:1.6;margin-bottom:16px;">
-          Guarda un archivo 100% cifrado de toda tu información para archivarlo en una memoria USB o disco seguro. Nadie puede abrirlo sin la contraseña maestra.
+          Guarda una copia de tu bóveda en una memoria USB o disco seguro. El contenido está cifrado; conserva la contraseña para recuperarlo. La aplicación guarda también la revisión anterior en disco.
         </p>
-        <button class="crystal-btn crystal-btn-primary" id="download-backup-btn">📦 Descargar Respaldo Cifrado</button>
+        <button class="crystal-btn crystal-btn-primary" id="download-backup-btn"> Descargar Respaldo Cifrado</button>
 
         <div style="margin-top:24px;border-top:1px solid var(--line);padding-top:16px;">
           <h4 style="margin:0 0 8px;font-size:14px;">Restaurar Respaldo</h4>
@@ -1494,7 +1496,7 @@ input[type="range"] {
 <div id="cmd-palette" class="cmd-palette-backdrop hidden" role="dialog" aria-modal="true">
   <div class="cmd-palette-modal">
     <div class="cmd-input-wrap">
-      <span style="margin-right:12px;color:var(--muted);">🔍</span>
+      <span style="margin-right:12px;color:var(--muted);"></span>
       <input type="text" id="cmd-search-input" placeholder="Escribe para buscar comandos o navegar… (Esc para cerrar)">
     </div>
     <div class="cmd-results" id="cmd-results-list"></div>
@@ -1555,7 +1557,7 @@ input[type="range"] {
         <button class="crystal-btn" type="button" id="cancel-tx-modal-btn">Cancelar</button>
         <button class="crystal-btn crystal-btn-primary" type="submit">Guardar en Bóveda</button>
       </div>
-      <div id="modal-tx-error" style="color:#ef4444;font-size:12px;margin-top:10px;"></div>
+      <div id="modal-tx-error" role="alert" style="color:#ef4444;font-size:12px;margin-top:10px;"></div>
     </form>
   </div>
 </div>
@@ -1634,22 +1636,22 @@ input[type="range"] {
       <p style="font-size:13px;color:var(--ink-secondary);margin-bottom:14px;">Elige el modo de trabajo de este perfil:</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div class="crystal-panel role-card selected" data-role="master" style="cursor:pointer;padding:16px;">
-          <div style="font-size:24px;margin-bottom:6px;">⭐</div>
+          <div style="font-size:24px;margin-bottom:6px;"></div>
           <strong style="font-size:13px;">Master Ejecutivo</strong>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">Inmobiliario, seguros, contabilidad y finanzas personales.</div>
         </div>
         <div class="crystal-panel role-card" data-role="realestate" style="cursor:pointer;padding:16px;">
-          <div style="font-size:24px;margin-bottom:6px;">🏢</div>
+          <div style="font-size:24px;margin-bottom:6px;"></div>
           <strong style="font-size:13px;">Asesor Inmobiliario</strong>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">Hipotecas, amortizaciones, Cap Rate y comisiones.</div>
         </div>
         <div class="crystal-panel role-card" data-role="insurance" style="cursor:pointer;padding:16px;">
-          <div style="font-size:24px;margin-bottom:6px;">🛡️</div>
+          <div style="font-size:24px;margin-bottom:6px;"></div>
           <strong style="font-size:13px;">Asesor de Seguros & PPR</strong>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">Planes de retiro, pólizas y proyecciones actuariales.</div>
         </div>
         <div class="crystal-panel role-card" data-role="accounting" style="cursor:pointer;padding:16px;">
-          <div style="font-size:24px;margin-bottom:6px;">📊</div>
+          <div style="font-size:24px;margin-bottom:6px;"></div>
           <strong style="font-size:13px;">Contable & PyME</strong>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">P&L, punto de equilibrio e impuestos.</div>
         </div>
@@ -1707,7 +1709,7 @@ input[type="range"] {
       </div>
       <div class="modal-actions">
         <button class="crystal-btn" id="wizard-prev-3">← Volver</button>
-        <button class="crystal-btn crystal-btn-primary" id="wizard-finish">🚀 Activar Perfil</button>
+        <button class="crystal-btn crystal-btn-primary" id="wizard-finish"> Activar Perfil</button>
       </div>
     </div>
   </div>
@@ -1807,1823 +1809,13 @@ input[type="range"] {
   </div>
 </div>
 
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="toast" role="status" aria-live="polite" class="toast" role="status" aria-live="polite"></div>
 
 <!-- ==========================================
      MOTOR JAVASCRIPT ZERO-KNOWLEDGE & LIQUID
      ========================================== -->
-<script>
-(()=>{
-'use strict';
-
-const ITERATIONS = 310000;
-const CATEGORIES = [
-  ['comida', 'Comida & Despensa'],
-  ['vivienda', 'Vivienda & Servicios'],
-  ['transporte', 'Transporte & Movilidad'],
-  ['salud', 'Salud & Gastos Médicos'],
-  ['ocio', 'Ocio & Calidad de Vida'],
-  ['negocio', 'Gastos Operativos / Negocio'],
-  ['inmobiliario', 'Bienes Raíces & Inversiones'],
-  ['impuestos', 'Impuestos & SAT'],
-  ['seguros', 'Seguros & Protección'],
-  ['ahorro', 'Inversión & Retiro'],
-  ['otros', 'Otros Flujos']
-];
-
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
-
-let key = null;
-let data = null;
-let vaultSalt = null;
-let vaultRevision = 0;
-let lockTimer = null;
-let toastTimer = null;
-let failedAttempts = 0;
-let lockoutCountdown = null;
-let wizardSelectedRole = 'master';
-let audioCtx = null;
-
-// Sonido háptico
-function playHaptic(type = 'click') {
-  if (data?.globalSettings?.soundEnabled === false) return;
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'sine';
-
-    if (type === 'unlock') {
-      osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.18);
-      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.25);
-    } else if (type === 'save') {
-      osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-      osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
-      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.22);
-    } else {
-      osc.frequency.setValueAtTime(950, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.04);
-    }
-  } catch {}
-}
-
-function money(amount, currency = null) {
-  const cur = currency || (data?.globalSettings?.currency) || 'MXN';
-  return new Intl.NumberFormat('es-MX', {
-    style: 'currency',
-    currency: cur,
-    maximumFractionDigits: 2
-  }).format(Number(amount) || 0);
-}
-
-function localToday() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-}
-
-function monthId() {
-  return localToday().slice(0, 7);
-}
-
-function escapeHtml(s) {
-  return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-// Bóveda por defecto
-function defaultVaultData() {
-  const initialId = 'prof_' + crypto.randomUUID().slice(0, 8);
-  return {
-    version: 2,
-    activeProfileId: initialId,
-    globalSettings: {
-      theme: 'obsidian',
-      accent: 'emerald',
-      paneAnim: 'smooth',
-      currency: 'MXN',
-      autoLockMinutes: 5,
-      soundEnabled: true,
-      businessName: 'MONEYMAXING Wealth Advisory',
-      advisorName: 'Asesor Patrimonial Certificado',
-      advisorPhone: '+52 55 0000 0000',
-      advisorEmail: 'contacto@moneymaxing.com'
-    },
-    profiles: [
-      {
-        id: initialId,
-        name: 'Principal Ejecutivo',
-        role: 'master',
-        currency: 'MXN',
-        initialBalance: 0,
-        transactions: [],
-        budgets: Object.fromEntries(CATEGORIES.map(([id]) => [id, 0])),
-        savingsGoals: [
-          { id: 'goal_1', name: 'Fondo de Emergencia (6 meses)', target: 75000, current: 25000, deadline: '2027-12-31' },
-          { id: 'goal_2', name: 'Enganche Inmueble Residencial', target: 500000, current: 120000, deadline: '2028-12-31' }
-        ],
-        realEstateProperties: [
-          {
-            id: 'prop_1',
-            title: 'Depto Torre Platino #402',
-            opType: 'Venta',
-            price: 3650000,
-            commissionPct: 5,
-            status: 'Disponible',
-            client: 'Ing. Carlos Mendoza (555-987-6543)'
-          }
-        ],
-        insuranceClients: [
-          {
-            id: 'cli_1',
-            name: 'Lic. Roberto Garza',
-            phone: '555-432-1098',
-            email: 'roberto.garza@empresa.com',
-            plan: 'PPR Retiro Dotal Art. 151',
-            status: 'Activo / Vigente',
-            sumInsured: 3000000,
-            premium: 48000
-          }
-        ],
-        receivables: [],
-        payables: []
-      }
-    ]
-  };
-}
-
-function migrateLegacyData(loaded) {
-  if (loaded.version >= 2 && Array.isArray(loaded.profiles)) {
-    loaded.globalSettings = loaded.globalSettings || {};
-    loaded.globalSettings.theme = loaded.globalSettings.theme || 'obsidian';
-    loaded.globalSettings.accent = loaded.globalSettings.accent || 'emerald';
-    loaded.globalSettings.paneAnim = loaded.globalSettings.paneAnim || 'smooth';
-    loaded.globalSettings.soundEnabled = loaded.globalSettings.soundEnabled !== false;
-    loaded.profiles.forEach(p => {
-      p.realEstateProperties = p.realEstateProperties || [];
-    });
-    return loaded;
-  }
-  const id = 'prof_legacy';
-  const legacyTransactions = (loaded.transactions || []).map(t => ({
-    ...t,
-    taxKind: 'none',
-    taxAmount: 0
-  }));
-  const legacyBudgets = loaded.budgets || Object.fromEntries(CATEGORIES.map(([c]) => [c, 0]));
-
-  return {
-    version: 2,
-    activeProfileId: id,
-    globalSettings: {
-      theme: 'obsidian',
-      accent: 'emerald',
-      paneAnim: 'smooth',
-      currency: 'MXN',
-      autoLockMinutes: 5,
-      soundEnabled: true,
-      businessName: 'MONEYMAXING Wealth Advisory',
-      advisorName: '',
-      advisorPhone: '',
-      advisorEmail: ''
-    },
-    profiles: [
-      {
-        id: id,
-        name: 'Principal',
-        role: 'master',
-        currency: 'MXN',
-        initialBalance: 0,
-        transactions: legacyTransactions,
-        budgets: legacyBudgets,
-        savingsGoals: [],
-        realEstateProperties: [],
-        insuranceClients: [],
-        receivables: [],
-        payables: []
-      }
-    ]
-  };
-}
-
-function getActiveProfile() {
-  if (!data || !data.profiles) return null;
-  let p = data.profiles.find(x => x.id === data.activeProfileId);
-  if (!p && data.profiles.length > 0) {
-    p = data.profiles[0];
-    data.activeProfileId = p.id;
-  }
-  return p;
-}
-
-// Criptografía
-function bytesToB64(bytes) { let s = ''; for (const b of bytes) s += String.fromCharCode(b); return btoa(s); }
-function b64ToBytes(s) { return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
-
-async function derive(password, salt) {
-  const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
-  return crypto.subtle.deriveKey(
-    { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
-    material,
-    { name: 'AES-GCM', length: 256 },
-    false,
-    ['encrypt', 'decrypt']
-  );
-}
-
-async function loadVault() {
-  const res = await fetch('/api/vault', { cache: 'no-store' });
-  if (!res.ok) throw new Error('No se pudo conectar a la bóveda.');
-  return res.json();
-}
-
-async function storeVault({ create = false } = {}) {
-  if (!key || !data || !vaultSalt) throw new Error('Bóveda bloqueada.');
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const encoded = new TextEncoder().encode(JSON.stringify(data));
-  const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded);
-  const record = {
-    version: 1,
-    iterations: ITERATIONS,
-    salt: bytesToB64(vaultSalt),
-    iv: bytesToB64(iv),
-    ciphertext: bytesToB64(new Uint8Array(encrypted))
-  };
-  const headers = { 'Content-Type': 'application/json' };
-  if (!create) headers['If-Match'] = String(vaultRevision);
-  const res = await fetch('/api/vault', {
-    method: create ? 'POST' : 'PUT',
-    headers,
-    body: JSON.stringify(record),
-    cache: 'no-store'
-  });
-  const result = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    if (res.status === 409) throw new Error('Conflicto de sincronización. Bloquea y reabre la bóveda.');
-    throw new Error('Error al guardar la bóveda.');
-  }
-  vaultRevision = result.revision;
-}
-
-// Puerta de Acceso
-async function gateMode() {
-  try {
-    const stored = await loadVault();
-    vaultRevision = stored.revision;
-    const exists = Boolean(stored.vault);
-    $('#gate-title').innerHTML = exists ? 'Bienvenido<br>de vuelta.' : 'Finanzas con<br>precisión suiza.';
-    $('#gate-copy').textContent = exists
-      ? 'Desbloquea tu bóveda personal, inmobiliaria y patrimonial.'
-      : 'Crea tu bóveda con cifrado zero-knowledge.';
-    $('#password-label').textContent = exists ? 'Contraseña maestra' : 'Crea tu contraseña maestra';
-    $('#confirm-field').classList.toggle('hidden', exists);
-    $('#gate-confirm').required = !exists;
-    $('#gate-submit').textContent = exists ? 'Desbloquear Bóveda' : 'Crear Bóveda Cifrada';
-    $('#gate-submit').disabled = false;
-    $('#gate-error').textContent = '';
-  } catch {
-    $('#gate-title').innerHTML = 'Conecta tu<br>PC principal.';
-    $('#gate-copy').textContent = 'El servidor local de MONEYMAXING no responde.';
-    $('#confirm-field').classList.add('hidden');
-    $('#gate-submit').disabled = true;
-    $('#gate-error').textContent = 'Servicio no disponible.';
-  }
-}
-
-function handleBruteForceFailure() {
-  failedAttempts++;
-  if (failedAttempts >= 3) {
-    const delay = failedAttempts === 3 ? 5 : failedAttempts === 4 ? 12 : 30;
-    triggerLockout(delay);
-  }
-}
-
-function triggerLockout(seconds) {
-  let remaining = seconds;
-  $('#gate-lockout').classList.remove('hidden');
-  $('#gate-submit').disabled = true;
-  $('#gate-password').disabled = true;
-  $('#lockout-seconds').textContent = remaining;
-
-  clearInterval(lockoutCountdown);
-  lockoutCountdown = setInterval(() => {
-    remaining--;
-    $('#lockout-seconds').textContent = remaining;
-    if (remaining <= 0) {
-      clearInterval(lockoutCountdown);
-      $('#gate-lockout').classList.add('hidden');
-      $('#gate-submit').disabled = false;
-      $('#gate-password').disabled = false;
-      $('#gate-password').focus();
-    }
-  }, 1000);
-}
-
-function lock() {
-  clearTimeout(lockTimer);
-  key = null;
-  data = null;
-  vaultSalt = null;
-  vaultRevision = 0;
-  $('#app').classList.add('hidden');
-  $('#gate').classList.remove('hidden');
-  $('#gate-form').reset();
-  $('#gate-error').textContent = '';
-  gateMode();
-  $('#gate-password').focus();
-}
-
-function resetLockTimer() {
-  clearTimeout(lockTimer);
-  const minutes = Number(data?.globalSettings?.autoLockMinutes) || 5;
-  if (key) lockTimer = setTimeout(lock, minutes * 60 * 1000);
-}
-
-function toast(message) {
-  const el = $('#toast');
-  el.textContent = message;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
-}
-
-function applyAppearance() {
-  const theme = data?.globalSettings?.theme || 'obsidian';
-  const accent = data?.globalSettings?.accent || 'emerald';
-  const paneAnim = data?.globalSettings?.paneAnim || 'smooth';
-
-  document.documentElement.setAttribute('data-theme', theme);
-  document.documentElement.setAttribute('data-accent', accent);
-  document.documentElement.setAttribute('data-pane-anim', paneAnim);
-
-  $$('.theme-picker-btn').forEach(b => b.classList.toggle('crystal-btn-primary', b.dataset.themeVal === theme));
-  $$('.swatch-btn').forEach(b => b.style.outline = b.dataset.accentVal === accent ? '3px solid #ffffff' : 'none');
-}
-
-// ==========================================
-// RENDERIZADO GENERAL & LIQUID EXPERIENCE
-// ==========================================
-function render() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  applyAppearance();
-
-  $('#sidebar-profile-name').textContent = profile.name;
-  $('#sidebar-role-badge').textContent = profile.role.toUpperCase();
-  $('#header-today').textContent = new Intl.DateTimeFormat('es-MX', { weekday: 'short', day: 'numeric', month: 'short' }).format(new Date()).toUpperCase();
-  $('#header-month').textContent = new Intl.DateTimeFormat('es-MX', { month: 'long', year: 'numeric' }).format(new Date()).toUpperCase();
-
-  const txs = [...profile.transactions].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
-  const currentMonth = monthId();
-  const monthlyTxs = txs.filter(t => t.date.slice(0, 7) === currentMonth);
-
-  const totalIncomes = txs.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0);
-  const totalExpenses = txs.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0);
-  const balance = (profile.initialBalance || 0) + totalIncomes - totalExpenses;
-
-  const monthIncomes = monthlyTxs.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0);
-  const monthExpenses = monthlyTxs.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0);
-
-  $('#dash-balance').textContent = money(balance, profile.currency);
-  $('#dash-income').textContent = money(monthIncomes, profile.currency);
-  $('#dash-expense').textContent = money(monthExpenses, profile.currency);
-
-  calculateHealthScore(balance, monthIncomes, monthExpenses, profile);
-  renderTrendAreaChart(txs, balance, profile.currency);
-  renderDonutChart(monthlyTxs, profile.currency);
-  renderTxList($('#home-tx-list'), txs.slice(0, 5), profile.currency);
-  renderFullTransactions();
-  renderRealEstateModule();
-  renderAccounting();
-  renderBreakEvenCalculator();
-  renderBudgetsAndGoals();
-  renderClients();
-  renderRetirementSimulation();
-  renderProfilesList();
-}
-
-function calculateHealthScore(balance, monthIncomes, monthExpenses, profile) {
-  let score = 55;
-  const burn = monthExpenses || 1;
-  const runway = balance / burn;
-  if (runway >= 6) score += 20;
-  else if (runway >= 3) score += 10;
-  else if (runway < 1) score -= 15;
-
-  if (monthIncomes > 0) {
-    const rate = (monthIncomes - monthExpenses) / monthIncomes;
-    if (rate >= 0.25) score += 15;
-    else if (rate >= 0.10) score += 8;
-  }
-
-  score = Math.max(10, Math.min(100, Math.round(score)));
-  $('#score-number').textContent = score;
-  const ring = $('#score-ring');
-  const offset = 251.2 - (251.2 * score) / 100;
-  ring.style.strokeDashoffset = offset;
-
-  const badge = $('#score-badge');
-  if (score >= 85) { badge.textContent = 'SOBERANO'; badge.style.color = 'var(--accent-base)'; ring.style.stroke = 'var(--accent-base)'; }
-  else if (score >= 65) { badge.textContent = 'ROBUSTO'; badge.style.color = '#38bdf8'; ring.style.stroke = '#38bdf8'; }
-  else if (score >= 45) { badge.textContent = 'ESTABLE'; badge.style.color = '#eab308'; ring.style.stroke = '#eab308'; }
-  else { badge.textContent = 'VULNERABLE'; badge.style.color = '#ef4444'; ring.style.stroke = '#ef4444'; }
-}
-
-function renderTrendAreaChart(txs, currentBalance, currency) {
-  const svg = $('#trend-svg');
-  const tooltip = $('#trend-tooltip');
-  if (!svg) return;
-
-  const width = 800, height = 180;
-  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-
-  if (txs.length < 2) {
-    svg.innerHTML = `<text x="${width/2}" y="${height/2}" fill="var(--muted)" font-size="12" text-anchor="middle">Registra al menos 2 movimientos para ver la curva patrimonial.</text>`;
-    return;
-  }
-
-  const sorted = [...txs].sort((a, b) => a.date.localeCompare(b.date));
-  let running = 0;
-  const dataPoints = sorted.slice(-15).map(t => {
-    running += (t.kind === 'income' ? t.amount : -t.amount);
-    return { date: t.date, val: running, note: t.note };
-  });
-
-  const minVal = Math.min(...dataPoints.map(p => p.val));
-  const maxVal = Math.max(...dataPoints.map(p => p.val));
-  const range = (maxVal - minVal) || 1;
-
-  const paddingX = 40, paddingY = 25;
-  const chartW = width - paddingX * 2, chartH = height - paddingY * 2;
-
-  const coords = dataPoints.map((p, idx) => {
-    const x = paddingX + (idx / (dataPoints.length - 1)) * chartW;
-    const y = height - paddingY - ((p.val - minVal) / range) * chartH;
-    return { x, y, data: p };
-  });
-
-  let pathD = `M ${coords[0].x} ${coords[0].y}`;
-  for (let i = 0; i < coords.length - 1; i++) {
-    const cpX = (coords[i].x + coords[i + 1].x) / 2;
-    pathD += ` C ${cpX} ${coords[i].y}, ${cpX} ${coords[i + 1].y}, ${coords[i + 1].x} ${coords[i + 1].y}`;
-  }
-
-  const areaD = `${pathD} L ${coords[coords.length - 1].x} ${height} L ${coords[0].x} ${height} Z`;
-
-  svg.innerHTML = `
-    <defs>
-      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="var(--accent-base)" stop-opacity="0.35" />
-        <stop offset="100%" stop-color="var(--accent-base)" stop-opacity="0.0" />
-      </linearGradient>
-    </defs>
-    <path d="${areaD}" fill="url(#areaGrad)" />
-    <path d="${pathD}" fill="none" stroke="var(--accent-base)" stroke-width="3" stroke-linecap="round" />
-    <line id="scrub-line" x1="0" y1="0" x2="0" y2="${height}" stroke="var(--line-crystal)" stroke-width="1" stroke-dasharray="3,3" opacity="0" />
-    <circle id="scrub-dot" cx="0" cy="0" r="5" fill="var(--accent-base)" stroke="#ffffff" stroke-width="2" opacity="0" />
-  `;
-
-  const scrubLine = svg.querySelector('#scrub-line');
-  const scrubDot = svg.querySelector('#scrub-dot');
-  const box = $('#trend-chart-box');
-
-  box.onmousemove = e => {
-    const rect = box.getBoundingClientRect();
-    const mouseX = (e.clientX - rect.left) * (width / rect.width);
-
-    let closest = coords[0];
-    let minDist = Infinity;
-    coords.forEach(pt => {
-      const dist = Math.abs(pt.x - mouseX);
-      if (dist < minDist) { minDist = dist; closest = pt; }
-    });
-
-    scrubLine.setAttribute('x1', closest.x);
-    scrubLine.setAttribute('x2', closest.x);
-    scrubLine.setAttribute('opacity', '1');
-    scrubDot.setAttribute('cx', closest.x);
-    scrubDot.setAttribute('cy', closest.y);
-    scrubDot.setAttribute('opacity', '1');
-
-    tooltip.innerHTML = `<strong>${money(closest.data.val, currency)}</strong><br><span style="color:var(--muted);">${closest.data.date} · ${escapeHtml(closest.data.note)}</span>`;
-    tooltip.classList.add('show');
-    tooltip.style.left = `${(closest.x / width) * 100}%`;
-    tooltip.style.top = `${closest.y - 45}px`;
-    tooltip.style.transform = 'translate(-50%, 0)';
-
-    $('#chart-scrubber-readout').textContent = `${closest.data.date}: ${money(closest.data.val, currency)}`;
-  };
-
-  box.onmouseleave = () => {
-    scrubLine.setAttribute('opacity', '0');
-    scrubDot.setAttribute('opacity', '0');
-    tooltip.classList.remove('show');
-    $('#chart-scrubber-readout').textContent = 'Interactivo';
-  };
-}
-
-function renderDonutChart(monthlyTxs, currency) {
-  const svg = $('#donut-svg');
-  const legend = $('#donut-legend');
-  if (!svg || !legend) return;
-
-  const expenses = monthlyTxs.filter(t => t.kind === 'expense');
-  const total = expenses.reduce((s, t) => s + t.amount, 0);
-
-  if (total === 0) {
-    svg.innerHTML = '<circle cx="60" cy="60" r="45" fill="transparent" stroke="var(--line)" stroke-width="16"></circle>';
-    $('#donut-center-pct').textContent = '0%';
-    $('#donut-center-cat').textContent = 'Sin gastos';
-    legend.innerHTML = '<div style="color:var(--muted);">Sin gastos registrados en el mes actual.</div>';
-    return;
-  }
-
-  const catSums = {};
-  expenses.forEach(t => catSums[t.category] = (catSums[t.category] || 0) + t.amount);
-
-  const colors = ['#10b981', '#38bdf8', '#f59e0b', '#a855f7', '#f43f5e', '#06b6d4', '#84cc16', '#fb923c', '#94a3b8'];
-  const circumference = 2 * Math.PI * 45;
-
-  let accumulatedAngle = 0;
-  let paths = '';
-  let legendHtml = '';
-  let colorIdx = 0;
-
-  for (const [catId, name] of CATEGORIES) {
-    const val = catSums[catId] || 0;
-    if (val > 0) {
-      const pct = val / total;
-      const strokeLen = pct * circumference;
-      const rot = (accumulatedAngle / circumference) * 360 - 90;
-      const col = colors[colorIdx % colors.length];
-
-      paths += `
-        <circle cx="60" cy="60" r="45" fill="transparent"
-          stroke="${col}" stroke-width="16"
-          stroke-dasharray="${strokeLen} ${circumference - strokeLen}"
-          transform="rotate(${rot} 60 60)"
-          data-cat="${name}" data-pct="${Math.round(pct * 100)}%"
-          style="cursor:pointer;transition:all 0.25s var(--ease-spring);transform-origin:60px 60px;"
-          class="donut-segment"
-        ></circle>
-      `;
-
-      legendHtml += `
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="display:flex;align-items:center;gap:6px;">
-            <span style="width:8px;height:8px;border-radius:50%;background:${col};"></span>
-            ${escapeHtml(name)}
-          </span>
-          <strong>${money(val, currency)} (${Math.round(pct * 100)}%)</strong>
-        </div>
-      `;
-
-      accumulatedAngle += strokeLen;
-      colorIdx++;
-    }
-  }
-
-  svg.innerHTML = paths;
-  legend.innerHTML = legendHtml;
-
-  svg.querySelectorAll('.donut-segment').forEach(seg => {
-    seg.onmouseenter = () => {
-      seg.setAttribute('stroke-width', '22');
-      playHaptic('click');
-      $('#donut-center-pct').textContent = seg.dataset.pct;
-      $('#donut-center-cat').textContent = seg.dataset.cat;
-    };
-    seg.onmouseleave = () => {
-      seg.setAttribute('stroke-width', '16');
-      $('#donut-center-pct').textContent = '100%';
-      $('#donut-center-cat').textContent = 'Total Gastos';
-    };
-  });
-}
-
-function renderTxList(container, list, currency) {
-  if (!list.length) {
-    container.innerHTML = '<div style="padding:22px;text-align:center;color:var(--muted);font-size:12px;">Sin movimientos registrados.</div>';
-    return;
-  }
-  container.innerHTML = list.map(t => {
-    const isInc = t.kind === 'income';
-    const catName = CATEGORIES.find(([id]) => id === t.category)?.[1] || (isInc ? 'Ingreso' : 'Gasto');
-    const dStr = new Intl.DateTimeFormat('es-MX', { day: 'numeric', month: 'short' }).format(new Date(`${t.date}T12:00:00`));
-    return `
-      <div class="tx-item">
-        <div class="crystal-gem ${isInc ? 'accent' : ''}">${isInc ? '↑' : '↓'}</div>
-        <div style="min-width:0;">
-          <div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(t.note)}</div>
-          <div style="font-size:11px;color:var(--muted);">${escapeHtml(catName)} · ${dStr} ${t.taxKind && t.taxKind !== 'none' ? '· 🏛️ Fiscal' : ''}</div>
-        </div>
-        <div style="font-weight:800;font-size:14px;white-space:nowrap;color:${isInc ? 'var(--accent-base)' : '#f97316'};">${isInc ? '+' : '−'}${money(t.amount, currency)}</div>
-        <button class="crystal-btn delete-tx-btn" data-id="${t.id}" style="padding:4px 8px;font-size:11px;color:var(--muted);" title="Eliminar">✕</button>
-      </div>
-    `;
-  }).join('');
-
-  container.querySelectorAll('.delete-tx-btn').forEach(btn => {
-    btn.onclick = async () => {
-      const p = getActiveProfile();
-      p.transactions = p.transactions.filter(t => t.id !== btn.dataset.id);
-      await storeVault();
-      render();
-      playHaptic('click');
-      toast('Movimiento eliminado.');
-    };
-  });
-}
-
-function renderFullTransactions() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-  const search = $('#filter-search').value.toLowerCase().trim();
-  const kind = $('#filter-kind').value;
-  const cat = $('#filter-category').value;
-
-  let filtered = [...profile.transactions].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
-  if (kind !== 'all') filtered = filtered.filter(t => t.kind === kind);
-  if (cat !== 'all') filtered = filtered.filter(t => t.category === cat);
-  if (search) filtered = filtered.filter(t => t.note.toLowerCase().includes(search));
-
-  renderTxList($('#full-tx-list'), filtered, profile.currency);
-}
-
-// ==========================================
-// MÓDULO INMOBILIARIO & BIENES RAÍCES (NUEVO)
-// ==========================================
-function renderRealEstateModule() {
-  const price = Number($('#input-re-price').value);
-  const downPct = Number($('#input-re-down').value);
-  const termYears = Number($('#input-re-term').value);
-  const annualRate = Number($('#input-re-rate').value) / 100;
-  const extraPmt = Number($('#input-re-extra').value);
-
-  const downAmount = price * (downPct / 100);
-  const loanAmount = Math.max(0, price - downAmount);
-  const months = termYears * 12;
-  const monthlyRate = annualRate / 12;
-
-  $('#label-re-price').textContent = money(price);
-  $('#label-re-down').textContent = `${downPct}% (${money(downAmount)})`;
-  $('#label-re-term').textContent = `${termYears} años (${months} meses)`;
-  $('#label-re-rate').textContent = `${(annualRate * 100).toFixed(2)}%`;
-  $('#label-re-extra').textContent = money(extraPmt);
-
-  // Fórmula de Mensualidad Hipotecaria Francesa
-  let basePmt = 0;
-  if (monthlyRate > 0) {
-    basePmt = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
-  } else {
-    basePmt = loanAmount / months;
-  }
-
-  // Simulación de amortización con y sin aportaciones a capital
-  let balanceNormal = loanAmount;
-  let totalInterestNormal = 0;
-  for (let m = 0; m < months; m++) {
-    const intPmt = balanceNormal * monthlyRate;
-    const princPmt = basePmt - intPmt;
-    totalInterestNormal += intPmt;
-    balanceNormal -= princPmt;
-    if (balanceNormal <= 0) break;
-  }
-
-  let balanceWithExtra = loanAmount;
-  let totalInterestExtra = 0;
-  let monthsWithExtra = 0;
-  while (balanceWithExtra > 0 && monthsWithExtra < months) {
-    monthsWithExtra++;
-    const intPmt = balanceWithExtra * monthlyRate;
-    const princPmt = (basePmt - intPmt) + extraPmt;
-    totalInterestExtra += intPmt;
-    balanceWithExtra -= princPmt;
-  }
-
-  const interestSaved = Math.max(0, totalInterestNormal - totalInterestExtra);
-  const yearsReduced = ((months - monthsWithExtra) / 12).toFixed(1);
-
-  $('#re-monthly-payment').textContent = money(basePmt);
-  $('#re-loan-amount').textContent = money(loanAmount);
-  $('#re-total-interest').textContent = money(totalInterestNormal);
-  $('#re-interest-saved').textContent = money(interestSaved);
-  $('#re-time-reduced').textContent = `${yearsReduced} años menos (${months - monthsWithExtra} meses)`;
-
-  // Calculadora de Rentabilidad (Cap Rate & Yield)
-  renderCapRateCalculation();
-  renderPropertiesList();
-}
-
-function renderCapRateCalculation() {
-  const buyPrice = Number($('#roi-price').value) || 1;
-  const rent = Number($('#roi-rent').value) || 0;
-  const closing = Number($('#roi-closing').value) || 0;
-  const expenses = Number($('#roi-expenses').value) || 0;
-
-  const totalInvested = buyPrice + closing;
-  const grossAnnualRent = rent * 12;
-  const netOperatingIncome = Math.max(0, grossAnnualRent - expenses);
-
-  const capRate = ((netOperatingIncome / totalInvested) * 100).toFixed(2);
-  $('#roi-caprate-res').textContent = `${capRate}%`;
-  $('#roi-net-cash').textContent = money(netOperatingIncome);
-}
-
-function renderPropertiesList() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-  profile.realEstateProperties = profile.realEstateProperties || [];
-
-  const list = $('#re-properties-list');
-  $('#re-properties-count').textContent = `${profile.realEstateProperties.length} propiedades`;
-
-  if (!profile.realEstateProperties.length) {
-    list.innerHTML = '<div style="padding:18px;color:var(--muted);font-size:12px;text-align:center;">Sin inmuebles en cartera. Usa “+ Nueva Propiedad”.</div>';
-    return;
-  }
-
-  list.innerHTML = profile.realEstateProperties.map((p, i) => {
-    const commAmount = (p.price * (p.commissionPct || 5)) / 100;
-    return `
-      <div class="tx-item">
-        <div class="crystal-gem accent">🏠</div>
-        <div style="min-width:0;">
-          <div style="font-weight:750;font-size:13px;">${escapeHtml(p.title)}</div>
-          <div style="font-size:11px;color:var(--muted);">${p.opType} · ${escapeHtml(p.client || 'Cliente')}</div>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-weight:800;color:var(--ink);">${money(p.price, profile.currency)}</div>
-          <div style="font-size:10px;color:var(--accent-base);">Comisión: ${money(commAmount, profile.currency)} (${p.commissionPct}%)</div>
-        </div>
-        <button class="crystal-btn delete-prop-btn" data-index="${i}" style="padding:4px 8px;font-size:11px;color:#ef4444;">✕</button>
-      </div>
-    `;
-  }).join('');
-
-  list.querySelectorAll('.delete-prop-btn').forEach(btn => {
-    btn.onclick = async () => {
-      profile.realEstateProperties.splice(Number(btn.dataset.index), 1);
-      await storeVault();
-      render();
-      playHaptic('click');
-      toast('Propiedad eliminada.');
-    };
-  });
-}
-
-// Calculadora de Punto de Equilibrio (Break-Even)
-function renderBreakEvenCalculator() {
-  const fixed = Number($('#be-fixed').value) || 0;
-  const price = Number($('#be-price').value) || 1;
-  const cost = Number($('#be-cost').value) || 0;
-
-  const marginPerUnit = Math.max(1, price - cost);
-  const unitsNeeded = Math.ceil(fixed / marginPerUnit);
-  const revenueNeeded = unitsNeeded * price;
-
-  $('#be-units-res').textContent = `${unitsNeeded} unidades / ventas`;
-  $('#be-revenue-res').textContent = money(revenueNeeded);
-}
-
-// Contabilidad & P&L
-function renderAccounting() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  const currentMonth = monthId();
-  const monthlyTxs = profile.transactions.filter(t => t.date.slice(0, 7) === currentMonth);
-
-  const grossIncomes = monthlyTxs.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0);
-  const deductibleExpenses = monthlyTxs.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0);
-
-  let taxEstimated = 0;
-  monthlyTxs.forEach(t => {
-    if (t.taxKind === 'vat16') taxEstimated += (t.amount * 0.16) / 1.16;
-    if (t.taxKind === 'retention') taxEstimated += t.amount * 0.10;
-  });
-
-  const netProfit = grossIncomes - deductibleExpenses;
-
-  $('#pnl-gross-income').textContent = money(grossIncomes, profile.currency);
-  $('#pnl-deductible-expenses').textContent = money(deductibleExpenses, profile.currency);
-  $('#pnl-tax-estimated').textContent = money(taxEstimated, profile.currency);
-  $('#pnl-net-profit').textContent = money(netProfit, profile.currency);
-
-  const tbody = $('#pnl-table-body');
-  const catSpend = {};
-  monthlyTxs.filter(t => t.kind === 'expense').forEach(t => catSpend[t.category] = (catSpend[t.category] || 0) + t.amount);
-
-  let rowsHtml = `
-    <tr style="border-bottom:1px solid var(--line);">
-      <td style="padding:10px 12px;"><strong>(+) Ingresos Brutos Totales</strong></td>
-      <td style="padding:10px 12px;"><strong>${money(grossIncomes, profile.currency)}</strong></td>
-      <td style="padding:10px 12px;">100.0%</td>
-      <td style="padding:10px 12px;color:var(--accent-base);">Base Gravable</td>
-    </tr>
-  `;
-
-  for (const [id, name] of CATEGORIES) {
-    const val = catSpend[id] || 0;
-    if (val > 0) {
-      const pct = grossIncomes > 0 ? ((val / grossIncomes) * 100).toFixed(1) : '0.0';
-      rowsHtml += `
-        <tr style="border-bottom:1px solid var(--line);">
-          <td style="padding:10px 12px;">(-) ${escapeHtml(name)}</td>
-          <td style="padding:10px 12px;">${money(val, profile.currency)}</td>
-          <td style="padding:10px 12px;">${pct}%</td>
-          <td style="padding:10px 12px;color:var(--muted);">Deducible</td>
-        </tr>
-      `;
-    }
-  }
-
-  rowsHtml += `
-    <tr style="font-weight:800;background:var(--bg-card-hover);">
-      <td style="padding:12px;">(=) UTILIDAD OPERATIVA (EBITDA)</td>
-      <td style="padding:12px;color:${netProfit >= 0 ? 'var(--accent-base)' : '#f97316'};">${money(netProfit, profile.currency)}</td>
-      <td style="padding:12px;">${grossIncomes > 0 ? ((netProfit / grossIncomes) * 100).toFixed(1) : '0.0'}%</td>
-      <td style="padding:12px;color:var(--accent-base);">Resultado Neto</td>
-    </tr>
-  `;
-  tbody.innerHTML = rowsHtml;
-
-  renderDebtsLists();
-}
-
-function renderDebtsLists() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  const recList = $('#receivables-list');
-  const recs = profile.receivables || [];
-  recList.innerHTML = recs.length ? recs.map((r, i) => `
-    <div class="tx-item">
-      <div class="crystal-gem accent">📥</div>
-      <div style="min-width:0;">
-        <div style="font-weight:700;font-size:13px;">${escapeHtml(r.entity)}</div>
-        <div style="font-size:11px;color:var(--muted);">${escapeHtml(r.concept || 'Factura')} · Vence: ${r.dueDate}</div>
-      </div>
-      <div style="font-weight:800;color:var(--accent-base);">${money(r.amount, profile.currency)}</div>
-      <button class="crystal-btn delete-rec-btn" data-index="${i}" style="padding:4px 8px;font-size:11px;">✕</button>
-    </div>
-  `).join('') : '<div style="padding:16px;color:var(--muted);font-size:12px;">Sin cuentas por cobrar.</div>';
-
-  recList.querySelectorAll('.delete-rec-btn').forEach(btn => {
-    btn.onclick = async () => {
-      profile.receivables.splice(Number(btn.dataset.index), 1);
-      await storeVault();
-      render();
-      toast('Cuenta archivada.');
-    };
-  });
-
-  const payList = $('#payables-list');
-  const pays = profile.payables || [];
-  payList.innerHTML = pays.length ? pays.map((p, i) => `
-    <div class="tx-item">
-      <div class="crystal-gem">📤</div>
-      <div style="min-width:0;">
-        <div style="font-weight:700;font-size:13px;">${escapeHtml(p.entity)}</div>
-        <div style="font-size:11px;color:var(--muted);">${escapeHtml(p.concept || 'Pasivo')} · Vence: ${p.dueDate}</div>
-      </div>
-      <div style="font-weight:800;color:#f97316;">${money(p.amount, profile.currency)}</div>
-      <button class="crystal-btn delete-pay-btn" data-index="${i}" style="padding:4px 8px;font-size:11px;">✕</button>
-    </div>
-  `).join('') : '<div style="padding:16px;color:var(--muted);font-size:12px;">Sin cuentas por pagar.</div>';
-
-  payList.querySelectorAll('.delete-pay-btn').forEach(btn => {
-    btn.onclick = async () => {
-      profile.payables.splice(Number(btn.dataset.index), 1);
-      await storeVault();
-      render();
-      toast('Cuenta por pagar saldada.');
-    };
-  });
-}
-
-// Retiro Actuarial
-function renderRetirementSimulation() {
-  const currentAge = Number($('#input-age').value);
-  const retireAge = Number($('#input-retire-age').value);
-  const monthlyInv = Number($('#input-monthly-inv').value);
-  const annualRate = Number($('#input-rate').value) / 100;
-  const inflation = Number($('#input-inflation').value) / 100;
-
-  $('#label-age').textContent = `${currentAge} años`;
-  $('#label-retire-age').textContent = `${retireAge} años`;
-  $('#label-monthly-inv').textContent = money(monthlyInv);
-  $('#label-rate').textContent = `${(annualRate * 100).toFixed(1)}%`;
-  $('#label-inflation').textContent = `${(inflation * 100).toFixed(1)}%`;
-  $('#res-retire-age-text').textContent = retireAge;
-
-  const years = Math.max(1, retireAge - currentAge);
-  const totalMonths = years * 12;
-  const monthlyRate = annualRate / 12;
-
-  let totalProjected = 0;
-  if (monthlyRate > 0) {
-    totalProjected = monthlyInv * ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
-  } else {
-    totalProjected = monthlyInv * totalMonths;
-  }
-
-  const totalCapitalInvested = monthlyInv * totalMonths;
-  const interestEarned = Math.max(0, totalProjected - totalCapitalInvested);
-  const estimatedMonthlyPension = totalProjected * 0.005;
-  const taxDeductionAnnual = Math.min(monthlyInv * 12 * 0.30, 189000);
-
-  $('#res-total-projected').textContent = money(totalProjected);
-  $('#res-capital-invested').textContent = money(totalCapitalInvested);
-  $('#res-interest-earned').textContent = money(interestEarned);
-  $('#res-monthly-pension').textContent = money(estimatedMonthlyPension);
-  $('#res-tax-deduction').textContent = money(taxDeductionAnnual);
-
-  const svg = $('#compound-svg');
-  if (svg) {
-    const w = 300, h = 90;
-    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    let investedPts = '', compoundPts = '';
-    for (let y = 0; y <= years; y++) {
-      const x = (y / years) * w;
-      const m = y * 12;
-      const inv = monthlyInv * m;
-      const comp = monthlyRate > 0 ? (monthlyInv * ((Math.pow(1 + monthlyRate, m) - 1) / monthlyRate)) : inv;
-      const yInv = h - (inv / (totalProjected || 1)) * (h - 10);
-      const yComp = h - (comp / (totalProjected || 1)) * (h - 10);
-      investedPts += `${y === 0 ? 'M' : 'L'} ${x} ${yInv} `;
-      compoundPts += `${y === 0 ? 'M' : 'L'} ${x} ${yComp} `;
-    }
-    svg.innerHTML = `
-      <path d="${investedPts}" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3,3" />
-      <path d="${compoundPts}" fill="none" stroke="var(--accent-base)" stroke-width="3" stroke-linecap="round" />
-    `;
-  }
-}
-
-// Clientes CRM
-function renderClients() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-  const query = $('#client-search').value.toLowerCase().trim();
-  const clients = profile.insuranceClients || [];
-
-  const filtered = query ? clients.filter(c =>
-    c.name.toLowerCase().includes(query) ||
-    c.plan.toLowerCase().includes(query) ||
-    (c.phone && c.phone.includes(query))
-  ) : clients;
-
-  const tbody = $('#clients-table-body');
-  if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--muted);">Sin clientes registrados en este perfil. Usa “+ Nuevo Cliente”.</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = filtered.map((c, i) => `
-    <tr style="border-bottom:1px solid var(--line);">
-      <td style="padding:12px 14px;"><strong>${escapeHtml(c.name)}</strong></td>
-      <td style="padding:12px 14px;">${escapeHtml(c.phone || c.email || '—')}</td>
-      <td style="padding:12px 14px;color:#38bdf8;">${escapeHtml(c.plan)}</td>
-      <td style="padding:12px 14px;">${c.sumInsured ? money(c.sumInsured, profile.currency) : '—'}</td>
-      <td style="padding:12px 14px;font-weight:800;color:var(--accent-base);">${c.premium ? money(c.premium, profile.currency) : '—'}</td>
-      <td style="padding:12px 14px;"><span class="crystal-btn" style="font-size:10px;padding:2px 8px;">${escapeHtml(c.status || 'Prospecto')}</span></td>
-      <td style="padding:12px 14px;">
-        <button class="crystal-btn print-client-prop-btn" data-index="${i}" title="Generar propuesta formal" style="padding:4px 8px;font-size:11px;">📄</button>
-        <button class="crystal-btn delete-client-btn" data-index="${i}" title="Eliminar" style="padding:4px 8px;font-size:11px;color:#ef4444;">✕</button>
-      </td>
-    </tr>
-  `).join('');
-
-  tbody.querySelectorAll('.delete-client-btn').forEach(btn => {
-    btn.onclick = async () => {
-      profile.insuranceClients.splice(Number(btn.dataset.index), 1);
-      await storeVault();
-      render();
-      toast('Cliente eliminado.');
-    };
-  });
-
-  tbody.querySelectorAll('.print-client-prop-btn').forEach(btn => {
-    btn.onclick = () => {
-      const c = profile.insuranceClients[Number(btn.dataset.index)];
-      if (c) showClientProposal(c);
-    };
-  });
-}
-
-function showClientProposal(c) {
-  const profile = getActiveProfile();
-  const brand = data.globalSettings.businessName || 'MONEYMAXING WEALTH ADVISORY';
-  const adv = data.globalSettings.advisorName || 'Asesor Patrimonial Certificado';
-
-  $('#prop-advisor-brand').textContent = brand.toUpperCase();
-  $('#prop-advisor-contact').textContent = `${adv} · ${data.globalSettings.advisorPhone || ''} ${data.globalSettings.advisorEmail ? '· ' + data.globalSettings.advisorEmail : ''}`;
-  $('#prop-date').textContent = new Intl.DateTimeFormat('es-MX', { dateStyle: 'full' }).format(new Date());
-
-  $('#prop-client-name').textContent = c.name;
-  $('#prop-plan-name').textContent = c.plan;
-  $('#prop-insured-capital').textContent = c.sumInsured ? money(c.sumInsured, profile.currency) : 'Según Cobertura';
-  $('#prop-monthly-premium').textContent = c.premium ? money(c.premium / 12, profile.currency) : '$0.00';
-  $('#prop-projected-capital').textContent = c.sumInsured ? money(c.sumInsured * 1.5, profile.currency) : 'Proyección a Medida';
-
-  $('#client-proposal-preview').classList.remove('hidden');
-  $('#client-proposal-preview').scrollIntoView({ behavior: 'smooth' });
-}
-
-// Presupuestos & Metas
-function renderBudgetsAndGoals() {
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  const currentMonth = monthId();
-  const monthlyTxs = profile.transactions.filter(t => t.date.slice(0, 7) === currentMonth && t.kind === 'expense');
-  const spentByCat = {};
-  monthlyTxs.forEach(t => spentByCat[t.category] = (spentByCat[t.category] || 0) + t.amount);
-
-  const bContainer = $('#budgets-container');
-  bContainer.innerHTML = CATEGORIES.map(([id, name]) => {
-    const limit = Number(profile.budgets?.[id]) || 0;
-    const spent = spentByCat[id] || 0;
-    const pct = limit > 0 ? Math.min(100, Math.round((spent / limit) * 100)) : 0;
-    const col = pct > 90 ? '#ef4444' : pct > 75 ? '#f97316' : 'var(--accent-base)';
-
-    return `
-      <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:4px;">
-          <span><strong>${name}</strong> (Gastado: ${money(spent, profile.currency)})</span>
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span>Límite: $</span>
-            <input type="number" data-cat-budget="${id}" value="${limit}" style="width:100px;padding:4px 6px;text-align:right;border-radius:6px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);">
-          </div>
-        </div>
-        <div style="height:6px;background:var(--line);border-radius:3px;overflow:hidden;">
-          <div style="height:100%;width:${pct}%;background:${col};transition:width 0.4s var(--ease-spring);"></div>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  const gContainer = $('#savings-goals-container');
-  const goals = profile.savingsGoals || [];
-  gContainer.innerHTML = goals.length ? goals.map((g, i) => {
-    const pct = g.target > 0 ? Math.min(100, Math.round((g.current / g.target) * 100)) : 0;
-    return `
-      <div style="background:var(--bg-glass-card);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
-          <strong style="font-size:13px;">${escapeHtml(g.name)}</strong>
-          <span style="font-weight:800;color:var(--accent-base);font-size:12px;">${pct}%</span>
-        </div>
-        <div style="height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:8px;">
-          <div style="height:100%;width:${pct}%;background:var(--accent-base);transition:width 0.4s var(--ease-spring);"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-secondary);">
-          <span>${money(g.current, profile.currency)} de ${money(g.target, profile.currency)}</span>
-          <button class="crystal-btn delete-goal-btn" data-index="${i}" style="padding:2px 6px;font-size:10px;">✕</button>
-        </div>
-      </div>
-    `;
-  }).join('') : '<div style="padding:16px;color:var(--muted);font-size:12px;">Sin metas de ahorro registradas.</div>';
-
-  gContainer.querySelectorAll('.delete-goal-btn').forEach(btn => {
-    btn.onclick = async () => {
-      profile.savingsGoals.splice(Number(btn.dataset.index), 1);
-      await storeVault();
-      render();
-      toast('Meta eliminada.');
-    };
-  });
-}
-
-function renderProfilesList() {
-  const container = $('#profiles-list-container');
-  if (!data?.profiles || !container) return;
-
-  container.innerHTML = data.profiles.map(p => {
-    const isCurrent = p.id === data.activeProfileId;
-    return `
-      <div class="tx-item" style="${isCurrent ? 'border-left:3px solid var(--accent-base);' : ''}">
-        <div class="crystal-gem accent">${p.role === 'realestate' ? '🏢' : p.role === 'insurance' ? '🛡️' : p.role === 'accounting' ? '📊' : p.role === 'personal' ? '👤' : '⭐'}</div>
-        <div style="min-width:0;">
-          <div style="font-weight:700;font-size:13px;">${escapeHtml(p.name)} ${isCurrent ? '<span style="color:var(--accent-base);font-size:10px;">(ACTIVO)</span>' : ''}</div>
-          <div style="font-size:11px;color:var(--muted);">Rol: ${p.role.toUpperCase()} · ${p.currency} · ${p.transactions.length} movimientos</div>
-        </div>
-        <div style="display:flex;gap:6px;">
-          ${!isCurrent ? `<button class="crystal-btn switch-profile-btn" data-id="${p.id}" style="padding:4px 10px;font-size:11px;">Activar</button>` : ''}
-          ${data.profiles.length > 1 ? `<button class="crystal-btn crystal-btn-danger delete-profile-btn" data-id="${p.id}" style="padding:4px 8px;font-size:11px;">✕</button>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  container.querySelectorAll('.switch-profile-btn').forEach(btn => {
-    btn.onclick = async () => {
-      data.activeProfileId = btn.dataset.id;
-      await storeVault();
-      render();
-      playHaptic('unlock');
-      toast('Perfil activado.');
-    };
-  });
-
-  container.querySelectorAll('.delete-profile-btn').forEach(btn => {
-    btn.onclick = async () => {
-      if (!confirm('¿Deseas eliminar este perfil y todos sus datos?')) return;
-      data.profiles = data.profiles.filter(p => p.id !== btn.dataset.id);
-      data.activeProfileId = data.profiles[0].id;
-      await storeVault();
-      render();
-      toast('Perfil eliminado.');
-    };
-  });
-
-  $('#setting-currency').value = data.globalSettings.currency || 'MXN';
-  $('#setting-autolock').value = String(data.globalSettings.autoLockMinutes || 5);
-  $('#setting-pane-anim').value = data.globalSettings.paneAnim || 'smooth';
-  $('#setting-sound').checked = data.globalSettings.soundEnabled !== false;
-  $('#setting-business-name').value = data.globalSettings.businessName || '';
-  $('#setting-advisor-name').value = data.globalSettings.advisorName || '';
-  $('#setting-advisor-phone').value = data.globalSettings.advisorPhone || '';
-  $('#setting-advisor-email').value = data.globalSettings.advisorEmail || '';
-}
-
-function showPage(pageId) {
-  $$('.page').forEach(p => p.classList.toggle('active', p.id === `page-${pageId}`));
-  $$('.nav-menu button').forEach(b => b.setAttribute('aria-current', b.dataset.page === pageId ? 'page' : 'false'));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function populateCategorySelects() {
-  const options = CATEGORIES.map(([id, name]) => `<option value="${id}">${name}</option>`).join('');
-  $('#modal-tx-category').innerHTML = options;
-  $('#filter-category').innerHTML = '<option value="all">Todas las categorías</option>' + options;
-}
-
-// ==========================================
-// COMMAND PALETTE
-// ==========================================
-const COMMANDS = [
-  { title: '+ Nuevo Movimiento', icon: '📝', action: () => $('#quick-add-btn').click() },
-  { title: 'Ir a Resumen Snapshot', icon: '⌂', action: () => showPage('home') },
-  { title: 'Ir a Bienes Raíces & Hipotecas', icon: '🏢', action: () => showPage('realestate') },
-  { title: 'Ir a Contabilidad & PyME', icon: '📊', action: () => showPage('accounting') },
-  { title: 'Ir a Seguros & Retiro (PPR)', icon: '🛡️', action: () => showPage('insurance') },
-  { title: 'Ir a Cartera de Clientes (CRM)', icon: '👥', action: () => showPage('clients') },
-  { title: 'Ir a Presupuestos & Metas', icon: '↗', action: () => showPage('budgets') },
-  { title: 'Liquid Crystal Studio & Temas', icon: '✨', action: () => showPage('studio') },
-  { title: 'Exportar Movimientos a CSV', icon: '📥', action: () => $('#export-csv-btn').click() },
-  { title: 'Descargar Respaldo Cifrado (.mmxvault)', icon: '📦', action: () => $('#download-backup-btn').click() },
-  { title: 'Crear Nuevo Perfil', icon: '👤', action: () => openWizard() },
-  { title: '🔒 Bloquear Bóveda Inmediatamente', icon: '🔒', action: () => lock() }
-];
-
-function openCommandPalette() {
-  $('#cmd-palette').classList.remove('hidden');
-  $('#cmd-search-input').value = '';
-  renderCommandResults('');
-  $('#cmd-search-input').focus();
-  playHaptic('click');
-}
-
-function closeCommandPalette() {
-  $('#cmd-palette').classList.add('hidden');
-}
-
-function renderCommandResults(query) {
-  const list = $('#cmd-results-list');
-  const q = query.toLowerCase().trim();
-  const filtered = q ? COMMANDS.filter(c => c.title.toLowerCase().includes(q)) : COMMANDS;
-
-  list.innerHTML = filtered.map((c, i) => `
-    <div class="cmd-item ${i === 0 ? 'active' : ''}" data-cmd-idx="${i}">
-      <span style="display:flex;align-items:center;gap:10px;">
-        <span style="font-size:16px;">${c.icon}</span>
-        ${escapeHtml(c.title)}
-      </span>
-      <span style="font-size:11px;color:var(--muted);font-family:var(--mono);">↵ Ejecutar</span>
-    </div>
-  `).join('');
-
-  list.querySelectorAll('.cmd-item').forEach((item, idx) => {
-    item.onclick = () => {
-      closeCommandPalette();
-      filtered[idx].action();
-    };
-  });
-}
-
-// ==========================================
-// EVENT LISTENERS & INICIALIZACIÓN
-// ==========================================
-$('#gate-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const password = $('#gate-password').value;
-  $('#gate-error').textContent = '';
-
-  try {
-    if (!crypto?.subtle) throw new Error('Criptografía no soportada.');
-    const stored = await loadVault();
-    vaultRevision = stored.revision;
-
-    if (stored.vault) {
-      const record = stored.vault;
-      vaultSalt = b64ToBytes(record.salt);
-      const derived = await derive(password, vaultSalt);
-      const plain = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: b64ToBytes(record.iv) },
-        derived,
-        b64ToBytes(record.ciphertext)
-      );
-      key = derived;
-      failedAttempts = 0;
-      data = migrateLegacyData(JSON.parse(new TextDecoder().decode(plain)));
-      $('#gate').classList.add('hidden');
-      $('#app').classList.remove('hidden');
-      populateCategorySelects();
-      render();
-      resetLockTimer();
-      playHaptic('unlock');
-      toast('Bóveda Suiza descifrada.');
-    } else {
-      if (password.length < 10) throw new Error('La contraseña debe tener mínimo 10 caracteres.');
-      if (password !== $('#gate-confirm').value) throw new Error('Las contraseñas no coinciden.');
-      vaultSalt = crypto.getRandomValues(new Uint8Array(16));
-      key = await derive(password, vaultSalt);
-      data = defaultVaultData();
-      await storeVault({ create: true });
-      $('#gate').classList.add('hidden');
-      $('#app').classList.remove('hidden');
-      populateCategorySelects();
-      render();
-      resetLockTimer();
-      openWizard();
-    }
-  } catch (err) {
-    key = null;
-    data = null;
-    handleBruteForceFailure();
-    $('#gate-error').textContent = err.name === 'OperationError' ? 'Contraseña incorrecta.' : (err.message || 'Error al abrir.');
-  }
-});
-
-// Guardar Transacción
-$('#tx-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  const amount = Number($('#modal-tx-amount').value);
-  const kind = $('#modal-tx-kind').value;
-  const note = $('#modal-tx-note').value.trim();
-  const date = $('#modal-tx-date').value;
-  const taxKind = $('#modal-tx-tax').value;
-  const category = kind === 'expense' ? $('#modal-tx-category').value : 'ingreso';
-
-  if (!Number.isFinite(amount) || amount <= 0) {
-    $('#modal-tx-error').textContent = 'El monto debe ser mayor que 0.';
-    return;
-  }
-  if (!date) {
-    $('#modal-tx-error').textContent = 'Selecciona una fecha válida.';
-    return;
-  }
-
-  profile.transactions.push({
-    id: crypto.randomUUID(),
-    kind,
-    amount: Math.round(amount * 100) / 100,
-    note,
-    date,
-    category,
-    taxKind,
-    createdAt: Date.now()
-  });
-
-  try {
-    await storeVault();
-    render();
-    $('#tx-modal').classList.add('hidden');
-    playHaptic('save');
-    toast('Movimiento registrado en bóveda.');
-  } catch (err) {
-    $('#modal-tx-error').textContent = err.message || 'Error al guardar.';
-  }
-});
-
-// Registrar Propiedad Inmobiliaria
-$('#property-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  profile.realEstateProperties = profile.realEstateProperties || [];
-  profile.realEstateProperties.push({
-    id: crypto.randomUUID(),
-    title: $('#prop-title').value.trim(),
-    opType: $('#prop-op-type').value,
-    price: Number($('#prop-price').value) || 0,
-    commissionPct: Number($('#prop-commission').value) || 5,
-    status: $('#prop-status').value,
-    client: $('#prop-client').value.trim(),
-    createdAt: Date.now()
-  });
-
-  await storeVault();
-  render();
-  $('#property-modal').classList.add('hidden');
-  playHaptic('save');
-  toast('Propiedad guardada en cartera.');
-});
-
-// Sliders Inmobiliarios
-['input-re-price', 'input-re-down', 'input-re-term', 'input-re-rate', 'input-re-extra'].forEach(id => {
-  $(`#${id}`)?.addEventListener('input', renderRealEstateModule);
-});
-
-// Inputs de Cap Rate
-['roi-price', 'roi-rent', 'roi-closing', 'roi-expenses'].forEach(id => {
-  $(`#${id}`)?.addEventListener('input', renderCapRateCalculation);
-});
-
-// Inputs de Punto de Equilibrio
-['be-fixed', 'be-price', 'be-cost'].forEach(id => {
-  $(`#${id}`)?.addEventListener('input', renderBreakEvenCalculator);
-});
-
-$('#print-mortgage-proposal').onclick = () => window.print();
-
-// Guardar Límites
-$('#save-budgets-btn').addEventListener('click', async () => {
-  const profile = getActiveProfile();
-  if (!profile) return;
-  profile.budgets = profile.budgets || {};
-  for (const [id] of CATEGORIES) {
-    const input = $(`[data-cat-budget="${id}"]`);
-    profile.budgets[id] = Math.max(0, Number(input?.value) || 0);
-  }
-  await storeVault();
-  renderBudgetsAndGoals();
-  playHaptic('save');
-  toast('Límites actualizados.');
-});
-
-// Guardar Proyección en Cartera
-$('#save-retirement-quote-btn').addEventListener('click', async () => {
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  const currentAge = $('#input-age').value;
-  const retireAge = $('#input-retire-age').value;
-  const monthly = $('#input-monthly-inv').value;
-  const clientName = $('#quote-client-name').value.trim() || `Prospecto Retiro (${currentAge} a ${retireAge} años)`;
-
-  profile.insuranceClients = profile.insuranceClients || [];
-  profile.insuranceClients.push({
-    id: crypto.randomUUID(),
-    name: clientName,
-    phone: '',
-    email: '',
-    plan: `PPR Retiro (${currentAge} a ${retireAge} años)`,
-    status: 'Propuesta Presentada',
-    sumInsured: Number($('#res-total-projected').textContent.replace(/[^0-9.-]+/g, '')) || 0,
-    premium: Number(monthly) * 12
-  });
-
-  await storeVault();
-  render();
-  playHaptic('save');
-  toast('Proyección guardada en CRM.');
-  showPage('clients');
-});
-
-// Cotización Rápida
-$('#create-quote-btn').addEventListener('click', async () => {
-  const profile = getActiveProfile();
-  if (!profile) return;
-  const name = $('#quote-client-name').value.trim();
-  if (!name) { toast('Escribe el nombre del cliente.'); return; }
-
-  const type = $('#quote-policy-type').value;
-  const sum = Number($('#quote-sum-insured').value) || 0;
-  const premium = Number($('#quote-premium-annual').value) || 0;
-
-  profile.insuranceClients = profile.insuranceClients || [];
-  profile.insuranceClients.push({
-    id: crypto.randomUUID(),
-    name,
-    phone: '',
-    email: '',
-    plan: type,
-    status: 'Propuesta Presentada',
-    sumInsured: sum,
-    premium
-  });
-
-  await storeVault();
-  render();
-  playHaptic('save');
-  toast('Cotización registrada en Cartera.');
-  showPage('clients');
-});
-
-// Registrar Cliente en CRM
-$('#client-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  profile.insuranceClients = profile.insuranceClients || [];
-  profile.insuranceClients.push({
-    id: crypto.randomUUID(),
-    name: $('#client-name').value.trim(),
-    phone: $('#client-phone').value.trim(),
-    email: $('#client-email').value.trim(),
-    plan: $('#client-plan').value.trim(),
-    status: $('#client-status').value,
-    sumInsured: Number($('#client-sum-insured').value) || 0,
-    premium: Number($('#client-premium').value) || 0
-  });
-
-  await storeVault();
-  render();
-  $('#client-modal').classList.add('hidden');
-  playHaptic('save');
-  toast('Cliente guardado en cartera.');
-});
-
-// Cuentas por Cobrar / Pagar
-$('#debt-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const profile = getActiveProfile();
-  if (!profile) return;
-
-  const kind = $('#debt-kind').value;
-  const record = {
-    id: crypto.randomUUID(),
-    entity: $('#debt-entity').value.trim(),
-    amount: Number($('#debt-amount').value),
-    dueDate: $('#debt-due-date').value,
-    concept: $('#debt-concept').value.trim(),
-    createdAt: Date.now()
-  };
-
-  if (kind === 'receivable') {
-    profile.receivables = profile.receivables || [];
-    profile.receivables.push(record);
-  } else {
-    profile.payables = profile.payables || [];
-    profile.payables.push(record);
-  }
-
-  await storeVault();
-  render();
-  $('#debt-modal').classList.add('hidden');
-  playHaptic('save');
-  toast('Cuenta registrada.');
-});
-
-// CSV Export
-$('#export-csv-btn').addEventListener('click', () => {
-  const profile = getActiveProfile();
-  if (!profile || !profile.transactions.length) { toast('Sin movimientos.'); return; }
-  const headers = ['Fecha', 'Tipo', 'Monto', 'Categoría', 'Descripción', 'Impuestos'];
-  const rows = profile.transactions.map(t => [t.date, t.kind, t.amount, t.category, `"${(t.note || '').replace(/"/g, '""')}"`, t.taxKind || 'none']);
-  const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
-  const encodedUri = encodeURI(csvContent);
-  const link = document.createElement('a');
-  link.setAttribute('href', encodedUri);
-  link.setAttribute('download', `MONEYMAXING_${profile.name}_${localToday()}.csv`);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  toast('Archivo CSV generado.');
-});
-
-// Respaldo
-$('#download-backup-btn').addEventListener('click', async () => {
-  try {
-    const stored = await loadVault();
-    if (!stored?.vault) throw new Error('Bóveda no encontrada.');
-    const blob = new Blob([JSON.stringify(stored, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `Boveda_MONEYMAXING_${localToday()}.mmxvault`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    toast('Respaldo cifrado descargado.');
-  } catch (err) {
-    toast('Error: ' + err.message);
-  }
-});
-
-// Restaurar Respaldo
-$('#restore-file-input').addEventListener('change', async e => {
-  const file = e.target.files?.[0];
-  if (!file) return;
-  try {
-    const text = await file.text();
-    const parsed = JSON.parse(text);
-    if (!parsed.vault || !parsed.vault.ciphertext || !parsed.vault.salt) throw new Error('Formato inválido.');
-    const res = await fetch('/api/vault', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'If-Match': String(vaultRevision) },
-      body: JSON.stringify(parsed.vault)
-    });
-    if (!res.ok) throw new Error('Servidor rechazó restauración.');
-    toast('Respaldo restaurado.');
-    lock();
-  } catch (err) {
-    alert('Error al restaurar: ' + err.message);
-  }
-});
-
-// Temas y Acentos Studio
-$$('.theme-picker-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    data.globalSettings.theme = btn.dataset.themeVal;
-    applyAppearance();
-    playHaptic('click');
-    await storeVault();
-  });
-});
-
-$$('.swatch-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    data.globalSettings.accent = btn.dataset.accentVal;
-    applyAppearance();
-    playHaptic('click');
-    await storeVault();
-  });
-});
-
-$('#setting-pane-anim').addEventListener('change', async e => {
-  data.globalSettings.paneAnim = e.target.value;
-  applyAppearance();
-  playHaptic('click');
-  await storeVault();
-  toast('Velocidad de paneo actualizada.');
-});
-
-$('#save-studio-btn').addEventListener('click', async () => {
-  data.globalSettings.currency = $('#setting-currency').value;
-  data.globalSettings.autoLockMinutes = Number($('#setting-autolock').value) || 5;
-  data.globalSettings.soundEnabled = $('#setting-sound').checked;
-  data.globalSettings.businessName = $('#setting-business-name').value.trim();
-  data.globalSettings.advisorName = $('#setting-advisor-name').value.trim();
-  data.globalSettings.advisorPhone = $('#setting-advisor-phone').value.trim();
-  data.globalSettings.advisorEmail = $('#setting-advisor-email').value.trim();
-
-  const profile = getActiveProfile();
-  if (profile) profile.currency = data.globalSettings.currency;
-
-  await storeVault();
-  render();
-  playHaptic('save');
-  toast('Preferencias del Studio guardadas.');
-});
-
-// WIZARD ONBOARDING
-function openWizard() {
-  $('#onboarding-modal').classList.remove('hidden');
-  $('#wizard-content-1').classList.remove('hidden');
-  $('#wizard-content-2').classList.add('hidden');
-  $('#wizard-content-3').classList.add('hidden');
-  $('#wstep-1').classList.add('crystal-btn-primary');
-  $('#wstep-2').classList.remove('crystal-btn-primary');
-  $('#wstep-3').classList.remove('crystal-btn-primary');
-}
-
-$$('.role-card').forEach(card => {
-  card.addEventListener('click', () => {
-    $$('.role-card').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    wizardSelectedRole = card.dataset.role;
-    playHaptic('click');
-  });
-});
-
-$('#wizard-next-1').addEventListener('click', () => {
-  $('#wizard-content-1').classList.add('hidden');
-  $('#wizard-content-2').classList.remove('hidden');
-  $('#wstep-1').classList.remove('crystal-btn-primary');
-  $('#wstep-2').classList.add('crystal-btn-primary');
-  $('#wiz-profile-name').focus();
-});
-
-$('#wizard-prev-2').addEventListener('click', () => {
-  $('#wizard-content-2').classList.add('hidden');
-  $('#wizard-content-1').classList.remove('hidden');
-  $('#wstep-2').classList.remove('crystal-btn-primary');
-  $('#wstep-1').classList.add('crystal-btn-primary');
-});
-
-$('#wizard-next-2').addEventListener('click', () => {
-  const name = $('#wiz-profile-name').value.trim();
-  if (!name) { toast('Escribe un nombre para este perfil.'); return; }
-  $('#wizard-content-2').classList.add('hidden');
-  $('#wizard-content-3').classList.remove('hidden');
-  $('#wstep-2').classList.remove('crystal-btn-primary');
-  $('#wstep-3').classList.add('crystal-btn-primary');
-});
-
-$('#wizard-prev-3').addEventListener('click', () => {
-  $('#wizard-content-3').classList.add('hidden');
-  $('#wizard-content-2').classList.remove('hidden');
-  $('#wstep-3').classList.remove('crystal-btn-primary');
-  $('#wstep-2').classList.add('crystal-btn-primary');
-});
-
-$('#wizard-finish').addEventListener('click', async () => {
-  const name = $('#wiz-profile-name').value.trim() || 'Nuevo Perfil';
-  const currency = $('#wiz-currency').value;
-  const theme = $('#wiz-theme').value;
-  const initBal = Number($('#wiz-initial-balance').value) || 0;
-  const bName = $('#wiz-business-name').value.trim();
-
-  const newProfile = {
-    id: 'prof_' + crypto.randomUUID().slice(0, 8),
-    name,
-    role: wizardSelectedRole,
-    currency,
-    initialBalance: initBal,
-    transactions: [],
-    budgets: Object.fromEntries(CATEGORIES.map(([id]) => [id, 0])),
-    savingsGoals: [],
-    realEstateProperties: [],
-    insuranceClients: [],
-    receivables: [],
-    payables: []
-  };
-
-  data.profiles = data.profiles || [];
-  data.profiles.push(newProfile);
-  data.activeProfileId = newProfile.id;
-  data.globalSettings.theme = theme;
-  data.globalSettings.currency = currency;
-  if (bName) data.globalSettings.businessName = bName;
-
-  await storeVault();
-  render();
-  $('#onboarding-modal').classList.add('hidden');
-  playHaptic('unlock');
-  toast('¡Perfil configurado con éxito!');
-});
-
-// Modales rápidos
-$('#quick-add-btn').onclick = () => {
-  $('#tx-form').reset();
-  $('#modal-tx-date').value = localToday();
-  $('#modal-tx-error').textContent = '';
-  $('#tx-modal').classList.remove('hidden');
-  $('#modal-tx-amount').focus();
-  playHaptic('click');
-};
-$('#add-tx-btn-page').onclick = () => $('#quick-add-btn').click();
-$('#close-tx-modal-btn').onclick = () => $('#tx-modal').classList.add('hidden');
-$('#cancel-tx-modal-btn').onclick = () => $('#tx-modal').classList.add('hidden');
-
-$('#new-property-btn').onclick = () => {
-  $('#property-form').reset();
-  $('#property-modal').classList.remove('hidden');
-  $('#prop-title').focus();
-  playHaptic('click');
-};
-$('#close-property-modal-btn').onclick = () => $('#property-modal').classList.add('hidden');
-$('#cancel-property-modal-btn').onclick = () => $('#property-modal').classList.add('hidden');
-
-$('#profile-switcher-btn').onclick = () => showPage('studio');
-$('#btn-add-profile-wizard').onclick = openWizard;
-$('#close-wizard-btn').onclick = () => $('#onboarding-modal').classList.add('hidden');
-
-$('#new-client-btn').onclick = () => {
-  $('#client-form').reset();
-  $('#client-modal').classList.remove('hidden');
-  $('#client-name').focus();
-  playHaptic('click');
-};
-$('#close-client-modal-btn').onclick = () => $('#client-modal').classList.add('hidden');
-$('#cancel-client-modal-btn').onclick = () => $('#client-modal').classList.add('hidden');
-
-$('#add-receivable-btn').onclick = () => {
-  $('#debt-form').reset();
-  $('#debt-kind').value = 'receivable';
-  $('#debt-modal-title').textContent = 'Añadir Cuenta por Cobrar';
-  $('#debt-due-date').value = localToday();
-  $('#debt-modal').classList.remove('hidden');
-};
-$('#add-payable-btn').onclick = () => {
-  $('#debt-form').reset();
-  $('#debt-kind').value = 'payable';
-  $('#debt-modal-title').textContent = 'Añadir Cuenta por Pagar';
-  $('#debt-due-date').value = localToday();
-  $('#debt-modal').classList.remove('hidden');
-};
-$('#close-debt-modal-btn').onclick = () => $('#debt-modal').classList.add('hidden');
-$('#cancel-debt-modal-btn').onclick = () => $('#debt-modal').classList.add('hidden');
-
-$('#new-goal-btn').onclick = async () => {
-  const profile = getActiveProfile();
-  if (!profile) return;
-  const name = prompt('Nombre de la meta de ahorro (ej. Enganche Inmueble, Fondo Emergencia):');
-  if (!name) return;
-  const target = Number(prompt('Monto objetivo en ' + profile.currency + ':')) || 0;
-  if (target <= 0) return;
-  profile.savingsGoals = profile.savingsGoals || [];
-  profile.savingsGoals.push({
-    id: crypto.randomUUID(),
-    name,
-    target,
-    current: 0,
-    deadline: localToday()
-  });
-  await storeVault();
-  render();
-  playHaptic('save');
-  toast('Meta creada.');
-};
-
-$('#generate-proposal-btn').onclick = () => {
-  const cName = $('#quote-client-name').value.trim() || 'Cliente Prospecto';
-  const pType = $('#quote-policy-type').value;
-  const sum = Number($('#quote-sum-insured').value) || 0;
-  const prem = Number($('#quote-premium-annual').value) || 0;
-  showClientProposal({ name: cName, plan: pType, sumInsured: sum, premium: prem });
-  playHaptic('click');
-};
-$('#close-proposal-btn').onclick = () => $('#client-proposal-preview').classList.add('hidden');
-
-$('#lock-btn').onclick = lock;
-
-['input-age', 'input-retire-age', 'input-monthly-inv', 'input-rate', 'input-inflation'].forEach(id => {
-  $(`#${id}`)?.addEventListener('input', renderRetirementSimulation);
-});
-
-$('#filter-search').addEventListener('input', renderFullTransactions);
-$('#filter-kind').addEventListener('change', renderFullTransactions);
-$('#filter-category').addEventListener('change', renderFullTransactions);
-$('#client-search').addEventListener('input', renderClients);
-
-$$('[data-go-tx]').forEach(b => b.onclick = () => showPage('transactions'));
-$$('.nav-menu button').forEach(b => b.addEventListener('click', () => {
-  playHaptic('click');
-  showPage(b.dataset.page);
-}));
-
-$('#open-cmd-palette-btn').onclick = openCommandPalette;
-$('#cmd-search-input').addEventListener('input', e => renderCommandResults(e.target.value));
-
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-    e.preventDefault();
-    if ($('#cmd-palette').classList.contains('hidden')) openCommandPalette();
-    else closeCommandPalette();
-  }
-  if (e.key === 'Escape') {
-    if (!$('#cmd-palette').classList.contains('hidden')) { closeCommandPalette(); return; }
-    if (!$('#tx-modal').classList.contains('hidden')) { $('#tx-modal').classList.add('hidden'); return; }
-    if (!$('#property-modal').classList.contains('hidden')) { $('#property-modal').classList.add('hidden'); return; }
-    if (!$('#onboarding-modal').classList.contains('hidden')) { $('#onboarding-modal').classList.add('hidden'); return; }
-    if (!$('#client-modal').classList.contains('hidden')) { $('#client-modal').classList.add('hidden'); return; }
-    if (!$('#debt-modal').classList.contains('hidden')) { $('#debt-modal').classList.add('hidden'); return; }
-    if (key) lock();
-  }
-  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
-    e.preventDefault();
-    if (key) lock();
-  }
-});
-
-$('#cmd-palette').addEventListener('click', e => {
-  if (e.target === $('#cmd-palette')) closeCommandPalette();
-});
-
-['click', 'keydown', 'mousemove', 'touchstart'].forEach(evt => {
-  document.addEventListener(evt, () => { if (key) resetLockTimer(); }, { passive: true });
-});
-
-gateMode();
-
-})();
-</script>
+<script src="/finance-core.cjs" defer></script>
+<script src="/app.js" defer></script>
+<dialog id="editor-dialog"><form method="dialog" id="editor-form"><h2 id="editor-title"></h2><div id="editor-fields"></div><div class="editor-actions"><button class="crystal-btn" type="button" id="editor-cancel">Cancelar</button><button class="crystal-btn crystal-btn-primary" type="submit">Continuar</button></div></form></dialog>
 </body>
 </html>

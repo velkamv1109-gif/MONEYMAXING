@@ -9,8 +9,8 @@ function createMainWindow({ BrowserWindow, origin = 'http://127.0.0.1:4765' }) {
     title: 'MONEYMAXING',
     width: 1280,
     height: 860,
-    minWidth: 920,
-    minHeight: 680,
+    minWidth: 720,
+    minHeight: 540,
     backgroundColor: '#f5f3ed',
     autoHideMenuBar: true,
     webPreferences: {
@@ -24,19 +24,30 @@ function createMainWindow({ BrowserWindow, origin = 'http://127.0.0.1:4765' }) {
   window.setMenuBarVisibility(false);
   window.webContents.on('will-navigate', event => event.preventDefault());
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  window.webContents.on('will-attach-webview', event => event.preventDefault());
+  window.webContents.session?.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
+  window.webContents.session?.setPermissionCheckHandler(() => false);
   window.loadURL(origin);
   return window;
 }
 
 if (require.main === module) {
   const { app, BrowserWindow, dialog } = require('electron');
+  const path = require('node:path');
+  if (process.env.MONEYMAXING_DATA_DIR) app.setPath('userData', path.resolve(process.env.MONEYMAXING_DATA_DIR));
+  const primary = app.requestSingleInstanceLock();
+  if (!primary) app.quit();
+  app.on('second-instance', () => {
+    const window = BrowserWindow.getAllWindows()[0];
+    if (window) { if (window.isMinimized()) window.restore(); window.focus(); }
+  });
   let service = null;
 
   function openMainWindow() {
     createMainWindow({ BrowserWindow, origin: service.origin });
   }
 
-  app.whenReady().then(async () => {
+  if (primary) app.whenReady().then(async () => {
     try {
       if (process.platform === 'win32' && app.setAppUserModelId) {
         app.setAppUserModelId('com.moneymaxing.desktop');
@@ -45,7 +56,8 @@ if (require.main === module) {
         appDir: __dirname,
         dataDir: app.getPath('userData'),
         host: '127.0.0.1',
-        port: 4765
+        port: Number(process.env.MONEYMAXING_PORT || 4765),
+        publicOrigin: process.env.MONEYMAXING_PUBLIC_ORIGIN || ''
       });
       openMainWindow();
       app.on('activate', () => {

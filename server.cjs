@@ -76,15 +76,22 @@ async function writeVault(file, document) {
   await fs.mkdir(path.dirname(file), { recursive: true });
   const temporary = `${file}.${process.pid}.${crypto.randomUUID()}.tmp`;
   try {
-    await fs.writeFile(temporary, JSON.stringify(document), { mode: 0o600 });
+    const handle = await fs.open(temporary, 'wx', 0o600);
+    try { await handle.writeFile(JSON.stringify(document)); await handle.sync(); }
+    finally { await handle.close(); }
+    // Retain the last valid encrypted state before replacing it, including restores.
+    try { await fs.copyFile(file, file + '.previous'); }
+    catch (error) { if (error.code !== 'ENOENT') throw error; }
     await fs.rename(temporary, file);
   } finally {
     await fs.rm(temporary, { force: true }).catch(() => {});
   }
 }
 
-function createServer({ appDir = __dirname, vaultFile }) {
+function createServer({ appDir = __dirname, vaultFile, publicOrigin = '' }) {
   if (!vaultFile) throw new TypeError('vaultFile is required');
+  const remote = publicOrigin ? new URL(publicOrigin) : null;
+  if (remote && (remote.protocol !== 'https:' || remote.pathname !== '/' || remote.username || remote.password || remote.search || remote.hash)) throw new Error('MONEYMAXING_PUBLIC_ORIGIN debe ser un origen HTTPS.');
   let writeQueue = Promise.resolve();
   function serializeWrite(operation) {
     const next = writeQueue.then(operation, operation);
@@ -93,8 +100,26 @@ function createServer({ appDir = __dirname, vaultFile }) {
   }
 
   return http.createServer(async (request, response) => {
-    const pathname = new URL(request.url, 'http://127.0.0.1').pathname;
     try {
+      const pathname = new URL(request.url, 'http://127.0.0.1').pathname;
+      const host = request.headers.host || '';
+      const port = request.socket.localPort;
+      const localHosts = [`127.0.0.1:${port}`, `localhost:${port}`];
+      if (!localHosts.includes(host) && host !== remote?.host) {
+        sendJson(response, 403, { error: 'forbidden_host' }); return;
+      }
+      const allowedOrigins = localHosts.map(h => `http://${h}`).concat(remote ? [remote.origin] : []);
+      if ((request.headers.origin && !allowedOrigins.includes(request.headers.origin)) || request.headers['sec-fetch-site'] === 'cross-site') {
+        sendJson(response, 403, { error: 'forbidden_origin' }); return;
+      }
+      response.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+      response.setHeader('X-Frame-Options', 'DENY');
+      response.setHeader('Referrer-Policy', 'no-referrer');
+      if (request.method === 'GET' && ['/app.js', '/finance-core.cjs', '/polish.css'].includes(pathname)) {
+        const asset = await fs.readFile(path.join(appDir, pathname.slice(1)));
+        response.writeHead(200, {'content-type': pathname.endsWith('.css') ? 'text/css; charset=utf-8' : 'text/javascript; charset=utf-8', 'x-content-type-options': 'nosniff'});
+        response.end(asset); return;
+      }
       if (request.method === 'GET' && pathname === '/api/health') {
         sendJson(response, 200, { ok: true });
         return;
@@ -151,9 +176,9 @@ function createServer({ appDir = __dirname, vaultFile }) {
   });
 }
 
-async function startServer({ appDir = __dirname, dataDir, host = '127.0.0.1', port = 4765 }) {
+async function startServer({ appDir = __dirname, dataDir, host = '127.0.0.1', port = 4765, publicOrigin = '' }) {
   if (!dataDir) throw new TypeError('dataDir is required');
-  const server = createServer({ appDir, vaultFile: path.join(dataDir, 'vault.enc.json') });
+  const server = createServer({ appDir, vaultFile: path.join(dataDir, 'vault.enc.json'), publicOrigin });
   await new Promise((resolve, reject) => {
     server.once('error', reject);
     server.listen(port, host, () => {

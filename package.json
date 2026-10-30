@@ -1,19 +1,21 @@
 {
   "name": "moneymaxing-desktop",
   "productName": "MONEYMAXING",
-  "version": "1.0.0",
-  "description": "Aplicación de finanzas personales para Windows y macOS",
+  "version": "1.0.1",
+  "description": "Finanzas personales, carteras y respaldos cifrados locales",
   "main": "main.cjs",
   "license": "UNLICENSED",
   "scripts": {
     "start": "electron .",
     "test": "node --test",
-    "dist:win": "electron-builder --win nsis",
-    "dist:mac": "electron-builder --mac dmg --x64 --arm64"
+    "dist:win": "npm run check && npm test && electron-builder --win nsis zip --x64 --publish never",
+    "dist:mac": "electron-builder --mac dmg --x64 --arm64",
+    "check": "node --check main.cjs && node --check server.cjs && node --check app.js && node --check finance-core.cjs"
   },
   "devDependencies": {
     "electron": "45.0.0",
-    "electron-builder": "26.18.0"
+    "electron-builder": "26.18.0",
+    "playwright": "1.64.1"
   },
   "build": {
     "appId": "com.moneymaxing.desktop",
@@ -24,31 +26,51 @@
     "files": [
       "main.cjs",
       "server.cjs",
-      "MONEYMAXING.html"
+      "MONEYMAXING.html",
+      "app.js",
+      "finance-core.cjs",
+      "polish.css"
     ],
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
         }
       ],
-      "artifactName": "MONEYMAXING-Setup-${version}.${ext}"
+      "artifactName": "MONEYMAXING-${version}-Windows-x64.${ext}",
+      "icon": "assets/icon.ico"
     },
     "nsis": {
       "oneClick": false,
       "perMachine": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "MONEYMAXING-Setup-${version}.exe",
+      "runAfterFinish": false
     },
     "mac": {
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ],
       "category": "public.app-category.finance",
       "artifactName": "MONEYMAXING-${version}-${arch}.${ext}"
     }
+  },
+  "author": {
+    "name": "MONEYMAXING"
   }
 }
