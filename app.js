@@ -41,6 +41,7 @@ let editingTxId = null;
 let editingClientId = null;
 let editingPropertyId = null;
 let initialWizard = false;
+let proposalClient = null;
 
 // Sonido háptico
 function playHaptic(type = 'click') {
@@ -327,6 +328,8 @@ function triggerLockout(seconds) {
 
 function lock() {
   if (saving) { toast('Espera a que termine el guardado.'); return; }
+  QuotationUI.clear();
+  proposalClient = null;
   committedData = null;
   $$('.modal-backdrop').forEach(el => el.classList.add('hidden'));
   clearTimeout(lockTimer);
@@ -1029,6 +1032,7 @@ function renderClients() {
 }
 
 function showClientProposal(c) {
+  proposalClient = {...c};
   showPage('insurance');
   const profile = getActiveProfile();
   const brand = data.globalSettings.businessName || 'MONEYMAXING WEALTH ADVISORY';
@@ -1378,7 +1382,7 @@ $('#property-form').addEventListener('submit', async e => {
   $(`#${id}`)?.addEventListener('input', renderBreakEvenCalculator);
 });
 
-$('#print-mortgage-proposal').onclick = () => window.print();
+$('#print-mortgage-proposal').onclick = () => QuotationUI.open('mortgage');
 
 // Guardar Límites
 $('#save-budgets-btn').addEventListener('click', async () => {
@@ -1802,6 +1806,10 @@ $('#open-cmd-palette-btn').onclick = openCommandPalette;
 $('#cmd-search-input').addEventListener('input', e => renderCommandResults(e.target.value));
 
 document.addEventListener('keydown', e => {
+  if ($('#quotation-dialog')?.open && (e.key === 'Escape' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'))) {
+    if (e.key !== 'Escape') e.preventDefault();
+    return;
+  }
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();
     if ($('#cmd-palette').classList.contains('hidden')) openCommandPalette();
@@ -1879,6 +1887,10 @@ document.addEventListener('keydown', event => {
   else if (!event.shiftKey && document.activeElement===items.at(-1)) {event.preventDefault();items[0].focus();}
 });
 
+ QuotationUI.init({getContext:()=>key && data ? {settings:data.globalSettings,currency:getActiveProfile().currency} : null});
+ $('#new-quotation-btn').onclick=()=>QuotationUI.open('services');
+ $('#retirement-pdf-btn').onclick=()=>QuotationUI.open('retirement');
+ $('#proposal-pdf-btn').onclick=()=>QuotationUI.open(/retiro|ppr/i.test(proposalClient?.plan||'')?'retirement':'insurance',proposalClient);
  gateMode();
 
 })();

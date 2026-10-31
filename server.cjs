@@ -115,7 +115,7 @@ function createServer({ appDir = __dirname, vaultFile, publicOrigin = '' }) {
       response.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
       response.setHeader('X-Frame-Options', 'DENY');
       response.setHeader('Referrer-Policy', 'no-referrer');
-      if (request.method === 'GET' && ['/app.js', '/finance-core.cjs', '/polish.css'].includes(pathname)) {
+      if (request.method === 'GET' && ['/app.js', '/finance-core.cjs', '/polish.css', '/quotation-core.cjs', '/quotation-ui.js'].includes(pathname)) {
         const asset = await fs.readFile(path.join(appDir, pathname.slice(1)));
         response.writeHead(200, {'content-type': pathname.endsWith('.css') ? 'text/css; charset=utf-8' : 'text/javascript; charset=utf-8', 'x-content-type-options': 'nosniff'});
         response.end(asset); return;

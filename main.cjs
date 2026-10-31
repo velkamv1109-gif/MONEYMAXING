@@ -17,7 +17,8 @@ function createMainWindow({ BrowserWindow, origin = 'http://127.0.0.1:4765' }) {
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: true,
-      webSecurity: true
+      webSecurity: true,
+      preload: require('node:path').join(__dirname, 'preload.cjs')
     }
   });
 
@@ -32,7 +33,8 @@ function createMainWindow({ BrowserWindow, origin = 'http://127.0.0.1:4765' }) {
 }
 
 if (require.main === module) {
-  const { app, BrowserWindow, dialog } = require('electron');
+  const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+  const { createExportHandler } = require('./quotation-pdf.cjs');
   const path = require('node:path');
   if (process.env.MONEYMAXING_DATA_DIR) app.setPath('userData', path.resolve(process.env.MONEYMAXING_DATA_DIR));
   const primary = app.requestSingleInstanceLock();
@@ -42,9 +44,10 @@ if (require.main === module) {
     if (window) { if (window.isMinimized()) window.restore(); window.focus(); }
   });
   let service = null;
+  let mainWindow = null;
 
   function openMainWindow() {
-    createMainWindow({ BrowserWindow, origin: service.origin });
+    mainWindow = createMainWindow({ BrowserWindow, origin: service.origin });
   }
 
   if (primary) app.whenReady().then(async () => {
@@ -59,6 +62,7 @@ if (require.main === module) {
         port: Number(process.env.MONEYMAXING_PORT || 4765),
         publicOrigin: process.env.MONEYMAXING_PUBLIC_ORIGIN || ''
       });
+      ipcMain.handle('quotation:export-pdf', createExportHandler({getWindow:()=>mainWindow,origin:service.origin,dialog,BrowserWindow,documentsDir:app.getPath('documents')}));
       openMainWindow();
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) openMainWindow();

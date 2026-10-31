@@ -1,3 +1,12 @@
+# 1.0.3 — 31 de octubre de 2026
+
+- Cotizaciones de servicios, seguros, hipotecas y retiro con vista previa y guardado local en PDF A4.
+- Acceso global y desde simuladores/propuestas; datos de emisor, cliente, folio, vigencia y moneda editables.
+- Cálculos de servicios en centavos; descuentos, impuestos y condiciones explícitos.
+- Exportación aislada, validación del emisor IPC y contenido, escritura atómica y protección contra doble clic.
+- Cancelación y errores recuperables; bloqueo elimina el borrador en memoria.
+- Sin cambios en el formato de la bóveda ni servicios externos nuevos. Se conserva el estilo sin tarjetas ni marcos decorativos.
+
 # 1.0.2 — 30 de octubre de 2026
 
 - Superficies transparentes sobre un fondo uniforme: sin tarjetas, burbujas, bordes decorativos, sombras ni esquinas redondeadas.

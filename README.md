@@ -1,16 +1,33 @@
-# MONEYMAXING 1.0.2
+# MONEYMAXING 1.0.3
 
 Finanzas por perfil, movimientos, presupuestos/metas, inmuebles, clientes y cuentas pendientes. Incluye simulaciones de crédito y ahorro. El contenido de la bóveda se cifra con AES-256-GCM antes de guardarse en el servidor HTTP local.
 
 ## Instalar y usar
 
-1. Ejecuta `MONEYMAXING-Setup-1.0.2.exe` para tu usuario. Alternativa: extrae **todo** `MONEYMAXING-1.0.2-Windows-x64.zip` y abre `MONEYMAXING.exe` dentro de la carpeta extraída. Conserva `resources`, `locales`, `icudtl.dat`, DLL y demás archivos juntos. Copiar solamente el EXE causa el error de ICU.
+1. Ejecuta `MONEYMAXING-Setup-1.0.3.exe` para tu usuario. Alternativa: extrae **todo** `MONEYMAXING-1.0.3-Windows-x64.zip` y abre `MONEYMAXING.exe` dentro de la carpeta extraída. Conserva `resources`, `locales`, `icudtl.dat`, DLL y demás archivos juntos. Copiar solamente el EXE causa el error de ICU.
 2. Crea una contraseña de al menos 10 caracteres, preferiblemente una frase larga y única. No hay recuperación de contraseña. Configura tu perfil y moneda.
 3. Registra ingresos/gastos con **Movimiento**; edítalos en **Movimientos**. Se admiten dos decimales. Los perfiles son libros separados; cambiar la moneda no convierte importes.
 4. En **Presupuestos y metas**, guarda límites y actualiza el ahorro de tus metas. En **Clientes**, registra/edita datos y genera propuestas con los importes que tú proporcionaste. No se consulta a aseguradoras ni se emiten pólizas.
 5. Descarga periódicamente un `.mmxvault` desde **Seguridad y respaldos**. La exportación CSV contiene movimientos en texto legible.
 
 El paquete no tiene firma Authenticode porque no se dispone de certificado. El editor en metadatos es la marca MONEYMAXING; no es una identidad acreditada por certificado. No hay actualización automática, compras ni servicios de pago integrados.
+
+## Cotizaciones en PDF
+
+Desde cualquier módulo, pulsa **Cotizar PDF**, elige Servicios, Seguro, Hipoteca o Retiro y completa cliente, emisor, folio, fechas y moneda. Revisa la vista previa y pulsa **Guardar PDF**. Elige una carpeta y un nombre terminado en `.pdf`; después puedes adjuntar el archivo por el medio que prefieras. La aplicación no envía mensajes.
+
+Servicios admite conceptos, cantidades, precios, descuento e impuesto configurables. Seguro usa la cobertura y prima proporcionadas; Hipoteca y Retiro presentan simulaciones con sus supuestos y limitaciones. También puedes preparar el PDF desde los simuladores y las propuestas de clientes. No se consultan tarifas externas ni se emiten pólizas u ofertas bancarias.
+
+Cancelar el guardado conserva la vista previa. Si falla, elige otra carpeta o cierra el PDF abierto y reintenta. Los borradores no se guardan en la bóveda y se eliminan al bloquear. El PDF exportado contiene datos legibles: compártelo solo con el destinatario previsto. La exportación está disponible en el escritorio Windows, no en la vista web móvil.
+
+Verificación del paquete, con datos aislados:
+
+```powershell
+node scripts/packaged-smoke.cjs
+node scripts/quotation-smoke.cjs
+```
+
+El segundo control genera PDFs reales y sustituye únicamente la selección nativa del destino durante la prueba automatizada. Consulta `VERIFICACION-1.0.3.md` para la comprobación manual y sus límites.
 
 ## Respaldo y recuperación
 
@@ -61,7 +78,7 @@ node node_modules/electron/install.js
 npm run dist:win -- --config.electronDist=node_modules/electron/dist
 ```
 
-Se verifican sintaxis y pruebas antes de empaquetar. Salidas en `release`: `MONEYMAXING-Setup-1.0.2.exe` y `MONEYMAXING-1.0.2-Windows-x64.zip`. No se publican. El paquete contiene HTML, JS, CSS y servidor en `resources/app.asar`, además del runtime completo. No necesita Node, npm ni servidor de desarrollo para ejecutarse. Icono en `assets/icon.svg`/`.ico`. macOS no se compiló ni verificó para esta entrega.
+Se verifican sintaxis y pruebas antes de empaquetar. Salidas en `release`: `MONEYMAXING-Setup-1.0.3.exe` y `MONEYMAXING-1.0.3-Windows-x64.zip`. No se publican. El paquete contiene HTML, JS, CSS y servidor en `resources/app.asar`, además del runtime completo. No necesita Node, npm ni servidor de desarrollo para ejecutarse. Icono en `assets/icon.svg`/`.ico`. macOS no se compiló ni verificó para esta entrega.
 
 ## Servicios externos opcionales
 
@@ -79,4 +96,4 @@ PC y app deben seguir encendidas. Tailscale es la barrera de acceso de red: auto
 - Eliminar una cuenta pendiente no registra cobro/pago. Registra estos por separado como movimientos cuando ocurran.
 - Hay exportación CSV y restauración cifrada; no hay importación CSV bancaria ni nube. Inmuebles/cuentas pendientes se corrigen reemplazando el registro; no tienen edición completa.
 - `index.html`, `MONEYMAXING-PWA.html`, `service-worker.js` y `manifest.json` son antecedentes conservados, no se distribuyen ni se presentan como versiones verificadas.
-- Revisión de código y dependencias con alcance documentado; no auditoría externa completa. Consulta `VERIFICACION-1.0.2.md` y el registro anterior `VERIFICACION.md` y `CHANGELOG.md`.
+- Revisión de código y dependencias con alcance documentado; no auditoría externa completa. Consulta `VERIFICACION-1.0.3.md` y el registro anterior `VERIFICACION.md` y `CHANGELOG.md`.

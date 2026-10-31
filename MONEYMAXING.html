@@ -796,6 +796,7 @@ input[type="range"] {
       </div>
 
       <div style="display:flex;align-items:center;gap:10px;">
+        <button class="crystal-btn" id="new-quotation-btn" type="button">Cotizar PDF</button>
         <button class="crystal-btn crystal-btn-primary" id="quick-add-btn" type="button">+ Movimiento</button>
         <button class="crystal-btn" aria-label="Bloquear bóveda" id="lock-btn" type="button" title="Bloquear inmediatamente">Bloquear</button>
       </div>
@@ -1200,6 +1201,7 @@ input[type="range"] {
               </div>
             </div>
 
+            <button class="crystal-btn" id="retirement-pdf-btn" type="button" style="width:100%;margin-top:16px;">Cotización de retiro en PDF</button>
             <button class="crystal-btn crystal-btn-primary" id="save-retirement-quote-btn" style="width:100%;margin-top:16px;"> Guardar Proyección en Cartera</button>
           </div>
         </div>
@@ -1278,7 +1280,7 @@ input[type="range"] {
 
         <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;" class="no-print">
           <button class="crystal-btn" id="close-proposal-btn">Cerrar</button>
-          <button class="crystal-btn crystal-btn-primary" data-print> Imprimir / Guardar en PDF</button>
+          <button class="crystal-btn crystal-btn-primary" id="proposal-pdf-btn" type="button">Preparar PDF</button>
         </div>
       </div>
     </section>
@@ -1815,6 +1817,8 @@ input[type="range"] {
      MOTOR JAVASCRIPT ZERO-KNOWLEDGE & LIQUID
      ========================================== -->
 <script src="/finance-core.cjs" defer></script>
+<script src="/quotation-core.cjs" defer></script>
+<script src="/quotation-ui.js" defer></script>
 <script src="/app.js" defer></script>
 <dialog id="editor-dialog"><form method="dialog" id="editor-form"><h2 id="editor-title"></h2><div id="editor-fields"></div><div class="editor-actions"><button class="crystal-btn" type="button" id="editor-cancel">Cancelar</button><button class="crystal-btn crystal-btn-primary" type="submit">Continuar</button></div></form></dialog>
 </body>
