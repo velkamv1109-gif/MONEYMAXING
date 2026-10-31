@@ -366,7 +366,7 @@ function applyAppearance() {
   document.documentElement.setAttribute('data-pane-anim', paneAnim);
 
   $$('.theme-picker-btn').forEach(b => b.classList.toggle('crystal-btn-primary', b.dataset.themeVal === theme));
-  $$('.swatch-btn').forEach(b => b.style.outline = b.dataset.accentVal === accent ? '3px solid #ffffff' : 'none');
+  $$('.swatch-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.accentVal === accent)));
 }
 
 // ==========================================
@@ -1086,7 +1086,7 @@ function renderBudgetsAndGoals() {
   gContainer.innerHTML = goals.length ? goals.map((g, i) => {
     const pct = g.target > 0 ? Math.min(100, Math.round((g.current / g.target) * 100)) : 0;
     return `
-      <div style="background:var(--bg-glass-card);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);">
+      <div class="plain-surface" style="padding:14px;">
         <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
           <strong style="font-size:13px;">${escapeHtml(g.name)}</strong>
           <span style="font-weight:800;color:var(--accent-base);font-size:12px;">${pct}%</span>

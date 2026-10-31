@@ -1,7 +1,7 @@
 {
   "name": "moneymaxing-desktop",
   "productName": "MONEYMAXING",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Finanzas personales, carteras y respaldos cifrados locales",
   "main": "main.cjs",
   "license": "UNLICENSED",

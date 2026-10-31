@@ -1,10 +1,10 @@
-# MONEYMAXING 1.0.1
+# MONEYMAXING 1.0.2
 
 Finanzas por perfil, movimientos, presupuestos/metas, inmuebles, clientes y cuentas pendientes. Incluye simulaciones de crédito y ahorro. El contenido de la bóveda se cifra con AES-256-GCM antes de guardarse en el servidor HTTP local.
 
 ## Instalar y usar
 
-1. Ejecuta `MONEYMAXING-Setup-1.0.1.exe` para tu usuario. Alternativa: extrae **todo** `MONEYMAXING-1.0.1-Windows-x64.zip` y abre `MONEYMAXING.exe` dentro de la carpeta extraída. Conserva `resources`, `locales`, `icudtl.dat`, DLL y demás archivos juntos. Copiar solamente el EXE causa el error de ICU.
+1. Ejecuta `MONEYMAXING-Setup-1.0.2.exe` para tu usuario. Alternativa: extrae **todo** `MONEYMAXING-1.0.2-Windows-x64.zip` y abre `MONEYMAXING.exe` dentro de la carpeta extraída. Conserva `resources`, `locales`, `icudtl.dat`, DLL y demás archivos juntos. Copiar solamente el EXE causa el error de ICU.
 2. Crea una contraseña de al menos 10 caracteres, preferiblemente una frase larga y única. No hay recuperación de contraseña. Configura tu perfil y moneda.
 3. Registra ingresos/gastos con **Movimiento**; edítalos en **Movimientos**. Se admiten dos decimales. Los perfiles son libros separados; cambiar la moneda no convierte importes.
 4. En **Presupuestos y metas**, guarda límites y actualiza el ahorro de tus metas. En **Clientes**, registra/edita datos y genera propuestas con los importes que tú proporcionaste. No se consulta a aseguradoras ni se emiten pólizas.
@@ -61,7 +61,7 @@ node node_modules/electron/install.js
 npm run dist:win -- --config.electronDist=node_modules/electron/dist
 ```
 
-Se verifican sintaxis y pruebas antes de empaquetar. Salidas en `release`: `MONEYMAXING-Setup-1.0.1.exe` y `MONEYMAXING-1.0.1-Windows-x64.zip`. No se publican. El paquete contiene HTML, JS, CSS y servidor en `resources/app.asar`, además del runtime completo. No necesita Node, npm ni servidor de desarrollo para ejecutarse. Icono en `assets/icon.svg`/`.ico`. macOS no se compiló ni verificó para esta entrega.
+Se verifican sintaxis y pruebas antes de empaquetar. Salidas en `release`: `MONEYMAXING-Setup-1.0.2.exe` y `MONEYMAXING-1.0.2-Windows-x64.zip`. No se publican. El paquete contiene HTML, JS, CSS y servidor en `resources/app.asar`, además del runtime completo. No necesita Node, npm ni servidor de desarrollo para ejecutarse. Icono en `assets/icon.svg`/`.ico`. macOS no se compiló ni verificó para esta entrega.
 
 ## Servicios externos opcionales
 
@@ -79,4 +79,4 @@ PC y app deben seguir encendidas. Tailscale es la barrera de acceso de red: auto
 - Eliminar una cuenta pendiente no registra cobro/pago. Registra estos por separado como movimientos cuando ocurran.
 - Hay exportación CSV y restauración cifrada; no hay importación CSV bancaria ni nube. Inmuebles/cuentas pendientes se corrigen reemplazando el registro; no tienen edición completa.
 - `index.html`, `MONEYMAXING-PWA.html`, `service-worker.js` y `manifest.json` son antecedentes conservados, no se distribuyen ni se presentan como versiones verificadas.
-- Revisión de código y dependencias con alcance documentado; no auditoría externa completa. Consulta `VERIFICACION.md` y `CHANGELOG.md`.
+- Revisión de código y dependencias con alcance documentado; no auditoría externa completa. Consulta `VERIFICACION-1.0.2.md` y el registro anterior `VERIFICACION.md` y `CHANGELOG.md`.

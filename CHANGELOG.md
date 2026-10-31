@@ -1,3 +1,11 @@
+# 1.0.2 — 30 de octubre de 2026
+
+- Superficies transparentes sobre un fondo uniforme: sin tarjetas, burbujas, bordes decorativos, sombras ni esquinas redondeadas.
+- Tratamiento uniforme en acceso, nueve módulos, formularios, búsquedas, tablas, metas y ventanas de edición.
+- Acciones y selección diferenciadas con texto, color y peso tipográfico; foco de teclado conservado.
+- Acentos seleccionables por nombre y estado accesible, sin círculos de color.
+- Sin cambios en formato de datos, cifrado ni cálculos.
+
 # 1.0.1 — 30 de octubre de 2026
 
 - Distribución NSIS y ZIP completos; nombre/editor/icono propios.

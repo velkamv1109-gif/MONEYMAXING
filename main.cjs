@@ -11,7 +11,7 @@ function createMainWindow({ BrowserWindow, origin = 'http://127.0.0.1:4765' }) {
     height: 860,
     minWidth: 720,
     minHeight: 540,
-    backgroundColor: '#f5f3ed',
+    backgroundColor: '#101413',
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,

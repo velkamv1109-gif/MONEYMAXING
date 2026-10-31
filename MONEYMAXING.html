@@ -960,7 +960,7 @@ input[type="range"] {
           </div>
 
           <!-- Resultados de Mensualidad & Ahorro -->
-          <div style="background:var(--bg-glass-card);border:1px solid var(--line-crystal);padding:22px;border-radius:14px;">
+          <div class="plain-surface" style="background:var(--bg-glass-card);border:1px solid var(--line-crystal);padding:22px;border-radius:14px;">
             <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">MENSUALIDAD BASE ESTIMADA</div>
             <div class="card-value" id="re-monthly-payment" style="font-size:34px;color:var(--accent-base);margin:6px 0 16px;">$0.00</div>
 
@@ -1012,7 +1012,7 @@ input[type="range"] {
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;background:var(--bg-glass-card);border:1px solid var(--line);padding:14px;border-radius:10px;">
+          <div class="plain-surface" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;background:var(--bg-glass-card);border:1px solid var(--line);padding:14px;border-radius:10px;">
             <div>
               <div style="font-size:11px;color:var(--muted);">CAP RATE (YIELD ANUAL NETO)</div>
               <div style="font-size:24px;font-weight:850;color:var(--accent-base);" id="roi-caprate-res">6.8%</div>
@@ -1088,7 +1088,7 @@ input[type="range"] {
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;background:var(--bg-glass-card);border:1px solid var(--line);padding:14px;border-radius:10px;">
+        <div class="plain-surface" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;background:var(--bg-glass-card);border:1px solid var(--line);padding:14px;border-radius:10px;">
           <div>
             <div style="font-size:11px;color:var(--muted);">UNIDADES MÍNIMAS A VENDER AL MES</div>
             <div style="font-size:26px;font-weight:850;color:var(--accent-base);" id="be-units-res">60 unidades</div>
@@ -1173,7 +1173,7 @@ input[type="range"] {
             </div>
           </div>
 
-          <div style="background:var(--bg-glass-card);border:1px solid var(--line-crystal);padding:22px;border-radius:14px;">
+          <div class="plain-surface" style="background:var(--bg-glass-card);border:1px solid var(--line-crystal);padding:22px;border-radius:14px;">
             <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">FONDO PROYECTADO A LOS <span id="res-retire-age-text">65</span> AÑOS</div>
             <div class="card-value" id="res-total-projected" style="font-size:34px;color:var(--accent-base);margin:6px 0 16px;">$0.00</div>
             
@@ -1250,7 +1250,7 @@ input[type="range"] {
           </div>
         </div>
 
-        <div style="background:var(--bg-glass-card);border:1px solid var(--line);padding:16px;border-radius:10px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="plain-surface" style="background:var(--bg-glass-card);border:1px solid var(--line);padding:16px;border-radius:10px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div>
             <div style="font-size:11px;color:var(--muted);">CLIENTE TITULAR</div>
             <strong style="font-size:15px;" id="prop-client-name">Cliente</strong>
@@ -1356,7 +1356,7 @@ input[type="range"] {
       <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
         <!-- Selector de Estilos y Paneo -->
         <div class="crystal-panel">
-          <h3 style="margin:0 0 14px;font-size:15px;">Paleta Maestra Minimal</h3>
+          <h3 style="margin:0 0 14px;font-size:15px;">Tema de la interfaz</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <button class="crystal-btn theme-picker-btn" data-theme-val="obsidian"> Obsidian Stealth (Dark)</button>
             <button class="crystal-btn theme-picker-btn" data-theme-val="gold"> Royal Onyx & Gold</button>
@@ -1367,15 +1367,15 @@ input[type="range"] {
             <button class="crystal-btn theme-picker-btn" data-theme-val="emerald-light"> Swiss Alpine Paper</button>
           </div>
 
-          <h3 style="margin:24px 0 10px;font-size:15px;">Acento Neón / Prismatic Glow</h3>
+          <h3 style="margin:24px 0 10px;font-size:15px;">Color de acento</h3>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
-            <button class="swatch-btn" data-accent-val="emerald" style="background:#10b981;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Esmeralda"></button>
-            <button class="swatch-btn" data-accent-val="gold" style="background:#d4af37;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Oro"></button>
-            <button class="swatch-btn" data-accent-val="sapphire" style="background:#38bdf8;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Zafiro"></button>
-            <button class="swatch-btn" data-accent-val="amethyst" style="background:#a855f7;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Amatista"></button>
-            <button class="swatch-btn" data-accent-val="ruby" style="background:#f43f5e;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Rubí"></button>
-            <button class="swatch-btn" data-accent-val="cyan" style="background:#06b6d4;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Cian"></button>
-            <button class="swatch-btn" data-accent-val="amber" style="background:#f59e0b;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Ámbar"></button>
+            <button class="swatch-btn" data-accent-val="emerald" style="background:#10b981;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Esmeralda">Esmeralda</button>
+            <button class="swatch-btn" data-accent-val="gold" style="background:#d4af37;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Oro">Oro</button>
+            <button class="swatch-btn" data-accent-val="sapphire" style="background:#38bdf8;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Zafiro">Zafiro</button>
+            <button class="swatch-btn" data-accent-val="amethyst" style="background:#a855f7;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Amatista">Amatista</button>
+            <button class="swatch-btn" data-accent-val="ruby" style="background:#f43f5e;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Rubí">Rubí</button>
+            <button class="swatch-btn" data-accent-val="cyan" style="background:#06b6d4;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Cian">Cian</button>
+            <button class="swatch-btn" data-accent-val="amber" style="background:#f59e0b;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Ámbar">Ámbar</button>
           </div>
 
           <!-- Ajuste de Paneo de Páginas -->
@@ -1413,7 +1413,7 @@ input[type="range"] {
 
           <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);">
             <div>
-              <strong style="font-size:13px;">Efectos Sonoros Cristalinos</strong>
+              <strong style="font-size:13px;">Sonidos de interacción</strong>
               <div style="font-size:11px;color:var(--muted);">Micro-clics acústicos de sintetizador Web Audio.</div>
             </div>
             <input type="checkbox" id="setting-sound" checked style="width:18px;height:18px;accent-color:var(--accent-base);">
