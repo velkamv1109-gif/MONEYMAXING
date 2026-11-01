@@ -42,10 +42,56 @@ let editingClientId = null;
 let editingPropertyId = null;
 let initialWizard = false;
 let proposalClient = null;
+let renderedProfileId = null;
+let workspaceTimer = null;
+let closeAfterSave = false;
+const workspaceIds = ['input-re-price','input-re-down','input-re-term','input-re-rate','input-re-extra','roi-price','roi-rent','roi-closing','roi-expenses','be-fixed','be-price','be-cost','input-age','input-retire-age','input-monthly-inv','input-rate','input-inflation','quote-policy-type','quote-sum-insured','quote-premium-annual','quote-client-name','filter-search','filter-kind','filter-category','client-search'];
+const workspaceDefaults = Object.fromEntries(workspaceIds.map(id=>[id,$('#'+id)?.value || '']));
+function profileSettings(){return ProfileCore.settings(getActiveProfile(),data?.globalSettings);}
+function captureWorkspace(){
+ const p=getActiveProfile();if(!p || p.id!==renderedProfileId)return;
+ p.workspace ||= {};p.workspace.inputs=Object.fromEntries(workspaceIds.map(id=>[id,$('#'+id)?.value || '']));
+}
+function scheduleWorkspaceSave(){
+ if(!key || !data)return;
+ captureWorkspace();clearTimeout(workspaceTimer);
+ workspaceTimer=setTimeout(()=>{workspaceTimer=null;if(saving){scheduleWorkspaceSave();return;}storeVault().catch(()=>{});},400);
+ $('#save-status').textContent='Cambios pendientes…';
+}
+function restoreWorkspace(){
+ const p=getActiveProfile();
+ if(renderedProfileId===p.id)return;
+ QuotationUI.clear();proposalClient=null;
+ $('#client-proposal-preview').classList.add('hidden');
+ $$('.modal-backdrop').forEach(el=>{if(el.id!=='onboarding-modal')el.classList.add('hidden');});
+ $('#editor-dialog').close();
+ populateCategorySelects();
+ const values=p.workspace?.inputs || {};
+ for(const id of workspaceIds){const el=$('#'+id);if(el){el.value=typeof values[id]==='string'?values[id]:workspaceDefaults[id];if(el.tagName==='SELECT'&&el.selectedIndex<0)el.selectedIndex=0;}}
+ renderedProfileId=p.id;
+ showPage(p.workspace?.page || ProfileCore.role(p).start,false);
+}
+async function activateProfile(id){
+ if(saving || !data.profiles.some(p=>p.id===id))return;
+ captureWorkspace();clearTimeout(workspaceTimer);workspaceTimer=null;
+ data.activeProfileId=id;
+ await storeVault();render();resetLockTimer();toast('Perfil activado con sus preferencias.');
+}
+function applySpecialty(){
+ const p=getActiveProfile(),r=ProfileCore.role(p);
+ $$('.nav-menu [data-page]').forEach(b=>b.hidden=!r.pages.includes(b.dataset.page));
+ $('#page-home .page-head h1').textContent='Resumen · '+r.name;
+ $('#page-home .subhead').textContent=r.description;
+ $('#profile-scope').textContent=r.description+' Los datos de otros módulos se conservan al cambiar de especialidad.';
+ const current=$('.page.active')?.id.replace('page-','');
+ if(!r.pages.includes(current))showPage(r.start,false);
+ populateCategorySelects();
+}
+
 
 // Sonido háptico
 function playHaptic(type = 'click') {
-  if (data?.globalSettings?.soundEnabled === false) return;
+  if (profileSettings().soundEnabled === false) return;
   try {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -84,7 +130,7 @@ function playHaptic(type = 'click') {
 }
 
 function money(amount, currency = null) {
-  const cur = currency || (data?.globalSettings?.currency) || 'MXN';
+  const cur = currency || getActiveProfile()?.currency || 'MXN';
   return new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: cur,
@@ -153,7 +199,7 @@ function migrateLegacyData(loaded) {
     loaded.profiles.forEach(p => {
       for (const field of ['transactions','realEstateProperties','insuranceClients','savingsGoals','receivables','payables']) p[field] = p[field] || [];
     });
-    return loaded;
+    return ProfileCore.migrate(loaded);
   }
   const id = 'prof_legacy';
   const legacyTransactions = (loaded.transactions || []).map(t => ({
@@ -229,6 +275,8 @@ async function loadVault() {
 }
 
 async function storeVault({ create = false } = {}) {
+  clearTimeout(workspaceTimer);workspaceTimer=null;
+  captureWorkspace();
   if (saving) throw new Error('Espera a que termine el guardado.');
   if (!key || !data || !vaultSalt) throw new Error('Bóveda bloqueada.');
   saving = true;
@@ -236,7 +284,9 @@ async function storeVault({ create = false } = {}) {
   $('#save-status').textContent = 'Guardando…';
   const controls = [...document.querySelectorAll('button,input,select,textarea')].filter(el => !el.disabled);
   controls.forEach(el => el.disabled = true);
+  let savedSuccessfully=false;
   try {
+    ProfileCore.migrate(data);
     Finance.validate(data);
     const snapshot = JSON.stringify(data);
     const iv = crypto.getRandomValues(new Uint8Array(12));
@@ -258,6 +308,7 @@ async function storeVault({ create = false } = {}) {
     vaultRevision = result.revision;
     committedData = JSON.parse(snapshot);
     $('#save-status').textContent = 'Guardado';
+    savedSuccessfully=true;
   } catch (error) {
     if (committedData) data = structuredClone(committedData);
     $('#save-status').textContent = 'No guardado · reintenta';
@@ -269,6 +320,7 @@ async function storeVault({ create = false } = {}) {
     document.body.removeAttribute('aria-busy');
     controls.forEach(el => el.disabled = false);
     resetLockTimer();
+    if(closeAfterSave){closeAfterSave=false;if(savedSuccessfully)window.close();}
   }
 }
 
@@ -326,11 +378,14 @@ function triggerLockout(seconds) {
   }, 1000);
 }
 
-function lock() {
+async function lock() {
+  if(workspaceTimer && !saving){await storeVault().catch(()=>{});}
   if (saving) { toast('Espera a que termine el guardado.'); return; }
   QuotationUI.clear();
   proposalClient = null;
   committedData = null;
+  renderedProfileId=null;
+  $('#profile-dialog').close();
   $$('.modal-backdrop').forEach(el => el.classList.add('hidden'));
   clearTimeout(lockTimer);
   key = null;
@@ -347,7 +402,7 @@ function lock() {
 
 function resetLockTimer() {
   clearTimeout(lockTimer);
-  const minutes = Number(data?.globalSettings?.autoLockMinutes) || 5;
+  const minutes = Number(profileSettings().autoLockMinutes) || 5;
   if (key) lockTimer = setTimeout(lock, minutes * 60 * 1000);
 }
 
@@ -360,15 +415,15 @@ function toast(message) {
 }
 
 function applyAppearance() {
-  const theme = data?.globalSettings?.theme || 'obsidian';
-  const accent = data?.globalSettings?.accent || 'emerald';
-  const paneAnim = data?.globalSettings?.paneAnim || 'smooth';
+  const theme = profileSettings().theme || 'obsidian';
+  const accent = profileSettings().accent || 'emerald';
+  const paneAnim = profileSettings().paneAnim || 'smooth';
 
   document.documentElement.setAttribute('data-theme', theme);
   document.documentElement.setAttribute('data-accent', accent);
   document.documentElement.setAttribute('data-pane-anim', paneAnim);
 
-  $$('.theme-picker-btn').forEach(b => b.classList.toggle('crystal-btn-primary', b.dataset.themeVal === theme));
+  $$('.theme-picker-btn').forEach(b => {b.classList.toggle('crystal-btn-primary', b.dataset.themeVal === theme);b.setAttribute('aria-pressed',String(b.dataset.themeVal===theme));});
   $$('.swatch-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.accentVal === accent)));
 }
 
@@ -379,6 +434,9 @@ function render() {
   const profile = getActiveProfile();
   if (!profile) return;
 
+  ProfileCore.migrate(data);
+  restoreWorkspace();
+  applySpecialty();
   applyAppearance();
 
   $('#sidebar-profile-name').textContent = profile.name;
@@ -407,6 +465,7 @@ function render() {
   renderTxList($('#home-tx-list'), txs.slice(0, 5), profile.currency);
   renderFullTransactions();
   renderRealEstateModule();
+  renderCapRateCalculation();
   renderAccounting();
   renderBreakEvenCalculator();
   renderBudgetsAndGoals();
@@ -1035,11 +1094,11 @@ function showClientProposal(c) {
   proposalClient = {...c};
   showPage('insurance');
   const profile = getActiveProfile();
-  const brand = data.globalSettings.businessName || 'MONEYMAXING WEALTH ADVISORY';
-  const adv = data.globalSettings.advisorName || 'Titular por configurar';
+  const brand = profileSettings().businessName || 'MONEYMAXING WEALTH ADVISORY';
+  const adv = profileSettings().advisorName || 'Titular por configurar';
 
   $('#prop-advisor-brand').textContent = brand.toUpperCase();
-  $('#prop-advisor-contact').textContent = `${adv} · ${data.globalSettings.advisorPhone || ''} ${data.globalSettings.advisorEmail ? '· ' + data.globalSettings.advisorEmail : ''}`;
+  $('#prop-advisor-contact').textContent = `${adv} · ${profileSettings().advisorPhone || ''} ${profileSettings().advisorEmail ? '· ' + profileSettings().advisorEmail : ''}`;
   $('#prop-date').textContent = new Intl.DateTimeFormat('es-MX', { dateStyle: 'full' }).format(new Date());
 
   $('#prop-client-name').textContent = c.name;
@@ -1063,7 +1122,7 @@ function renderBudgetsAndGoals() {
   monthlyTxs.forEach(t => spentByCat[t.category] = (spentByCat[t.category] || 0) + t.amount);
 
   const bContainer = $('#budgets-container');
-  bContainer.innerHTML = CATEGORIES.map(([id, name]) => {
+  bContainer.innerHTML = CATEGORIES.filter(([id])=>profileCategories().some(c=>c[0]===id)||profile.budgets?.[id]||spentByCat[id]).map(([id, name]) => {
     const limit = Number(profile.budgets?.[id]) || 0;
     const spent = spentByCat[id] || 0;
     const pct = limit > 0 ? Math.min(100, Math.round((spent / limit) * 100)) : 0;
@@ -1128,7 +1187,7 @@ function renderProfilesList() {
         <div class="crystal-gem accent">${p.role === 'realestate' ? '🏢' : p.role === 'insurance' ? '🛡️' : p.role === 'accounting' ? '📊' : p.role === 'personal' ? '👤' : '⭐'}</div>
         <div style="min-width:0;">
           <div style="font-weight:700;font-size:13px;">${escapeHtml(p.name)} ${isCurrent ? '<span style="color:var(--accent-base);font-size:10px;">(ACTIVO)</span>' : ''}</div>
-          <div style="font-size:11px;color:var(--muted);">Rol: ${escapeHtml(p.role.toUpperCase())} · ${escapeHtml(p.currency)} · ${p.transactions.length} movimientos</div>
+          <div style="font-size:11px;color:var(--muted);">Rol: ${escapeHtml(ProfileCore.role(p).name)} · ${escapeHtml(p.currency)} · ${p.transactions.length} movimientos</div>
         </div>
         <div style="display:flex;gap:6px;">
           ${!isCurrent ? `<button class="crystal-btn switch-profile-btn" data-id="${escapeHtml(p.id)}" style="padding:4px 10px;font-size:11px;">Activar</button>` : ''}
@@ -1140,9 +1199,7 @@ function renderProfilesList() {
 
   container.querySelectorAll('.switch-profile-btn').forEach(btn => {
     btn.onclick = async () => {
-      data.activeProfileId = btn.dataset.id;
-      await storeVault();
-      render();
+      await activateProfile(btn.dataset.id);
       playHaptic('unlock');
       toast('Perfil activado.');
     };
@@ -1152,33 +1209,47 @@ function renderProfilesList() {
     btn.onclick = async () => {
       if (!confirm('¿Deseas eliminar este perfil y todos sus datos?')) return;
       data.profiles = data.profiles.filter(p => p.id !== btn.dataset.id);
-      data.activeProfileId = data.profiles[0].id;
+      if(data.activeProfileId===btn.dataset.id)data.activeProfileId = data.profiles[0].id;
       await storeVault();
       render();
       toast('Perfil eliminado.');
     };
   });
 
-  $('#setting-currency').value = data.globalSettings.currency || 'MXN';
-  $('#setting-autolock').value = String(data.globalSettings.autoLockMinutes || 5);
-  $('#setting-pane-anim').value = data.globalSettings.paneAnim || 'smooth';
-  $('#setting-sound').checked = data.globalSettings.soundEnabled !== false;
-  $('#setting-business-name').value = data.globalSettings.businessName || '';
-  $('#setting-advisor-name').value = data.globalSettings.advisorName || '';
-  $('#setting-advisor-phone').value = data.globalSettings.advisorPhone || '';
-  $('#setting-advisor-email').value = data.globalSettings.advisorEmail || '';
+  $('#setting-currency').value = getActiveProfile().currency;
+  $('#setting-profile-name').value=getActiveProfile().name;
+  $('#setting-profile-role').value=getActiveProfile().role;
+  $('#setting-autolock').value = String(profileSettings().autoLockMinutes || 5);
+  $('#setting-pane-anim').value = profileSettings().paneAnim || 'smooth';
+  $('#setting-sound').checked = profileSettings().soundEnabled !== false;
+  $('#setting-business-name').value = profileSettings().businessName || '';
+  $('#setting-advisor-name').value = profileSettings().advisorName || '';
+  $('#setting-advisor-phone').value = profileSettings().advisorPhone || '';
+  $('#setting-advisor-email').value = profileSettings().advisorEmail || '';
 }
 
-function showPage(pageId) {
+function showPage(pageId, persist=true) {
+  const p=getActiveProfile();if(p&&!ProfileCore.role(p).pages.includes(pageId))return;
+  if(p){p.workspace ||= {};p.workspace.page=pageId;}
   $$('.page').forEach(p => p.classList.toggle('active', p.id === `page-${pageId}`));
   $$('.nav-menu button').forEach(b => b.setAttribute('aria-current', b.dataset.page === pageId ? 'page' : 'false'));
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if(persist)scheduleWorkspaceSave();
 }
 
+function profileCategories(){
+ const p=getActiveProfile(),allowed=ProfileCore.role(p).categories;
+ return CATEGORIES.filter(([id])=>!allowed || allowed.includes(id));
+}
 function populateCategorySelects() {
-  const options = CATEGORIES.map(([id, name]) => `<option value="${id}">${name}</option>`).join('');
-  $('#modal-tx-category').innerHTML = options;
-  $('#filter-category').innerHTML = '<option value="all">Todas las categorías</option>' + options;
+ const selected=$('#modal-tx-category').value,filter=$('#filter-category').value;
+ const p=getActiveProfile(),existing=new Set(p?.transactions.map(t=>t.category)||[]);
+ const categories=profileCategories();
+ const rows=[...categories,...CATEGORIES.filter(([id])=>existing.has(id)&&!categories.some(c=>c[0]===id))];
+ const options=rows.map(([id,name])=>`<option value="${id}">${name}</option>`).join('');
+ $('#modal-tx-category').innerHTML=options;$('#filter-category').innerHTML='<option value="all">Todas las categorías</option>'+options;
+ if(rows.some(c=>c[0]===selected))$('#modal-tx-category').value=selected;
+ $('#filter-category').value=rows.some(c=>c[0]===filter)?filter:'all';
 }
 
 // ==========================================
@@ -1186,13 +1257,13 @@ function populateCategorySelects() {
 // ==========================================
 const COMMANDS = [
   { title: '+ Nuevo Movimiento', icon: '📝', action: () => $('#quick-add-btn').click() },
-  { title: 'Ir a Resumen', icon: '⌂', action: () => showPage('home') },
-  { title: 'Ir a Bienes Raíces & Hipotecas', icon: '🏢', action: () => showPage('realestate') },
-  { title: 'Ir a Contabilidad', icon: '📊', action: () => showPage('accounting') },
-  { title: 'Ir a Seguros y retiro', icon: '🛡️', action: () => showPage('insurance') },
-  { title: 'Ir a Clientes (CRM)', icon: '👥', action: () => showPage('clients') },
-  { title: 'Ir a Presupuestos y metas', icon: '↗', action: () => showPage('budgets') },
-  { title: 'Preferencias & Temas', icon: '✨', action: () => showPage('studio') },
+  { title: 'Ir a Resumen', icon: '⌂', page: 'home', action: () => showPage('home') },
+  { title: 'Ir a Bienes Raíces & Hipotecas', icon: '🏢', page: 'realestate', action: () => showPage('realestate') },
+  { title: 'Ir a Contabilidad', icon: '📊', page: 'accounting', action: () => showPage('accounting') },
+  { title: 'Ir a Seguros y retiro', icon: '🛡️', page: 'insurance', action: () => showPage('insurance') },
+  { title: 'Ir a Clientes (CRM)', icon: '👥', page: 'clients', action: () => showPage('clients') },
+  { title: 'Ir a Presupuestos y metas', icon: '↗', page: 'budgets', action: () => showPage('budgets') },
+  { title: 'Preferencias & Temas', icon: '✨', page: 'studio', action: () => showPage('studio') },
   { title: 'Exportar Movimientos a CSV', icon: '📥', action: () => $('#export-csv-btn').click() },
   { title: 'Descargar Respaldo Cifrado (.mmxvault)', icon: '📦', action: () => $('#download-backup-btn').click() },
   { title: 'Crear Nuevo Perfil', icon: '👤', action: () => { initialWizard = false; openWizard(); } },
@@ -1214,7 +1285,8 @@ function closeCommandPalette() {
 function renderCommandResults(query) {
   const list = $('#cmd-results-list');
   const q = query.toLowerCase().trim();
-  const filtered = q ? COMMANDS.filter(c => c.title.toLowerCase().includes(q)) : COMMANDS;
+  const available=COMMANDS.filter(c=>!c.page || ProfileCore.role(getActiveProfile()).pages.includes(c.page));
+  const filtered = q ? available.filter(c => c.title.toLowerCase().includes(q)) : available;
 
   list.innerHTML = filtered.map((c, i) => `
     <div class="cmd-item ${i === 0 ? 'active' : ''}" data-cmd-idx="${i}">
@@ -1391,7 +1463,7 @@ $('#save-budgets-btn').addEventListener('click', async () => {
   profile.budgets = profile.budgets || {};
   for (const [id] of CATEGORIES) {
     const input = $(`[data-cat-budget="${id}"]`);
-    profile.budgets[id] = Math.max(0, Number(input?.value) || 0);
+    if(input)profile.budgets[id] = Math.max(0, Number(input.value) || 0);
   }
   await storeVault();
   renderBudgetsAndGoals();
@@ -1569,10 +1641,16 @@ $('#restore-file-input').addEventListener('change', async e => {
   finally { saving = false; e.target.value = ''; }
 });
 
+const themePicker=$('.theme-picker-btn').parentElement;
+themePicker.className='theme-catalog';
+themePicker.innerHTML=Object.entries(ProfileCore.themes).map(([id,name])=>`<button class="crystal-btn theme-picker-btn" data-theme-val="${id}"><span class="theme-sample" data-preview="${id}" aria-hidden="true"></span><span>${name}</span></button>`).join('');
+$('#wiz-theme').innerHTML=Object.entries(ProfileCore.themes).map(([id,name])=>`<option value="${id}">${name}</option>`).join('');
+
 // Temas y Acentos Preferencias
 $$('.theme-picker-btn').forEach(btn => {
   btn.addEventListener('click', async () => {
-    data.globalSettings.theme = btn.dataset.themeVal;
+    profileSettings().theme = btn.dataset.themeVal;
+    profileSettings().accent='theme';
     applyAppearance();
     playHaptic('click');
     await storeVault();
@@ -1581,7 +1659,7 @@ $$('.theme-picker-btn').forEach(btn => {
 
 $$('.swatch-btn').forEach(btn => {
   btn.addEventListener('click', async () => {
-    data.globalSettings.accent = btn.dataset.accentVal;
+    profileSettings().accent = btn.dataset.accentVal;
     applyAppearance();
     playHaptic('click');
     await storeVault();
@@ -1589,7 +1667,7 @@ $$('.swatch-btn').forEach(btn => {
 });
 
 $('#setting-pane-anim').addEventListener('change', async e => {
-  data.globalSettings.paneAnim = e.target.value;
+  profileSettings().paneAnim = e.target.value;
   applyAppearance();
   playHaptic('click');
   await storeVault();
@@ -1600,25 +1678,34 @@ $('#save-studio-btn').addEventListener('click', async () => {
   const selectedCurrency = $('#setting-currency').value;
   const currentProfile = getActiveProfile();
   if (currentProfile.currency !== selectedCurrency && (currentProfile.transactions.length || currentProfile.initialBalance || currentProfile.realEstateProperties.length || currentProfile.insuranceClients.length || currentProfile.savingsGoals.length || currentProfile.receivables.length || currentProfile.payables.length)) { toast('Este perfil ya tiene importes. Crea otro perfil para usar otra moneda.'); return; }
-  data.globalSettings.currency = selectedCurrency;
-  data.globalSettings.autoLockMinutes = Number($('#setting-autolock').value) || 5;
-  data.globalSettings.soundEnabled = $('#setting-sound').checked;
-  data.globalSettings.businessName = $('#setting-business-name').value.trim();
-  data.globalSettings.advisorName = $('#setting-advisor-name').value.trim();
-  data.globalSettings.advisorPhone = $('#setting-advisor-phone').value.trim();
-  data.globalSettings.advisorEmail = $('#setting-advisor-email').value.trim();
+  const profileName=$('#setting-profile-name').value.trim();
+  if(!profileName){toast('Escribe un nombre para el perfil.');return;}
+  if(!$('#setting-advisor-email').checkValidity()){toast('Revisa el correo del asesor.');return;}
+  currentProfile.currency = selectedCurrency;
+  currentProfile.name=profileName;
+  currentProfile.role=$('#setting-profile-role').value;
+  profileSettings().autoLockMinutes = Number($('#setting-autolock').value) || 5;
+  profileSettings().soundEnabled = $('#setting-sound').checked;
+  profileSettings().businessName = $('#setting-business-name').value.trim();
+  profileSettings().advisorName = $('#setting-advisor-name').value.trim();
+  profileSettings().advisorPhone = $('#setting-advisor-phone').value.trim();
+  profileSettings().advisorEmail = $('#setting-advisor-email').value.trim();
 
   const profile = getActiveProfile();
-  if (profile) profile.currency = data.globalSettings.currency;
+
 
   await storeVault();
   render();
   playHaptic('save');
-  toast('Preferencias del Preferencias guardadas.');
+  toast('Preferencias de este perfil guardadas.');
 });
 
 // WIZARD ONBOARDING
 function openWizard() {
+  wizardSelectedRole='master';
+  $$('.role-card').forEach(c=>{c.classList.toggle('selected',c.dataset.role==='master');c.setAttribute('aria-pressed',String(c.dataset.role==='master'));});
+  $('#wiz-profile-name').value='';$('#wiz-business-name').value='';$('#wiz-initial-balance').value='0';$('#wiz-currency').value='MXN';$('#wiz-theme').value='obsidian';
+
   openModal('#onboarding-modal');
   $('#wizard-content-1').classList.remove('hidden');
   $('#wizard-content-2').classList.add('hidden');
@@ -1633,6 +1720,7 @@ $$('.role-card').forEach(card => {
     $$('.role-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
     wizardSelectedRole = card.dataset.role;
+    $$('.role-card').forEach(c=>c.setAttribute('aria-pressed',String(c===card)));
     playHaptic('click');
   });
 });
@@ -1672,13 +1760,15 @@ $('#wizard-finish').addEventListener('click', async () => {
   const name = $('#wiz-profile-name').value.trim() || 'Nuevo Perfil';
   const currency = $('#wiz-currency').value;
   const theme = $('#wiz-theme').value;
-  const initBal = Number($('#wiz-initial-balance').value) || 0;
+  let initBal;try{initBal=Finance.amount($('#wiz-initial-balance').value);}catch(e){toast(e.message);return;}
   const bName = $('#wiz-business-name').value.trim();
 
   const newProfile = {
     id: 'prof_' + crypto.randomUUID().slice(0, 8),
     name,
     role: wizardSelectedRole,
+    settings:{...ProfileCore.defaults,theme,businessName:bName},
+    workspace:{page:ProfileCore.roles[wizardSelectedRole].start},
     currency,
     initialBalance: initBal,
     transactions: [],
@@ -1693,10 +1783,8 @@ $('#wizard-finish').addEventListener('click', async () => {
   data.profiles = data.profiles || [];
   if (initialWizard) data.profiles[0] = newProfile; else data.profiles.push(newProfile);
   initialWizard = false;
+  captureWorkspace();
   data.activeProfileId = newProfile.id;
-  data.globalSettings.theme = theme;
-  data.globalSettings.currency = currency;
-  if (bName) data.globalSettings.businessName = bName;
 
   await storeVault();
   render();
@@ -1728,7 +1816,15 @@ $('#new-property-btn').onclick = () => {
 $('#close-property-modal-btn').onclick = () => closeModal('#property-modal');
 $('#cancel-property-modal-btn').onclick = () => closeModal('#property-modal');
 
-$('#profile-switcher-btn').onclick = () => showPage('studio');
+$('#profile-switcher-btn').onclick = () => {
+ $('#profile-choices').innerHTML=data.profiles.map(p=>`<button class="crystal-btn" data-profile-id="${escapeHtml(p.id)}" ${p.id===data.activeProfileId?'aria-current="true"':''}>${escapeHtml(p.name)} · ${escapeHtml(ProfileCore.role(p).name)}${p.id===data.activeProfileId?' · Activo':''}</button>`).join('');
+ $('#profile-dialog').showModal();
+};
+$('#profile-switcher-btn').tabIndex=0;$('#profile-switcher-btn').setAttribute('role','button');
+$('#profile-switcher-btn').onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();$('#profile-switcher-btn').click();}};
+$('#profile-choices').onclick=async e=>{const b=e.target.closest('[data-profile-id]');if(b){await activateProfile(b.dataset.profileId);$('#profile-dialog').close();}};
+$('#close-profile-dialog').onclick=()=>$('#profile-dialog').close();
+$('#manage-profiles').onclick=()=>{$('#profile-dialog').close();showPage('studio');};
 $('#btn-add-profile-wizard').onclick = () => { initialWizard = false; openWizard(); };
 $('#close-wizard-btn').onclick = () => closeModal('#onboarding-modal');
 
@@ -1806,6 +1902,7 @@ $('#open-cmd-palette-btn').onclick = openCommandPalette;
 $('#cmd-search-input').addEventListener('input', e => renderCommandResults(e.target.value));
 
 document.addEventListener('keydown', e => {
+  if ($('#profile-dialog').open && e.key==='Escape')return;
   if ($('#quotation-dialog')?.open && (e.key === 'Escape' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'))) {
     if (e.key !== 'Escape') e.preventDefault();
     return;
@@ -1858,7 +1955,9 @@ function editFields(title, fields) {
 window.addEventListener('unhandledrejection', event => {
   event.preventDefault(); toast(event.reason?.message || 'No se completó la acción. Revisa los datos e inténtalo de nuevo.');
 });
-window.addEventListener('beforeunload', event => { if (saving) { event.preventDefault(); event.returnValue = ''; } });
+window.addEventListener('beforeunload', event => {
+ if(workspaceTimer || saving){event.preventDefault();event.returnValue='';closeAfterSave=true;if(!saving)storeVault().catch(()=>{});}
+});
 ['click','submit','change'].forEach(type => document.addEventListener(type,event => {
   if (saving) { event.preventDefault(); event.stopImmediatePropagation(); }
 },true));
@@ -1887,10 +1986,11 @@ document.addEventListener('keydown', event => {
   else if (!event.shiftKey && document.activeElement===items.at(-1)) {event.preventDefault();items[0].focus();}
 });
 
- QuotationUI.init({getContext:()=>key && data ? {settings:data.globalSettings,currency:getActiveProfile().currency} : null});
- $('#new-quotation-btn').onclick=()=>QuotationUI.open('services');
+ QuotationUI.init({getContext:()=>key && data ? {settings:profileSettings(),currency:getActiveProfile().currency,types:ProfileCore.role(getActiveProfile()).quotes} : null});
+ $('#new-quotation-btn').onclick=()=>QuotationUI.open(ProfileCore.role(getActiveProfile()).quotes[0]);
  $('#retirement-pdf-btn').onclick=()=>QuotationUI.open('retirement');
  $('#proposal-pdf-btn').onclick=()=>QuotationUI.open(/retiro|ppr/i.test(proposalClient?.plan||'')?'retirement':'insurance',proposalClient);
+ workspaceIds.forEach(id=>{const el=$('#'+id);if(el)el.addEventListener('input',scheduleWorkspaceSave);if(el?.tagName==='SELECT')el.addEventListener('change',scheduleWorkspaceSave);});
  gateMode();
 
 })();

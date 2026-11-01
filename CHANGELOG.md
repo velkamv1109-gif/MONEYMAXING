@@ -1,3 +1,13 @@
+# 1.0.4 — 31 de octubre de 2026
+
+- Especialidades funcionales: navegación, comandos, categorías y tipos de cotización adecuados al perfil.
+- Creador reiniciado entre usos, opción Personal y edición de nombre/especialidad.
+- Preferencias y membrete independientes; recuperación de pantalla, filtros y simuladores al cambiar o reabrir.
+- Migración compatible de preferencias globales antiguas sin modificar registros financieros.
+- Selector directo de perfiles con teclado y cierre que espera el guardado pendiente.
+- Un tema Frutiger Aero y siete paletas ejecutivas claras/oscuras con colores diferenciados y acentos coordinados.
+- Corrección de recortes en Preferencias y navegación en ventanas pequeñas.
+
 # 1.0.3 — 31 de octubre de 2026
 
 - Cotizaciones de servicios, seguros, hipotecas y retiro con vista previa y guardado local en PDF A4.

@@ -1,7 +1,7 @@
 {
   "name": "moneymaxing-desktop",
   "productName": "MONEYMAXING",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Finanzas personales, carteras y respaldos cifrados locales",
   "main": "main.cjs",
   "license": "UNLICENSED",
@@ -10,7 +10,7 @@
     "test": "node --test",
     "dist:win": "npm run check && npm test && electron-builder --win nsis zip --x64 --publish never",
     "dist:mac": "electron-builder --mac dmg --x64 --arm64",
-    "check": "node --check main.cjs && node --check server.cjs && node --check app.js && node --check finance-core.cjs && node --check preload.cjs && node --check quotation-core.cjs && node --check quotation-ui.js && node --check quotation-pdf.cjs"
+    "check": "node --check main.cjs && node --check server.cjs && node --check app.js && node --check finance-core.cjs && node --check preload.cjs && node --check quotation-core.cjs && node --check quotation-ui.js && node --check quotation-pdf.cjs && node --check profile-core.cjs"
   },
   "devDependencies": {
     "electron": "45.0.0",
@@ -33,7 +33,8 @@
       "preload.cjs",
       "quotation-core.cjs",
       "quotation-ui.js",
-      "quotation-pdf.cjs"
+      "quotation-pdf.cjs",
+      "profile-core.cjs"
     ],
     "win": {
       "target": [

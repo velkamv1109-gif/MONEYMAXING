@@ -76,7 +76,8 @@ if (require.main === module) {
     }
   });
 
-  app.on('before-quit', () => {
+  // Keep the local store alive while renderer beforeunload flushes pending changes.
+  app.on('will-quit', () => {
     if (service) {
       const running = service;
       service = null;

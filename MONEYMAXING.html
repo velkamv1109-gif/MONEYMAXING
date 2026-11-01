@@ -1351,13 +1351,14 @@ input[type="range"] {
         <div>
           <p class="eyebrow">Control Total de Apariencia & Dinámicas</p>
           <h1>Preferencias</h1>
-          <p class="subhead">Personaliza paletas maestras, botones transparentes, velocidad de paneo y membrete.</p>
+          <p class="subhead">Tema, membrete y preferencias independientes para cada perfil.</p>
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
         <!-- Selector de Estilos y Paneo -->
         <div class="crystal-panel">
+<div class="profile-settings"><label for="setting-profile-name">Nombre de este perfil</label><input id="setting-profile-name" maxlength="120"><label for="setting-profile-role">Especialidad</label><select id="setting-profile-role"><option value="master">General · todos los módulos</option><option value="personal">Finanzas personales</option><option value="realestate">Asesor inmobiliario</option><option value="insurance">Seguros y retiro</option><option value="accounting">Contabilidad y negocio</option></select><p id="profile-scope" class="theme-help"></p></div>
           <h3 style="margin:0 0 14px;font-size:15px;">Tema de la interfaz</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <button class="crystal-btn theme-picker-btn" data-theme-val="obsidian"> Obsidian Stealth (Dark)</button>
@@ -1369,17 +1370,7 @@ input[type="range"] {
             <button class="crystal-btn theme-picker-btn" data-theme-val="emerald-light"> Swiss Alpine Paper</button>
           </div>
 
-          <h3 style="margin:24px 0 10px;font-size:15px;">Color de acento</h3>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
-            <button class="swatch-btn" data-accent-val="emerald" style="background:#10b981;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Esmeralda">Esmeralda</button>
-            <button class="swatch-btn" data-accent-val="gold" style="background:#d4af37;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Oro">Oro</button>
-            <button class="swatch-btn" data-accent-val="sapphire" style="background:#38bdf8;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Zafiro">Zafiro</button>
-            <button class="swatch-btn" data-accent-val="amethyst" style="background:#a855f7;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Amatista">Amatista</button>
-            <button class="swatch-btn" data-accent-val="ruby" style="background:#f43f5e;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Rubí">Rubí</button>
-            <button class="swatch-btn" data-accent-val="cyan" style="background:#06b6d4;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Cian">Cian</button>
-            <button class="swatch-btn" data-accent-val="amber" style="background:#f59e0b;width:32px;height:32px;border-radius:50%;border:2px solid transparent;" title="Ámbar">Ámbar</button>
-          </div>
-
+          <p class="theme-help">Cada tema combina su fondo, texto y acento para mantener una identidad coherente.</p>
           <!-- Ajuste de Paneo de Páginas -->
           <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:16px;">
             <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Animación de Paneo entre Módulos</label>
@@ -1397,9 +1388,6 @@ input[type="range"] {
                 <option value="MXN">Peso Mexicano (MXN $)</option>
                 <option value="USD">Dólar Estadounidense (USD $)</option>
                 <option value="EUR">Euro (EUR €)</option>
-                <option value="COP">Peso Colombiano (COP $)</option>
-                <option value="CLP">Peso Chileno (CLP $)</option>
-                <option value="ARS">Peso Argentino (ARS $)</option>
               </select>
             </div>
             <div>
@@ -1639,9 +1627,10 @@ input[type="range"] {
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div class="crystal-panel role-card selected" data-role="master" style="cursor:pointer;padding:16px;">
           <div style="font-size:24px;margin-bottom:6px;"></div>
-          <strong style="font-size:13px;">Master Ejecutivo</strong>
+          <strong style="font-size:13px;">General · todos los módulos</strong>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">Inmobiliario, seguros, contabilidad y finanzas personales.</div>
         </div>
+        <div class="crystal-panel role-card" data-role="personal" style="cursor:pointer;padding:16px;"><strong>Finanzas personales</strong><div class="theme-help">Movimientos, presupuestos y metas de ahorro.</div></div>
         <div class="crystal-panel role-card" data-role="realestate" style="cursor:pointer;padding:16px;">
           <div style="font-size:24px;margin-bottom:6px;"></div>
           <strong style="font-size:13px;">Asesor Inmobiliario</strong>
@@ -1650,7 +1639,7 @@ input[type="range"] {
         <div class="crystal-panel role-card" data-role="insurance" style="cursor:pointer;padding:16px;">
           <div style="font-size:24px;margin-bottom:6px;"></div>
           <strong style="font-size:13px;">Asesor de Seguros & PPR</strong>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Planes de retiro, pólizas y proyecciones actuariales.</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Planes de retiro, pólizas y simulaciones de ahorro.</div>
         </div>
         <div class="crystal-panel role-card" data-role="accounting" style="cursor:pointer;padding:16px;">
           <div style="font-size:24px;margin-bottom:6px;"></div>
@@ -1676,9 +1665,6 @@ input[type="range"] {
               <option value="MXN">Peso Mexicano (MXN $)</option>
               <option value="USD">Dólar Estadounidense (USD $)</option>
               <option value="EUR">Euro (EUR €)</option>
-              <option value="COP">Peso Colombiano (COP $)</option>
-              <option value="CLP">Peso Chileno (CLP $)</option>
-              <option value="ARS">Peso Argentino (ARS $)</option>
             </select>
           </div>
           <div>
@@ -1702,7 +1688,7 @@ input[type="range"] {
       <div style="display:grid;gap:12px;">
         <div>
           <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Saldo Inicial en Cuenta / Bóveda</label>
-          <input type="number" id="wiz-initial-balance" value="0" step="100" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
+          <input type="number" id="wiz-initial-balance" value="0" step="0.01" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg-glass-card);color:var(--ink);margin-top:4px;">
         </div>
         <div>
           <label style="font-size:12px;font-weight:650;color:var(--ink-secondary);">Nombre del Despacho o Titular</label>
@@ -1811,12 +1797,14 @@ input[type="range"] {
   </div>
 </div>
 
+<dialog id="profile-dialog" aria-labelledby="profile-dialog-title"><h2 id="profile-dialog-title">Cambiar de perfil</h2><p>Retoma el espacio de trabajo y la apariencia de cada perfil.</p><div id="profile-choices"></div><div class="editor-actions"><button class="crystal-btn" id="manage-profiles">Gestionar perfiles</button><button class="crystal-btn" id="close-profile-dialog">Cerrar</button></div></dialog>
 <div id="toast" role="status" aria-live="polite" class="toast" role="status" aria-live="polite"></div>
 
 <!-- ==========================================
      MOTOR JAVASCRIPT ZERO-KNOWLEDGE & LIQUID
      ========================================== -->
 <script src="/finance-core.cjs" defer></script>
+<script src="/profile-core.cjs" defer></script>
 <script src="/quotation-core.cjs" defer></script>
 <script src="/quotation-ui.js" defer></script>
 <script src="/app.js" defer></script>

@@ -2,7 +2,7 @@ const {test}=require('node:test');const assert=require('node:assert/strict');con
 // Execute the actual legacy adapter against fixtures; do not duplicate migration logic.
 const source=fs.readFileSync(require.resolve('../app.js'),'utf8');
 const migrationCode=source.slice(source.indexOf('function migrateLegacyData('),source.indexOf('function getActiveProfile('));
-const migrate=vm.runInNewContext('('+migrationCode.trim()+')',{CATEGORIES:[['otros','Otros']]});
+const migrate=vm.runInNewContext('('+migrationCode.trim()+')',{CATEGORIES:[['otros','Otros']],ProfileCore:require('../profile-core.cjs')});
 test('legacy fixture preserves balance, currency, transactions and budgets',()=>{
  const old={version:1,currency:'USD',initialBalance:1000,budgets:{otros:500},transactions:[{id:'legacy-1',kind:'income',amount:300,note:'Ingreso anterior',date:'2026-10-29',category:'ingreso'}]};
  const migrated=F.validate(migrate(old));const p=migrated.profiles[0];
